@@ -7,8 +7,11 @@ import (
 	"os"
 )
 
+var UserDao *_UserDao
+var UserPasswordDao *_UserPasswordDao
+
 func Init() error {
-	db, err := gorm.Open("mysql", "lzy:612345@/dbname?charset=utf8&parseTime=True&loc=Local")
+	db, err := gorm.Open("mysql", "debian-sys-maint:fYzuFNK68VdZTWJ0@/demite?charset=utf8&parseTime=True&loc=Local")
 	if err != nil {
 		return err
 	}
@@ -16,4 +19,14 @@ func Init() error {
 	db.LogMode(true)
 	db.SetLogger(log.New(os.Stdout, "\r\n", 0))
 
+	UserDao = newUserDao(db)
+	UserPasswordDao = newUserPasswordDao(db)
+
+	//init
+	err = UserDao.initUserDao()
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
