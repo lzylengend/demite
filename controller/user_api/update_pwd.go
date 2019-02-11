@@ -48,6 +48,6 @@ func UpdatePwd(c *gin.Context) {
 		return
 	}
 
-	rsp.Status = my_error.NoLoginError()
+	rsp.Status = my_error.NoError()
 	c.JSON(200, rsp)
 }

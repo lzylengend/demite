@@ -19,6 +19,7 @@ func main() {
 		fmt.Println(err)
 		return
 	}
+	store.Options(sessions.Options{MaxAge: 60 * 60 * 24 * 30})
 
 	g.Use(sessions.Sessions("s", store))
 	g.Use(gin.Recovery())
@@ -38,5 +39,9 @@ func main() {
 		return
 	}
 
-	g.Run(c.Port)
+	err = g.Run(c.Port)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 }

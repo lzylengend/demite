@@ -23,3 +23,17 @@ func CheckSession(c *gin.Context) {
 
 	c.Next()
 }
+
+func CheckWxSession(c *gin.Context) {
+	rsp := &commonRespose{}
+	_, err := controller.GetWxUserId(c)
+
+	if err != nil {
+		rsp.Status = my_error.NoLoginError()
+		c.JSON(200, rsp)
+		c.Abort()
+		return
+	}
+
+	c.Next()
+}
