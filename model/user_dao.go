@@ -5,6 +5,9 @@ import (
 	"time"
 )
 
+const defaltUserName = "admin"
+const DefaltUserPwd = "123456"
+
 type User struct {
 	UserId     int64  `gorm:"column:userid;primary_key;AUTO_INCREMENT"`
 	UserName   string `gorm:"column:username;index:name"`
@@ -16,9 +19,6 @@ type User struct {
 type _UserDao struct {
 	Db *gorm.DB
 }
-
-const defaltUserName = "admin"
-const DefaltUserPwd = "123456"
 
 func (User) TableName() string {
 	return "user"
