@@ -7,7 +7,7 @@ import (
 )
 
 func Init(g *gin.Engine) {
-	user := g.Group("/user")
+	user := g.Group("/user", middleware.LogReq)
 	{
 		user.POST("/login", user_api.Login)
 		user.POST("/logout", middleware.CheckSession, user_api.Logout)

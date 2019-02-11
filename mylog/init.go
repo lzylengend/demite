@@ -17,7 +17,7 @@ func init() {
 	// 同样地，也可以单独为某个logrus实例设置日志级别和hook，这里不详细叙述。
 	log.Formatter = &logrus.JSONFormatter{}
 
-	log.AddHook(newLfsHook("/tmp/demit_log", 100))
+	log.AddHook(newLfsHook("C:/tmp/demit_log", 100))
 }
 
 func LogError(args ...interface{}) {

@@ -6,12 +6,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type noLogin struct {
+type commonRespose struct {
 	Status *my_error.ErrorCommon `json:"status"`
 }
 
 func CheckSession(c *gin.Context) {
-	rsp := &noLogin{}
+	rsp := &commonRespose{}
 	_, err := controller.GetUserId(c)
 
 	if err != nil {
