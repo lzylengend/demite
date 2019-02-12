@@ -2,6 +2,7 @@ package main
 
 import (
 	"demite/conf"
+	"demite/express_api"
 	"demite/model"
 	_ "demite/mylog"
 	"demite/router"
@@ -13,6 +14,8 @@ import (
 
 func main() {
 	g := gin.New()
+
+	express_api.QurryExpress("")
 
 	store, err := redis.NewStore(10, "tcp", "localhost:6379", "", []byte("demite00"))
 	if err != nil {

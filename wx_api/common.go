@@ -4,12 +4,11 @@ import (
 	"bytes"
 	"crypto/aes"
 	"crypto/cipher"
+	"demite/util"
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"github.com/pkg/errors"
-	"io/ioutil"
-	"net/http"
 	"strconv"
 )
 
@@ -36,7 +35,7 @@ type sessionRespose struct {
 }
 
 func GetAccessTokenFromWx() (string, error) {
-	rsp, err := clientDo("GET", "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="+
+	rsp, err := util.ClientDo("GET", "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="+
 		appId+
 		"&secret="+appSecret, []byte{})
 	if err != nil {
@@ -57,7 +56,7 @@ func GetAccessTokenFromWx() (string, error) {
 }
 
 func CodeToSession(code string) (*sessionRespose, error) {
-	rsp, err := clientDo("GET", "https://api.weixin.qq.com/sns/jscode2session?appid="+appId+
+	rsp, err := util.ClientDo("GET", "https://api.weixin.qq.com/sns/jscode2session?appid="+appId+
 		"&secret="+appSecret+
 		"&js_code="+code+"&grant_type=authorization_code", []byte{})
 	if err != nil {
@@ -75,24 +74,6 @@ func CodeToSession(code string) (*sessionRespose, error) {
 	}
 
 	return res, nil
-}
-
-func clientDo(reqMethod string, url string, body []byte) ([]byte, error) {
-	client := &http.Client{}
-
-	req, err := http.NewRequest(reqMethod, url, bytes.NewBuffer(body))
-	if err != nil {
-		return nil, err
-	}
-	resp, err := client.Do(req)
-	defer resp.Body.Close()
-
-	bodyRsp, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return nil, err
-	}
-
-	return bodyRsp, err
 }
 
 func Decrypt(encryptedData, iv, sessionId string) error {
