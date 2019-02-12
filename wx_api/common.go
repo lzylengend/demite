@@ -9,6 +9,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/pkg/errors"
+	"io/ioutil"
 	"strconv"
 )
 
@@ -34,10 +35,15 @@ type sessionRespose struct {
 	ErrMsg     string `json:"errmsg"`
 }
 
+type qrCodeRequset struct {
+	Scene string `json:"scene"`
+	Page  string `json:"page"`
+}
+
 func GetAccessTokenFromWx() (string, error) {
 	rsp, err := util.ClientDo("GET", "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="+
 		appId+
-		"&secret="+appSecret, []byte{})
+		"&secret="+appSecret, []byte{}, nil)
 	if err != nil {
 		return "", err
 	}
@@ -55,10 +61,40 @@ func GetAccessTokenFromWx() (string, error) {
 	return res.AccessToken, nil
 }
 
+func GetQRCode() error {
+	req := &qrCodeRequset{}
+
+	req.Page = "pages/express"
+	req.Scene = "id=1"
+
+	reqByte, err := json.Marshal(req)
+	if err != nil {
+		return err
+	}
+
+	fmt.Println(string(reqByte))
+
+	header := make(map[string]string)
+	header["Content-type"] = "application/json;charset=UTF-8"
+
+	rsp, err := util.ClientDo("POST", "https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token="+
+		"18_VC-8dP6xQFWwOKxc25YfSWfQqhrtkGfE7T9mP4oIFgLy1h89U9LkS8iNBUuwg-d5YQzRJvjB1ul19n8W0nExlqIgr5mJUJKwqwHwatN6AbwfRFq1CVttsE_tWmbWaGh5TqZhru7R79abHhRjVMCgAEAJAQ", reqByte, header)
+	if err != nil {
+		return err
+	}
+
+	err = ioutil.WriteFile("/home/lzy/go_work/src/demite/pic/a", rsp, 0667)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func CodeToSession(code string) (*sessionRespose, error) {
 	rsp, err := util.ClientDo("GET", "https://api.weixin.qq.com/sns/jscode2session?appid="+appId+
 		"&secret="+appSecret+
-		"&js_code="+code+"&grant_type=authorization_code", []byte{})
+		"&js_code="+code+"&grant_type=authorization_code", []byte{}, nil)
 	if err != nil {
 		return nil, err
 	}

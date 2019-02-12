@@ -77,3 +77,7 @@ func (this *_WxUserDao) NewWxUser(openId, sessionKey, nickName, gender, city, pr
 		UpdateTime: time.Now().Unix(),
 	}
 }
+
+func (this *_WxUserDao) List() {
+
+}
