@@ -1,6 +1,7 @@
 package router
 
 import (
+	"demite/controller/class_api"
 	"demite/controller/middleware"
 	"demite/controller/user_api"
 	"demite/controller/wx_user_api"
@@ -19,6 +20,13 @@ func Init(g *gin.Engine) {
 			user.POST("/update", middleware.CheckSession, user_api.UpdateUser)
 			user.POST("/delete", middleware.CheckSession, user_api.DeleteUser)
 			user.POST("/updatepassword", middleware.CheckSession, user_api.UpdatePwd)
+		}
+
+		class := manage.Group("/class", middleware.CheckSession)
+		{
+			class.POST("/add", class_api.AddClass)
+			class.POST("/list", class_api.ListClass)
+			class.POST("/update", class_api.UpdateClass)
 		}
 	}
 

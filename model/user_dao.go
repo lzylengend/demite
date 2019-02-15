@@ -96,6 +96,7 @@ func (this *_UserDao) Count() (int, error) {
 
 func (this *_UserDao) GetByName(name string) (*User, error) {
 	obj := &User{}
+
 	err := this.Db.Where("username = ?", name).First(obj).Error
 	if err != nil {
 		return nil, err
