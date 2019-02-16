@@ -26,6 +26,12 @@ func AddClass(c *gin.Context) {
 		return
 	}
 
+	if req.Name == "" {
+		rsp.Status = my_error.NotNilError("分组名")
+		c.JSON(200, rsp)
+		return
+	}
+
 	path := ""
 	if req.UpClassId != 0 {
 		upClass, err := model.ClassDao.GetClassById(req.UpClassId)

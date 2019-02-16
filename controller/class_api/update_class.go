@@ -27,6 +27,12 @@ func UpdateClass(c *gin.Context) {
 		return
 	}
 
+	if req.Name == "" {
+		rsp.Status = my_error.NotNilError("分组名")
+		c.JSON(200, rsp)
+		return
+	}
+
 	class, err := model.ClassDao.GetClassById(req.ClassId)
 	if err != nil {
 		rsp.Status = my_error.DbError(err.Error())
@@ -36,12 +42,12 @@ func UpdateClass(c *gin.Context) {
 
 	class.ClassName = req.Name
 	if req.Show {
-		class.Show = 0
+		class.IsShow = 0
 	} else {
-		class.Show = time.Now().Unix()
+		class.IsShow = time.Now().Unix()
 	}
 
-	err := model.ClassDao.Set(class)
+	err = model.ClassDao.Set(class)
 	if err != nil {
 		rsp.Status = my_error.DbError(err.Error())
 		c.JSON(200, rsp)

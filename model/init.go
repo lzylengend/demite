@@ -11,6 +11,7 @@ var UserDao *_UserDao
 var UserPasswordDao *_UserPasswordDao
 var WxUserDao *_WxUserDao
 var ClassDao *_ClassDao
+var PlaceDao *_PlaceDao
 
 func Init() error {
 	//db, err := gorm.Open("mysql", "debian-sys-maint:fYzuFNK68VdZTWJ0@/demite?charset=utf8&parseTime=True&loc=Local")
@@ -27,6 +28,7 @@ func Init() error {
 	UserPasswordDao = newUserPasswordDao(db)
 	WxUserDao = newWxUserDao(db)
 	ClassDao = newClassDao(db)
+	PlaceDao = newPlaceDao(db)
 
 	//init
 	err = UserDao.initUserDao()

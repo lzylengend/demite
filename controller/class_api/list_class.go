@@ -41,7 +41,7 @@ func ListClass(c *gin.Context) {
 	rsp.Data = make([]*classData, 0)
 	for _, v := range classList {
 		b := true
-		if v.Show != 0 {
+		if v.IsShow != 0 {
 			b = false
 		}
 

@@ -10,7 +10,7 @@ type Class struct {
 	ClassId    int64  `gorm:"column:classid;primary_key;AUTO_INCREMENT"`
 	ClassName  string `gorm:"column:classname;index:classname"`
 	UpClassId  int64  `gorm:"column:upclassid;index:upclassid"` //0为根目录
-	Show       int64  `gorm:"column:show;index:show"`
+	IsShow     int64  `gorm:"column:isshow;index:isshow"`
 	Path       string `gorm:"column:path"`
 	DataStatus int64  `gorm:"column:datastatus"`
 	CreateTime int64  `gorm:"column:createtime"`
@@ -36,13 +36,28 @@ func (this *_ClassDao) AddClass(className string, upClassId int64, path string) 
 		ClassName:  className,
 		UpClassId:  upClassId,
 		DataStatus: 0,
-		Show:       0,
+		IsShow:     time.Now().Unix(),
 		Path:       path,
 		CreateTime: time.Now().Unix(),
 		UpdateTime: time.Now().Unix(),
 	}
 
-	err := this.Insert(obj)
+	s := this.Db.Begin()
+	err := s.Create(obj).Error
+	if err != nil {
+		s.Rollback()
+		return nil, err
+	}
+
+	obj.Path = this.AddPath(obj.Path, obj.ClassId)
+	err = s.Save(obj).Error
+	if err != nil {
+		s.Rollback()
+		return nil, err
+	}
+
+	s.Commit()
+
 	return obj, err
 }
 
