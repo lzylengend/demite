@@ -2,6 +2,7 @@ package router
 
 import (
 	"demite/controller/class_api"
+	"demite/controller/file_api"
 	"demite/controller/middleware"
 	"demite/controller/place_api"
 	"demite/controller/user_api"
@@ -33,6 +34,11 @@ func Init(g *gin.Engine) {
 		place := manage.Group("/place", middleware.CheckSession)
 		{
 			place.POST("/list", place_api.ListPlace)
+		}
+
+		file := manage.Group("/file", middleware.CheckSession)
+		{
+			file.POST("/upload", file_api.UploadFile)
 		}
 	}
 

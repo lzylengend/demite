@@ -6,6 +6,7 @@ import (
 	"demite/mylog"
 	"github.com/gin-gonic/gin"
 	"io/ioutil"
+	"strings"
 )
 
 type bodyLogWriter struct {
@@ -28,6 +29,13 @@ func LogReq(c *gin.Context) {
 	}
 
 	c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(data))
+
+	if strings.Contains(c.Request.URL.String(), "file") {
+		if len(data) >= 1000 {
+			data = []byte("文件数据")
+		}
+	}
+
 	blw := &bodyLogWriter{body: bytes.NewBufferString(""), ResponseWriter: c.Writer}
 	c.Writer = blw
 

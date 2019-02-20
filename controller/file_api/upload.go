@@ -30,7 +30,7 @@ func UploadFile(c *gin.Context) {
 
 	fmt.Println(header.Filename)
 
-	f, err := os.Create(conf.GetFilePath() + id)
+	f, err := os.Create(conf.GetFilePath() + "/" + id)
 	if err != nil {
 		rsp.Status = my_error.FileWriteError(err.Error())
 		c.JSON(200, rsp)
@@ -38,7 +38,13 @@ func UploadFile(c *gin.Context) {
 	}
 	defer f.Close()
 
-	io.Copy(f, file)
+	_, err = io.Copy(f, file)
+	if err != nil {
+		rsp.Status = my_error.FileWriteError(err.Error())
+		c.JSON(200, rsp)
+		return
+	}
+
 	rsp.Id = id
 	rsp.Status = my_error.NoError()
 	c.JSON(200, rsp)
