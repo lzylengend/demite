@@ -119,7 +119,7 @@ func (this *_UserDao) ListByKey(limit, offset int64, key string) ([]*User, error
 	objList := make([]*User, 0)
 
 	key = "%" + key + "%"
-	err := this.Db.Where("username like ?", key).Offset(offset).Limit(limit).Order("createtime").Find(&objList).Error
+	err := this.Db.Where("username like ? and datastatus = ?", key, 0).Offset(offset).Limit(limit).Order("createtime").Find(&objList).Error
 	return objList, err
 }
 
@@ -127,7 +127,7 @@ func (this *_UserDao) CountByKey(key string) (int64, error) {
 	n := 0
 
 	key = "%" + key + "%"
-	err := this.Db.Where("username like ?", key).Count(&n).Error
+	err := this.Db.Where("username like ? and datastatus = ?", key, 0).Count(&n).Error
 	return int64(n), err
 }
 

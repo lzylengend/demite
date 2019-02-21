@@ -5,6 +5,7 @@ import (
 	"demite/controller/file_api"
 	"demite/controller/middleware"
 	"demite/controller/place_api"
+	"demite/controller/product_api"
 	"demite/controller/user_api"
 	"demite/controller/wx_user_api"
 	"github.com/gin-gonic/gin"
@@ -39,6 +40,13 @@ func Init(g *gin.Engine) {
 		file := manage.Group("/file", middleware.CheckSession)
 		{
 			file.POST("/upload", file_api.UploadFile)
+			file.POST("/download", file_api.DownloadFile)
+		}
+
+		produce := manage.Group("/product", middleware.CheckSession)
+		{
+			produce.POST("/add", product_api.AddProduct)
+			produce.POST("/list", product_api.ListProduct)
 		}
 	}
 

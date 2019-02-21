@@ -66,21 +66,33 @@ func (this *_ClassDao) Insert(obj *Class) error {
 }
 
 func (this *_ClassDao) Set(obj *Class) error {
+	obj.UpdateTime = time.Now().Unix()
 	return this.Db.Save(obj).Error
 }
 
 func (this *_ClassDao) GetClassById(classId int64) (*Class, error) {
 	obj := &Class{}
-	err := this.Db.Where("classid = ?", classId).First(obj).Error
+	err := this.Db.Where("classid = ? and datastatus = ?", classId, 0).First(obj).Error
 	return obj, err
 }
 
 func (this *_ClassDao) ListClassByUp(upClassId int64) ([]*Class, error) {
 	objList := make([]*Class, 0)
-	err := this.Db.Where("upclassid = ?", upClassId).Find(&objList).Error
+	err := this.Db.Where("upclassid = ? and datastatus = ?", upClassId, 0).Find(&objList).Error
 	return objList, err
 }
 
 func (this *_ClassDao) AddPath(path string, classId int64) string {
 	return path + "/" + strconv.Itoa(int(classId))
+}
+
+func (this *_ClassDao) ExistId(Id int64) (*Class, bool, error) {
+	obj, err := this.GetClassById(Id)
+	if err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return obj, false, nil
+		}
+		return obj, true, err
+	}
+	return obj, true, nil
 }

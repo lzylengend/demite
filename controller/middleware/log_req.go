@@ -30,16 +30,23 @@ func LogReq(c *gin.Context) {
 
 	c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(data))
 
+	blw := &bodyLogWriter{body: bytes.NewBufferString(""), ResponseWriter: c.Writer}
+	c.Writer = blw
+
 	if strings.Contains(c.Request.URL.String(), "file") {
 		if len(data) >= 1000 {
 			data = []byte("文件数据")
 		}
 	}
 
-	blw := &bodyLogWriter{body: bytes.NewBufferString(""), ResponseWriter: c.Writer}
-	c.Writer = blw
-
 	c.Next()
 
-	mylog.LogInfo("path:" + c.Request.URL.String() + "| req:" + string(data) + "| rsp:" + blw.body.String())
+	rspData := blw.body.String()
+	if strings.Contains(c.Request.URL.String(), "file") {
+		if len(blw.body.String()) >= 1000 {
+			rspData = "文件数据"
+		}
+	}
+
+	mylog.LogInfo("path:" + c.Request.URL.String() + "| req:" + string(data) + "| rsp:" + rspData)
 }

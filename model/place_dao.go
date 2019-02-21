@@ -43,6 +43,6 @@ func (this *_PlaceDao) InsertBatch(objList []*Place) error {
 
 func (this *_PlaceDao) ListByUpId(upPlaceId int64) ([]*Place, error) {
 	objList := make([]*Place, 0)
-	err := this.Db.Where("upplaceid = ?", upPlaceId).Find(&objList).Error
+	err := this.Db.Where("upplaceid = ? and datastatus = ?", upPlaceId, 0).Find(&objList).Error
 	return objList, err
 }

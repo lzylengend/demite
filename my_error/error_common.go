@@ -25,3 +25,7 @@ func DbError(errorDesc string) *ErrorCommon {
 func NotNilError(key string) *ErrorCommon {
 	return &ErrorCommon{HasError: true, ErrorShowDesc: key + "不能为空", ErrorDesc: ""}
 }
+
+func ParamError(key string) *ErrorCommon {
+	return &ErrorCommon{HasError: true, ErrorShowDesc: key + "参数错误", ErrorDesc: ""}
+}
