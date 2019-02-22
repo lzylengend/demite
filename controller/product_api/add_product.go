@@ -23,6 +23,25 @@ type AddProductResponse struct {
 	Status *my_error.ErrorCommon `json:"status"`
 }
 
+type AddProductApi struct {
+}
+
+func (AddProductApi) GetRequest() interface{} {
+	return &AddProductRequest{}
+}
+
+func (AddProductApi) GetResponse() interface{} {
+	return &AddProductResponse{}
+}
+
+func (AddProductApi) GetApi() string {
+	return "AddProduct"
+}
+
+func (AddProductApi) GetDesc() string {
+	return "新增产品"
+}
+
 func AddProduct(c *gin.Context) {
 	req := &AddProductRequest{}
 	rsp := &AddProductResponse{}

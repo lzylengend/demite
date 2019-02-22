@@ -16,6 +16,25 @@ type AddClassResponse struct {
 	Status  *my_error.ErrorCommon `json:"status"`
 }
 
+type AddClassApi struct {
+}
+
+func (AddClassApi) GetRequest() interface{} {
+	return &AddClassRequest{}
+}
+
+func (AddClassApi) GetResponse() interface{} {
+	return &AddClassResponse{}
+}
+
+func (AddClassApi) GetApi() string {
+	return "AddClass"
+}
+
+func (AddClassApi) GetDesc() string {
+	return "新增分类"
+}
+
 func AddClass(c *gin.Context) {
 	req := &AddClassRequest{}
 	rsp := &AddClassResponse{}

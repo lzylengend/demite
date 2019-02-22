@@ -17,6 +17,25 @@ type UpdateClassResponse struct {
 	Status *my_error.ErrorCommon `json:"status"`
 }
 
+type UpdateClassApi struct {
+}
+
+func (UpdateClassApi) GetRequest() interface{} {
+	return &UpdateClassRequest{}
+}
+
+func (UpdateClassApi) GetResponse() interface{} {
+	return &UpdateClassResponse{}
+}
+
+func (UpdateClassApi) GetApi() string {
+	return "UpdateClass"
+}
+
+func (UpdateClassApi) GetDesc() string {
+	return "修改分类"
+}
+
 func UpdateClass(c *gin.Context) {
 	req := &UpdateClassRequest{}
 	rsp := &UpdateClassResponse{}

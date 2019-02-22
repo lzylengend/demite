@@ -17,6 +17,25 @@ type DownloadFileResponse struct {
 	Status *my_error.ErrorCommon `json:"status"`
 }
 
+type DownloadFileApi struct {
+}
+
+func (DownloadFileApi) GetRequest() interface{} {
+	return &DownloadFileRequest{}
+}
+
+func (DownloadFileApi) GetResponse() interface{} {
+	return &DownloadFileResponse{}
+}
+
+func (DownloadFileApi) GetApi() string {
+	return "DownloadFile"
+}
+
+func (DownloadFileApi) GetDesc() string {
+	return "下载文件，data为base64的文件信息"
+}
+
 func DownloadFile(c *gin.Context) {
 	req := &DownloadFileRequest{}
 	rsp := &DownloadFileResponse{}

@@ -33,6 +33,12 @@ func main() {
 
 	router.Init(g)
 
+	err = router.DoDoc(g)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
 	err = model.Init()
 	if err != nil {
 		fmt.Println(err)

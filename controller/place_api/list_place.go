@@ -20,6 +20,29 @@ type placeData struct {
 	PlaceName string `json:"placename"`
 }
 
+type ListPlaceApi struct {
+}
+
+func (ListPlaceApi) GetRequest() interface{} {
+	return &ListPlaceRequest{}
+}
+
+func (ListPlaceApi) GetResponse() interface{} {
+	return &ListPlaceResponse{
+		Data: []*placeData{
+			&placeData{},
+		},
+	}
+}
+
+func (ListPlaceApi) GetApi() string {
+	return "ListPlace"
+}
+
+func (ListPlaceApi) GetDesc() string {
+	return "列出地域"
+}
+
 func ListPlace(c *gin.Context) {
 	req := &ListPlaceRequest{}
 	rsp := &ListPlaceResponse{}

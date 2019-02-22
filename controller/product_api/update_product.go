@@ -24,6 +24,25 @@ type UpdateProductResponse struct {
 	Status *my_error.ErrorCommon `json:"status"`
 }
 
+type UpdateProductApi struct {
+}
+
+func (UpdateProductApi) GetRequest() interface{} {
+	return &UpdateProductRequest{}
+}
+
+func (UpdateProductApi) GetResponse() interface{} {
+	return &UpdateProductResponse{}
+}
+
+func (UpdateProductApi) GetApi() string {
+	return "UpdateProduct"
+}
+
+func (UpdateProductApi) GetDesc() string {
+	return "修改产品"
+}
+
 func UpdateProduct(c *gin.Context) {
 	req := &UpdateProductRequest{}
 	rsp := &UpdateProductResponse{}

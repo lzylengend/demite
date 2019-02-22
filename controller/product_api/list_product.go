@@ -29,6 +29,29 @@ type productData struct {
 	Show        bool   `json:"show"`
 }
 
+type ListProductApi struct {
+}
+
+func (ListProductApi) GetRequest() interface{} {
+	return &ListProductRequest{}
+}
+
+func (ListProductApi) GetResponse() interface{} {
+	return &ListProductResponse{
+		Data: []*productData{
+			&productData{},
+		},
+	}
+}
+
+func (ListProductApi) GetApi() string {
+	return "ListProduct"
+}
+
+func (ListProductApi) GetDesc() string {
+	return "列出产品"
+}
+
 func ListProduct(c *gin.Context) {
 	req := &ListProductRequest{}
 	rsp := &ListProductResponse{}

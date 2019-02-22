@@ -17,6 +17,25 @@ type UploadFileResponse struct {
 	Status *my_error.ErrorCommon `json:"status"`
 }
 
+type UploadFileApi struct {
+}
+
+func (UploadFileApi) GetRequest() interface{} {
+	return &UploadFileRequest{}
+}
+
+func (UploadFileApi) GetResponse() interface{} {
+	return &UploadFileResponse{}
+}
+
+func (UploadFileApi) GetApi() string {
+	return "UploadFile"
+}
+
+func (UploadFileApi) GetDesc() string {
+	return "上传文件，formdata，文件key为 file"
+}
+
 func UploadFile(c *gin.Context) {
 	rsp := &UploadFileResponse{}
 	id := uuid.NewV4().String()

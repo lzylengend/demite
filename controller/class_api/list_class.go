@@ -21,6 +21,25 @@ type classData struct {
 	Show      bool   `json:"show"`
 }
 
+type ListClassApi struct {
+}
+
+func (ListClassApi) GetRequest() interface{} {
+	return &ListClassRequest{}
+}
+
+func (ListClassApi) GetResponse() interface{} {
+	return &ListClassResponse{}
+}
+
+func (ListClassApi) GetApi() string {
+	return "ListClass"
+}
+
+func (ListClassApi) GetDesc() string {
+	return "列出分类"
+}
+
 func ListClass(c *gin.Context) {
 	req := &ListClassRequest{}
 	rsp := &ListClassResponse{}
