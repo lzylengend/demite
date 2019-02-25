@@ -16,6 +16,7 @@ type AddProductRequest struct {
 	Price       int64  `json:"price"`
 	SortId      int64  `json:"sortid"`
 	ClassId     int64  `json:"classid"`
+	Num         int64  `json:"num"`
 }
 
 type AddProductResponse struct {
@@ -90,7 +91,7 @@ func AddProduct(c *gin.Context) {
 		return
 	}
 
-	p, err := model.ProduceDao.Insert(req.Name, req.ProductDecs, req.ProductPic, req.Price, req.SortId, req.ClassId, uid)
+	p, err := model.ProduceDao.Insert(req.Name, req.ProductDecs, req.ProductPic, req.Price, req.SortId, req.ClassId, uid, req.Num)
 	if err != nil {
 		rsp.Status = my_error.DbError(err.Error())
 		c.JSON(200, rsp)

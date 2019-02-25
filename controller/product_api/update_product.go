@@ -18,6 +18,7 @@ type UpdateProductRequest struct {
 	SortId      int64  `json:"sortid"`
 	ClassId     int64  `json:"classid"`
 	Show        bool   `json:"show"`
+	Num         int64  `json:"num"`
 }
 
 type UpdateProductResponse struct {
@@ -102,6 +103,7 @@ func UpdateProduct(c *gin.Context) {
 	p.Price = req.Price
 	p.SortId = req.SortId
 	p.ClassId = req.ClassId
+	p.Num = req.Num
 
 	err = model.ProduceDao.Set(p)
 	if err != nil {

@@ -13,6 +13,7 @@ type Product struct {
 	Price       int64  `gorm:"column:price;"`
 	SortId      int64  `gorm:"column:sortid;"`
 	Show        int64  `gorm:"column:show;"`
+	Num         int64  `gorm:"column:num;"`
 	ClassId     int64  `gorm:"column:classid;index:classid"`
 	CreatorId   int64  `gorm:"column:creatorid"`
 	DataStatus  int64  `gorm:"column:datastatus"`
@@ -34,7 +35,7 @@ func newProductDao(db *gorm.DB) *_ProductDao {
 	return &_ProductDao{Db: db.Model(&Product{})}
 }
 
-func (this *_ProductDao) Insert(productName, productDecs, productPic string, price, sortId, classId, creatorId int64) (*Product, error) {
+func (this *_ProductDao) Insert(productName, productDecs, productPic string, price, sortId, classId, creatorId, num int64) (*Product, error) {
 	obj := &Product{
 		ProductName: productName,
 		ProductDecs: productDecs,
@@ -44,6 +45,7 @@ func (this *_ProductDao) Insert(productName, productDecs, productPic string, pri
 		ClassId:     classId,
 		CreatorId:   creatorId,
 		Show:        time.Now().Unix(),
+		Num:         num,
 		DataStatus:  0,
 		CreateTime:  time.Now().Unix(),
 		UpdateTime:  time.Now().Unix(),

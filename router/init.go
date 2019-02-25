@@ -4,6 +4,7 @@ import (
 	"demite/controller/class_api"
 	"demite/controller/file_api"
 	"demite/controller/middleware"
+	"demite/controller/order_api"
 	"demite/controller/place_api"
 	"demite/controller/product_api"
 	"demite/controller/user_api"
@@ -69,10 +70,10 @@ func Init(g *gin.Engine) {
 	mini := g.Group("/api", middleware.LogReq)
 	{
 		mini.POST("/login", wx_user_api.Login)
-		//wxUser := mini.Group("/wxuser", middleware.LogReq)
-		//{
-		//
-		//}
+		wxUser := mini.Group("/wxuser", middleware.CheckWxSession)
+		{
+			MyRouterPost(wxUser, "/addorder", order_api.AddOrderApi{}, order_api.AddOrder)
+		}
 	}
 }
 

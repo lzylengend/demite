@@ -27,6 +27,7 @@ type productData struct {
 	SortId      int64  `json:"sortid"`
 	ClassId     int64  `json:"classid"`
 	Show        bool   `json:"show"`
+	Num         int64  `json:"num"`
 }
 
 type ListProductApi struct {
@@ -91,6 +92,7 @@ func ListProduct(c *gin.Context) {
 			SortId:      v.SortId,
 			ClassId:     v.ClassId,
 			Show:        show,
+			Num:         v.Num,
 		})
 	}
 	rsp.Count = count
