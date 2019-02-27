@@ -50,6 +50,7 @@ func (AddOrderApi) GetDesc() string {
 func AddOrder(c *gin.Context) {
 	req := &AddOrderRequest{}
 	rsp := &AddOrderResponse{}
+
 	err := c.BindJSON(req)
 	if err != nil {
 		rsp.Status = my_error.JsonError(err.Error())
@@ -97,7 +98,7 @@ func AddOrder(c *gin.Context) {
 
 		for i := 0; i < int(v.Num); i++ {
 			gList = append(gList, &model.Goods{
-				GoodsCode:      model.GoodsDao.CreateCode(uId),
+				GoodsCode:      model.GoodsDao.CreateCode(),
 				GoodsName:      p.ProductName,
 				GoodsDecs:      p.ProductDecs,
 				GoodsPic:       p.ProductPic,
