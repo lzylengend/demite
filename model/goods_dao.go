@@ -92,3 +92,7 @@ func (this *_GoodsDao) Add(obj *Goods) (int64, error) {
 	err := this.Db.Create(obj).Error
 	return obj.GoodsId, err
 }
+
+func (this *_GoodsDao) ListByQRCode() {
+
+}

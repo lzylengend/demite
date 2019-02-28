@@ -9,7 +9,7 @@ type GoodsListRequest struct {
 	Limit        int64  `json:"limit"`
 	Offset       int64  `json:"offset"`
 	Key          string `json:"key"`
-	CreateQRCode bool   `json:"createqrcode"`
+	CreateQRCode string `json:"createqrcode"`
 }
 
 type GoodsListResponse struct {
