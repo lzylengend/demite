@@ -11,6 +11,7 @@ var UserDao *_UserDao
 var UserPasswordDao *_UserPasswordDao
 var WxUserDao *_WxUserDao
 var ClassDao *_ClassDao
+var DrugClassDao *_DrugClassDao
 var PlaceDao *_PlaceDao
 var ProduceDao *_ProductDao
 var OrdertDao *_OrdertDao
