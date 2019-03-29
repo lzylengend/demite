@@ -28,6 +28,8 @@ var routerMap map[string]MyRouter
 func Init(g *gin.Engine) {
 	routerMap = make(map[string]MyRouter)
 
+	g.GET("test", file_api.Test)
+
 	manage := g.Group("/manage", middleware.LogReq)
 	{
 		manage.POST("/login", user_api.Login)

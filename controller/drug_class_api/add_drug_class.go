@@ -50,7 +50,7 @@ func AddDrugClass(c *gin.Context) {
 		return
 	}
 
-	class, err := model.ClassDao.AddDrugClass(req.Name, req.UpClassId, path)
+	class, err := model.DrugClassDao.AddDrugClass(req.Name)
 	if err != nil {
 		rsp.Status = my_error.DbError(err.Error())
 		c.JSON(200, rsp)
