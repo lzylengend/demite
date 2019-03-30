@@ -29,6 +29,7 @@ type Goods struct {
 	ProductId               int64      `gorm:"column:productid;index:productid"`
 	ClassId                 int64      `gorm:"column:classid;index:classid"`
 	CreatorId               int64      `gorm:"column:creatorid"`
+	WXUserId                int64      `gorm:"column:wxuserid"`
 	Status                  goodStatus `gorm:"column:status"`
 	DataStatus              int64      `gorm:"column:datastatus"`
 	CreateTime              int64      `gorm:"column:createtime"`
@@ -54,7 +55,7 @@ func (this *_GoodsDao) CreateCode() string {
 
 func (this *_GoodsDao) GetByCode(code string) (*Goods, error) {
 	obj := &Goods{}
-	err := this.Db.Where("goodscode = ?", code).First(obj).Error
+	err := this.Db.Where("goodsuuid = ?", code).First(obj).Error
 	return obj, err
 }
 
@@ -72,6 +73,17 @@ func (this *_GoodsDao) GetByUUID(uuid string) (*Goods, error) {
 	obj := &Goods{}
 	err := this.Db.Where("goodsuuid = ?", uuid).First(obj).Error
 	return obj, err
+}
+
+func (this *_GoodsDao) Get(id int64) (*Goods, error) {
+	obj := &Goods{}
+	err := this.Db.Where("goodsid = ?", id).First(obj).Error
+	return obj, err
+}
+
+func (this *_GoodsDao) Set(obj *Goods) error {
+	err := this.Db.Save(obj).Error
+	return err
 }
 
 func (this *_GoodsDao) ExitByUUID(uuid string) (bool, error) {

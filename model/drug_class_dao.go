@@ -48,3 +48,17 @@ func (this *_DrugClassDao) Get(id int64) (*DrugClass, error) {
 	err := this.Db.Where("classid = ? and datastatus = ?", id, 0).First(obj).Error
 	return obj, err
 }
+
+//func (this *_DrugClassDao) Exist(id int64) (bool, error) {
+//	_, err := this.Get(id)
+//	if err != nil {
+//		return true, err
+//	}
+//	return false, err
+//}
+
+func (this *_DrugClassDao) List() ([]*DrugClass, error) {
+	objList := make([]*DrugClass, 0)
+	err := this.Db.Where("datastatus = ?", 0).Find(&objList).Error
+	return objList, err
+}

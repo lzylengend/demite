@@ -2,11 +2,13 @@ package router
 
 import (
 	"demite/controller/class_api"
+	"demite/controller/drug_api"
+	"demite/controller/drug_class_api"
 	"demite/controller/file_api"
+	"demite/controller/goods_api"
 	"demite/controller/middleware"
 	"demite/controller/order_api"
 	"demite/controller/place_api"
-	"demite/controller/product_api"
 	"demite/controller/user_api"
 	"demite/controller/wx_user_api"
 	"encoding/json"
@@ -61,11 +63,29 @@ func Init(g *gin.Engine) {
 			MyRouterPost(file, "/download", file_api.DownloadFileApi{}, file_api.DownloadFile)
 		}
 
-		produce := manage.Group("/product", middleware.CheckSession)
+		//produce := manage.Group("/product", middleware.CheckSession)
+		//{
+		//	MyRouterPost(produce, "/add", product_api.AddProductApi{}, product_api.AddProduct)
+		//	MyRouterPost(produce, "/list", product_api.ListProductApi{}, product_api.ListProduct)
+		//	MyRouterPost(produce, "/update", product_api.UpdateProductApi{}, product_api.UpdateProduct)
+		//}
+
+		drugClass := manage.Group("/druclass", middleware.CheckSession)
 		{
-			MyRouterPost(produce, "/add", product_api.AddProductApi{}, product_api.AddProduct)
-			MyRouterPost(produce, "/list", product_api.ListProductApi{}, product_api.ListProduct)
-			MyRouterPost(produce, "/update", product_api.UpdateProductApi{}, product_api.UpdateProduct)
+			MyRouterPost(drugClass, "/add", drug_class_api.AddDrugClassApi{}, drug_class_api.AddDrugClass)
+			MyRouterPost(drugClass, "/list", drug_class_api.ListDrugClassApi{}, drug_class_api.ListDrugClass)
+		}
+
+		drug := manage.Group("/drug", middleware.CheckSession)
+		{
+			MyRouterPost(drug, "/add", drug_api.AddDrugApi{}, drug_api.AddDrug)
+			MyRouterPost(drug, "/list", drug_api.ListDrugApi{}, drug_api.ListDrug)
+			MyRouterPost(drug, "/update", drug_api.UpdateDrugApi{}, drug_api.UpdateDrug)
+		}
+
+		goods := manage.Group("/goods", middleware.CheckSession)
+		{
+			MyRouterPost(goods, "/add", goods_api.GoodsAddApi{}, goods_api.GoodsAdd)
 		}
 	}
 
@@ -85,7 +105,7 @@ func MyRouterPost(group *gin.RouterGroup, path string, r MyRouter, handleFun ...
 }
 
 func DoDoc(g *gin.Engine) error {
-	doc, err := os.OpenFile("/tmp/doc", os.O_CREATE|os.O_WRONLY, 06667)
+	doc, err := os.OpenFile("F:/doc", os.O_CREATE|os.O_WRONLY, 06667) // /tmp/doc
 	if err != nil {
 		return err
 	}

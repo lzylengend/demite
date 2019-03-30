@@ -2,6 +2,7 @@ package main
 
 import (
 	"demite/conf"
+	"demite/model"
 	_ "demite/mylog"
 	"demite/router"
 	"fmt"
@@ -38,11 +39,11 @@ func main() {
 		return
 	}
 
-	//err = model.Init()
-	//if err != nil {
-	//	fmt.Println(err)
-	//	return
-	//}
+	err = model.Init()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 
 	err = g.Run(c.Port)
 	if err != nil {

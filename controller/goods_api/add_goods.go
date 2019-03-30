@@ -9,12 +9,13 @@ import (
 )
 
 type GoodsAddRequest struct {
-	Name                    string `json:"name"`
-	GoodsUUID               string `json:"goodsuuid"`
-	GoodsDecs               string `json:"goodsdecs"`
-	GoodsPic                string `json:"goodspic"`
-	GoodsTemplet            string `json:"goodsteplet"`
-	GoodsTempletLockContext string `json:"goodstempletlockcontext"`
+	Name                    string  `json:"name"`
+	GoodsUUID               string  `json:"goodsuuid"`
+	GoodsDecs               string  `json:"goodsdecs"`
+	GoodsPic                string  `json:"goodspic"`
+	DrugList                []int64 `json:"druglist"`
+	GoodsTemplet            string  `json:"goodsteplet"`
+	GoodsTempletLockContext string  `json:"goodstempletlockcontext"`
 }
 
 type GoodsAddResponse struct {
@@ -64,6 +65,12 @@ func GoodsAdd(c *gin.Context) {
 		return
 	}
 
+	if req.Name == "" {
+		rsp.Status = my_error.NotNilError("name")
+		c.JSON(200, rsp)
+		return
+	}
+
 	var uId int64 = 0
 	uId, err = controller.GetUserId(c)
 	if err != nil {
@@ -85,6 +92,13 @@ func GoodsAdd(c *gin.Context) {
 		CreateTime:              time.Now().Unix(),
 		UpdateTime:              time.Now().Unix(),
 		CreatorId:               uId,
+	}
+
+	err = model.GoodDrugsDao.Add(req.DrugList, req.GoodsUUID)
+	if err != nil {
+		rsp.Status = my_error.DbError(err.Error())
+		c.JSON(200, rsp)
+		return
 	}
 
 	rsp.Id, err = model.GoodsDao.Add(g)

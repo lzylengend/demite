@@ -17,11 +17,13 @@ var ProduceDao *_ProductDao
 var OrdertDao *_OrdertDao
 var OrderLogDao *_OrdertLogDao
 var GoodsDao *_GoodsDao
+var DrugDao *_DrugDao
+var GoodDrugsDao *_GoodDrugsDao
 
 func Init() error {
 	//db, err := gorm.Open("mysql", "debian-sys-maint:fYzuFNK68VdZTWJ0@/demite?charset=utf8&parseTime=True&loc=Local")
-	db, err := gorm.Open("mysql", "debian-sys-maint:P7Mo08KJ9qIYEZ9b@/demite?charset=utf8&parseTime=True&loc=Local")
-	//db, err := gorm.Open("mysql", "root:612345@/demite?charset=utf8&parseTime=True&loc=Local")
+	//db, err := gorm.Open("mysql", "debian-sys-maint:P7Mo08KJ9qIYEZ9b@/demite?charset=utf8&parseTime=True&loc=Local")
+	db, err := gorm.Open("mysql", "root:612345@/demite?charset=utf8&parseTime=True&loc=Local")
 	if err != nil {
 		return err
 	}
@@ -38,6 +40,9 @@ func Init() error {
 	OrdertDao = newOrderDao(db)
 	OrderLogDao = newOrderLogDao(db)
 	GoodsDao = newGoodsDao(db)
+	DrugClassDao = newDrugClassDao(db)
+	DrugDao = newDrugDao(db)
+	GoodDrugsDao = newGoodDrugsDao(db)
 
 	//init
 	err = UserDao.initUserDao()
