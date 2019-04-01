@@ -82,12 +82,14 @@ func GetGood(c *gin.Context) {
 	rsp.Name = good.GoodsName
 	rsp.GoodsDecs = good.GoodsDecs
 	rsp.GoodsPic = good.GoodsPic
-	rsp.GoodsTemplet = good.GoodsTempletLockContext
+	rsp.GoodsTemplet = good.GoodsTemplet
 	rsp.CreateTime = good.CreateTime
 	rsp.QRCode = good.QRCode
 	rsp.GoodsModel = good.GoodsModel
 	rsp.GoodsPicData = base64.StdEncoding.EncodeToString(data)
 	rsp.GuaranteeTime = good.GuaranteeTime
+	rsp.GoodsUUID = good.GoodsUUID
+	rsp.GoodsTempletLockContext = good.GoodsTempletLockContext
 
 	for _, v := range objList {
 		drug, err := model.DrugDao.Get(v.DrugId)
