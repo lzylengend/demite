@@ -77,7 +77,6 @@ func GoodsList(c *gin.Context) {
 			data = []byte{}
 			//rsp.Status = my_error.FileReadError(err.Error())
 			//c.JSON(200, rsp)
-			continue
 		}
 
 		rsp.Data = append(rsp.Data, &good{
