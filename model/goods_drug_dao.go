@@ -1,11 +1,14 @@
 package model
 
 import (
-	"github.com/jinzhu/gorm"
+	"fmt"
 	"time"
+
+	"github.com/jinzhu/gorm"
 )
 
 type GoodDrugs struct {
+	Id         int64  `gorm:"column:id;primary_key;AUTO_INCREMENT"`
 	GoodUUId   string `gorm:"column:goodsuuid;index:goodsuuid"`
 	DrugId     int64  `gorm:"column:drugid;index:drugid"`
 	CreateTime int64  `gorm:"column:createtime"`
@@ -71,6 +74,8 @@ func (this *_GoodDrugsDao) Update(id []int64, uuid string) error {
 		}
 	}
 
+	fmt.Println(delList)
+
 	for _, v := range id {
 		existFlag := false
 		for _, v2 := range objList {
@@ -90,6 +95,7 @@ func (this *_GoodDrugsDao) Update(id []int64, uuid string) error {
 			})
 		}
 	}
+	fmt.Println(addList)
 
 	t := this.Db.Begin()
 

@@ -15,6 +15,7 @@ type LoginRequest struct {
 
 type LoginResponse struct {
 	Status *my_error.ErrorCommon `json:"status"`
+	Openid string                `json:"openid"`
 }
 
 func Login(c *gin.Context) {

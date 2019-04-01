@@ -14,6 +14,7 @@ const (
 )
 
 type GoodsWXUser struct {
+	Id         int64       `gorm:"column:id;primary_key;AUTO_INCREMENT"`
 	GoodsUUID  string      `gorm:"column:goodsuuid;index:goodsuuid"`
 	WXUserId   int64       `gorm:"column:wxuserid;index:wxuserid"`
 	Status     goodsWXUser `gorm:"column:status"`
@@ -53,7 +54,7 @@ func (this *_GoodsWXUserDao) Set() {
 
 func (this *_GoodsWXUserDao) GetAndExist(goodUUID string, wxUserId int64) (bool, *GoodsWXUser, error) {
 	obj := &GoodsWXUser{}
-	err := this.Db.Where("datastatus  = ? and goodUUID = ? and wxUserId = ?", 0, goodUUID, wxUserId).First(obj).Error
+	err := this.Db.Where("datastatus  = ? and goodsuuid = ? and wxuserid = ?", 0, goodUUID, wxUserId).First(obj).Error
 
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
@@ -66,14 +67,14 @@ func (this *_GoodsWXUserDao) GetAndExist(goodUUID string, wxUserId int64) (bool,
 
 func (this *_GoodsWXUserDao) ListByUUID(uuid string) ([]*GoodsWXUser, error) {
 	objList := make([]*GoodsWXUser, 0)
-	err := this.Db.Where("datastatus  = ? and goodUUID = ?", 0, uuid).Find(&objList).Error
+	err := this.Db.Where("datastatus  = ? and goodsuuid = ?", 0, uuid).Find(&objList).Error
 
 	return objList, err
 }
 
 func (this *_GoodsWXUserDao) ListByWXId(wxId int64) ([]*GoodsWXUser, error) {
 	objList := make([]*GoodsWXUser, 0)
-	err := this.Db.Where("datastatus  = ? and wxUserId = ?", 0, wxId).Find(&objList).Error
+	err := this.Db.Where("datastatus  = ? and wxuserid = ?", 0, wxId).Find(&objList).Error
 
 	return objList, err
 }
