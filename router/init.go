@@ -85,6 +85,7 @@ func Init(g *gin.Engine) {
 			MyRouterPost(goods, "/list", goods_api.GoodsListApi{}, goods_api.GoodsList)
 			MyRouterPost(goods, "/update", goods_api.GoodsUpdateApi{}, goods_api.GoodsUpdate)
 			MyRouterPost(goods, "/goodgetdrug", goods_api.GoodsGetDrugApi{}, goods_api.GoodsGetDrug)
+			MyRouterPost(goods, "/getgood", goods_api.GetGoodApi{}, goods_api.GetGood)
 		}
 
 		//produce := manage.Group("/product", middleware.CheckSession)
