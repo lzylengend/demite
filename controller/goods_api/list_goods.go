@@ -74,9 +74,10 @@ func GoodsList(c *gin.Context) {
 	for _, v := range objList {
 		data, err := ioutil.ReadFile(conf.GetFilePath() + "/" + v.GoodsPic)
 		if err != nil {
-			rsp.Status = my_error.FileReadError(err.Error())
-			c.JSON(200, rsp)
-			return
+			data = []byte{}
+			//rsp.Status = my_error.FileReadError(err.Error())
+			//c.JSON(200, rsp)
+			continue
 		}
 
 		rsp.Data = append(rsp.Data, &good{

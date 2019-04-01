@@ -74,9 +74,9 @@ func GetGood(c *gin.Context) {
 
 	data, err := ioutil.ReadFile(conf.GetFilePath() + "/" + good.GoodsPic)
 	if err != nil {
-		rsp.Status = my_error.FileReadError(err.Error())
-		c.JSON(200, rsp)
-		return
+		data = []byte{}
+		//rsp.Status = my_error.FileReadError(err.Error())
+		//c.JSON(200, rsp)
 	}
 
 	rsp.Name = good.GoodsName
