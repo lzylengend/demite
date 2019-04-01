@@ -8,7 +8,7 @@ import (
 )
 
 type GoodsUpdateRequest struct {
-	Id                      int64   `json:"id"`
+	UUId                    string  `json:"uuid"`
 	Name                    string  `json:"name"`
 	GoodsDecs               string  `json:"goodsdecs"`
 	GoodsPic                string  `json:"goodspic"`
@@ -59,7 +59,7 @@ func GoodsUpdate(c *gin.Context) {
 		return
 	}
 
-	g, err := model.GoodsDao.Get(req.Id)
+	g, err := model.GoodsDao.GetByUUID(req.UUId)
 	if err != nil {
 		rsp.Status = my_error.ParamError("id")
 		c.JSON(200, rsp)
