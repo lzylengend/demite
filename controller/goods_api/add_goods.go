@@ -16,6 +16,8 @@ type GoodsAddRequest struct {
 	DrugList                []int64 `json:"druglist"`
 	GoodsTemplet            string  `json:"goodsteplet"`
 	GoodsTempletLockContext string  `json:"goodstempletlockcontext"`
+	GoodsModel              string  `json:"goodmodel"`
+	GuaranteeTime           int64   `json:"guaranteetime"`
 }
 
 type GoodsAddResponse struct {
@@ -71,6 +73,12 @@ func GoodsAdd(c *gin.Context) {
 		return
 	}
 
+	if req.GoodsModel == "" {
+		rsp.Status = my_error.NotNilError("goodsmodel")
+		c.JSON(200, rsp)
+		return
+	}
+
 	var uId int64 = 0
 	uId, err = controller.GetUserId(c)
 	if err != nil {
@@ -92,6 +100,8 @@ func GoodsAdd(c *gin.Context) {
 		CreateTime:              time.Now().Unix(),
 		UpdateTime:              time.Now().Unix(),
 		CreatorId:               uId,
+		GoodsModel:              req.GoodsModel,
+		GuaranteeTime:           req.GuaranteeTime,
 	}
 
 	err = model.GoodDrugsDao.Add(req.DrugList, req.GoodsUUID)

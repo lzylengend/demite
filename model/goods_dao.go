@@ -19,6 +19,7 @@ type Goods struct {
 	GoodsUUID               string     `gorm:"column:goodsuuid;index:goodsuuid;unique"`
 	GoodsCode               string     `grom:"column:goodscode;index:goodscode;unique"`
 	GoodsName               string     `gorm:"column:goodsname;index:goodsname"`
+	GoodsModel              string     `gorm:"column:goodmodel;index:goodmodel"`
 	GoodsDecs               string     `gorm:"column:goodsdesc;type:text"`
 	GoodsPic                string     `gorm:"column:goodspic;type:text"`
 	Price                   int64      `gorm:"column:price;"`
@@ -31,6 +32,7 @@ type Goods struct {
 	ClassId                 int64      `gorm:"column:classid;index:classid"`
 	CreatorId               int64      `gorm:"column:creatorid"`
 	Status                  goodStatus `gorm:"column:status"`
+	GuaranteeTime           int64      `gorm:"column:guaranteetime"`
 	DataStatus              int64      `gorm:"column:datastatus"`
 	CreateTime              int64      `gorm:"column:createtime"`
 	UpdateTime              int64      `gorm:"column:updatetime"`

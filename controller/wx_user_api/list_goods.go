@@ -9,7 +9,6 @@ import (
 )
 
 type ListGoodsRequest struct {
-	GoodUUID string `json:"gooduuid"`
 }
 
 type ListGoodsResponse struct {

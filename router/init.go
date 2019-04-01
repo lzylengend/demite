@@ -1,7 +1,6 @@
 package router
 
 import (
-	"demite/controller/class_api"
 	"demite/controller/drug_api"
 	"demite/controller/drug_class_api"
 	"demite/controller/file_api"
@@ -46,12 +45,12 @@ func Init(g *gin.Engine) {
 			user.POST("/updatepassword", user_api.UpdatePwd)
 		}
 
-		class := manage.Group("/class", middleware.CheckSession)
-		{
-			MyRouterPost(class, "/add", class_api.AddClassApi{}, class_api.AddClass)
-			MyRouterPost(class, "/list", class_api.ListClassApi{}, class_api.ListClass)
-			MyRouterPost(class, "/update", class_api.UpdateClassApi{}, class_api.UpdateClass)
-		}
+		//class := manage.Group("/class", middleware.CheckSession)
+		//{
+		//	MyRouterPost(class, "/add", class_api.AddClassApi{}, class_api.AddClass)
+		//	MyRouterPost(class, "/list", class_api.ListClassApi{}, class_api.ListClass)
+		//	MyRouterPost(class, "/update", class_api.UpdateClassApi{}, class_api.UpdateClass)
+		//}
 
 		place := manage.Group("/place", middleware.CheckSession)
 		{
@@ -63,13 +62,6 @@ func Init(g *gin.Engine) {
 			MyRouterPost(file, "/upload", file_api.UploadFileApi{}, file_api.UploadFile)
 			MyRouterPost(file, "/download", file_api.DownloadFileApi{}, file_api.DownloadFile)
 		}
-
-		//produce := manage.Group("/product", middleware.CheckSession)
-		//{
-		//	MyRouterPost(produce, "/add", product_api.AddProductApi{}, product_api.AddProduct)
-		//	MyRouterPost(produce, "/list", product_api.ListProductApi{}, product_api.ListProduct)
-		//	MyRouterPost(produce, "/update", product_api.UpdateProductApi{}, product_api.UpdateProduct)
-		//}
 
 		drugClass := manage.Group("/druclass", middleware.CheckSession)
 		{
@@ -92,7 +84,16 @@ func Init(g *gin.Engine) {
 			MyRouterPost(goods, "/add", goods_api.GoodsAddApi{}, goods_api.GoodsAdd)
 			MyRouterPost(goods, "/list", goods_api.GoodsListApi{}, goods_api.GoodsList)
 			MyRouterPost(goods, "/update", goods_api.GoodsUpdateApi{}, goods_api.GoodsUpdate)
+			MyRouterPost(goods, "/goodgetdrug", goods_api.GoodsGetDrugApi{}, goods_api.GoodsGetDrug)
 		}
+
+		//produce := manage.Group("/product", middleware.CheckSession)
+		//{
+		//	MyRouterPost(produce, "/add", product_api.AddProductApi{}, product_api.AddProduct)
+		//	MyRouterPost(produce, "/list", product_api.ListProductApi{}, product_api.ListProduct)
+		//	MyRouterPost(produce, "/update", product_api.UpdateProductApi{}, product_api.UpdateProduct)
+		//}
+
 	}
 
 	mini := g.Group("/api", middleware.LogReq)

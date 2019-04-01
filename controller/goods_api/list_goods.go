@@ -28,6 +28,8 @@ type good struct {
 	GoodsTempletLockContext string `json:"goodstempletlockcontext"`
 	CreateTime              int64  `json:"createtime"`
 	QRCode                  string `json:"qrcode"`
+	GoodsModel              string `json:"goodmodel"`
+	GuaranteeTime           int64  `json:"guaranteetime"`
 }
 
 type GoodsListApi struct {
@@ -67,17 +69,6 @@ func GoodsList(c *gin.Context) {
 	}
 
 	for _, v := range objList {
-		// gdList, err := model.GoodDrugsDao.GetByUUID(v.GoodsUUID)
-		// if err != nil {
-		// 	rsp.Status = my_error.DbError(err.Error())
-		// 	c.JSON(200, rsp)
-		// 	return
-		// }
-
-		// rspGDList := make([]int64, 0)
-		// for _, v2 := range gdList {
-		// 	rspGDList = append(rspGDList, v2.DrugId)
-		// }
 
 		rsp.Data = append(rsp.Data, &good{
 			Name:                    v.GoodsName,
@@ -88,6 +79,8 @@ func GoodsList(c *gin.Context) {
 			GoodsTempletLockContext: v.GoodsTempletLockContext,
 			CreateTime:              v.CreateTime,
 			QRCode:                  v.QRCode,
+			GoodsModel:              v.GoodsModel,
+			GuaranteeTime:           v.GuaranteeTime,
 		})
 	}
 

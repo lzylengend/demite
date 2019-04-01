@@ -4,6 +4,7 @@ import (
 	"demite/model"
 	"demite/my_error"
 	"github.com/gin-gonic/gin"
+	"time"
 )
 
 type GoodsUpdateRequest struct {
@@ -14,6 +15,9 @@ type GoodsUpdateRequest struct {
 	DrugList                []int64 `json:"druglist"`
 	GoodsTemplet            string  `json:"goodsteplet"`
 	GoodsTempletLockContext string  `json:"goodstempletlockcontext"`
+	GoodsModel              string  `json:"goodmodel"`
+	GuaranteeTime           int64   `json:"guaranteetime"`
+	ClassId                 int64   `json:"classid"`
 }
 
 type GoodsUpdateResponse struct {
@@ -68,6 +72,16 @@ func GoodsUpdate(c *gin.Context) {
 		c.JSON(200, rsp)
 		return
 	}
+
+	g.GuaranteeTime = req.GuaranteeTime
+	g.GoodsModel = req.GoodsModel
+	g.UpdateTime = time.Now().Unix()
+	g.ClassId = req.ClassId
+	g.GoodsName = req.Name
+	g.GoodsDecs = req.GoodsDecs
+	g.GoodsPic = req.GoodsPic
+	g.GoodsTemplet = req.GoodsTemplet
+	g.GoodsTempletLockContext = req.GoodsTempletLockContext
 
 	err = model.GoodsDao.Set(g)
 	if err != nil {
