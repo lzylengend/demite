@@ -1,10 +1,12 @@
 package goods_api
 
 import (
+	"demite/conf"
 	"demite/model"
 	"demite/my_error"
-
+	"encoding/base64"
 	"github.com/gin-gonic/gin"
+	"io/ioutil"
 )
 
 type GoodsListRequest struct {
@@ -30,6 +32,7 @@ type good struct {
 	QRCode                  string `json:"qrcode"`
 	GoodsModel              string `json:"goodmodel"`
 	GuaranteeTime           int64  `json:"guaranteetime"`
+	GoodsPicData            string `json:"goodpicdata"`
 }
 
 type GoodsListApi struct {
@@ -69,6 +72,12 @@ func GoodsList(c *gin.Context) {
 	}
 
 	for _, v := range objList {
+		data, err := ioutil.ReadFile(conf.GetFilePath() + "/" + v.GoodsPic)
+		if err != nil {
+			rsp.Status = my_error.FileReadError(err.Error())
+			c.JSON(200, rsp)
+			return
+		}
 
 		rsp.Data = append(rsp.Data, &good{
 			Name:                    v.GoodsName,
@@ -81,6 +90,7 @@ func GoodsList(c *gin.Context) {
 			QRCode:                  v.QRCode,
 			GoodsModel:              v.GoodsModel,
 			GuaranteeTime:           v.GuaranteeTime,
+			GoodsPicData:            base64.StdEncoding.EncodeToString(data),
 		})
 	}
 

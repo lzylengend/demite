@@ -111,8 +111,8 @@ func MyRouterPost(group *gin.RouterGroup, path string, r MyRouter, handleFun ...
 	routerMap[reflect.TypeOf(r).PkgPath()+"."+r.GetApi()] = r
 }
 
-func DoDoc(g *gin.Engine) error {
-	doc, err := os.OpenFile("D:/share/doc.txt", os.O_CREATE|os.O_WRONLY, 06667) // /tmp/doc
+func DoDoc(g *gin.Engine, filePath string) error {
+	doc, err := os.OpenFile(filePath, os.O_CREATE|os.O_WRONLY, 06667) // /tmp/doc
 	if err != nil {
 		return err
 	}

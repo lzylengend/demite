@@ -33,7 +33,7 @@ func main() {
 
 	router.Init(g)
 
-	err = router.DoDoc(g)
+	err = router.DoDoc(g, "D:/share/doc.txt")
 	if err != nil {
 		fmt.Println(err)
 		return
