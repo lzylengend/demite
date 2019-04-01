@@ -1,8 +1,9 @@
 package model
 
 import (
-	"github.com/jinzhu/gorm"
 	"time"
+
+	"github.com/jinzhu/gorm"
 )
 
 type Drug struct {
@@ -59,11 +60,22 @@ func (this *_DrugDao) Get(id int64) (*Drug, error) {
 	return obj, err
 }
 
-func (this *_DrugDao) ListByCreateTime(key string, limit, offset int64) ([]*Drug, error) {
-	objList := make([]*Drug, 0)
+func (this *_DrugDao) GetByClassId(classid int64) ([]*Drug, error) {
+	obj := make([]*Drug, 0)
+	err := this.Db.Where("drugclassid = ? and datastatus = ?", classid, 0).Find(&obj).Error
+	return obj, err
+}
 
+func (this *_DrugDao) ListByCreateTime(classId int64, key string, limit, offset int64) ([]*Drug, error) {
+	objList := make([]*Drug, 0)
+	var err error
 	key = "%" + key + "%"
-	err := this.Db.Where("drugname like ? and datastatus = ?", key, 0).Offset(offset).Limit(limit).Order("createtime").Find(&objList).Error
+	if classId > 0 {
+		err = this.Db.Where("drugname like ? and datastatus = ? and drugclassid = ?", key, 0, classId).Offset(offset).Limit(limit).Order("createtime").Find(&objList).Error
+	} else {
+		err = this.Db.Where("drugname like ? and datastatus = ?", key, 0).Offset(offset).Limit(limit).Order("createtime").Find(&objList).Error
+	}
+
 	return objList, err
 }
 

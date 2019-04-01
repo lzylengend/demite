@@ -1,7 +1,9 @@
 package goods_api
 
 import (
+	"demite/model"
 	"demite/my_error"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -56,4 +58,40 @@ func GoodsList(c *gin.Context) {
 		c.JSON(200, rsp)
 		return
 	}
+
+	objList, err := model.GoodsDao.ListByQRCode(req.Key, req.Limit, req.Offset)
+	if err != nil {
+		rsp.Status = my_error.DbError(err.Error())
+		c.JSON(200, rsp)
+		return
+	}
+
+	for _, v := range objList {
+		// gdList, err := model.GoodDrugsDao.GetByUUID(v.GoodsUUID)
+		// if err != nil {
+		// 	rsp.Status = my_error.DbError(err.Error())
+		// 	c.JSON(200, rsp)
+		// 	return
+		// }
+
+		// rspGDList := make([]int64, 0)
+		// for _, v2 := range gdList {
+		// 	rspGDList = append(rspGDList, v2.DrugId)
+		// }
+
+		rsp.Data = append(rsp.Data, &good{
+			Name:                    v.GoodsName,
+			GoodsUUID:               v.GoodsUUID,
+			GoodsDecs:               v.GoodsDecs,
+			GoodsPic:                v.GoodsPic,
+			GoodsTemplet:            v.GoodsTemplet,
+			GoodsTempletLockContext: v.GoodsTempletLockContext,
+			CreateTime:              v.CreateTime,
+			QRCode:                  v.QRCode,
+		})
+	}
+
+	rsp.Status = my_error.NoError()
+	c.JSON(200, rsp)
+	return
 }

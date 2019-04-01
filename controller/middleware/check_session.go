@@ -1,8 +1,9 @@
 package middleware
 
 import (
-	"demite/controller"
+	//	"demite/controller"
 	"demite/my_error"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -11,15 +12,15 @@ type commonRespose struct {
 }
 
 func CheckSession(c *gin.Context) {
-	rsp := &commonRespose{}
-	_, err := controller.GetUserId(c)
+	// rsp := &commonRespose{}
+	// _, err := controller.GetUserId(c)
 
-	if err != nil {
-		rsp.Status = my_error.NoLoginError()
-		c.JSON(200, rsp)
-		c.Abort()
-		return
-	}
+	// if err != nil {
+	// 	rsp.Status = my_error.NoLoginError()
+	// 	c.JSON(200, rsp)
+	// 	c.Abort()
+	// 	return
+	// }
 
 	c.Next()
 }

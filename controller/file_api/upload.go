@@ -3,10 +3,11 @@ package file_api
 import (
 	"demite/conf"
 	"demite/my_error"
-	"github.com/gin-gonic/gin"
-	"github.com/satori/go.uuid"
 	"io"
 	"os"
+
+	"github.com/gin-gonic/gin"
+	"github.com/satori/go.uuid"
 )
 
 type UploadFileRequest struct {
@@ -38,6 +39,7 @@ func (UploadFileApi) GetDesc() string {
 
 func UploadFile(c *gin.Context) {
 	rsp := &UploadFileResponse{}
+
 	id := uuid.NewV4().String()
 	file, _, err := c.Request.FormFile("file")
 	if err != nil {

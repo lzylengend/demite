@@ -1,9 +1,10 @@
 package model
 
 import (
+	"time"
+
 	"github.com/google/uuid"
 	"github.com/jinzhu/gorm"
-	"time"
 )
 
 type goodStatus string
@@ -29,7 +30,6 @@ type Goods struct {
 	ProductId               int64      `gorm:"column:productid;index:productid"`
 	ClassId                 int64      `gorm:"column:classid;index:classid"`
 	CreatorId               int64      `gorm:"column:creatorid"`
-	WXUserId                int64      `gorm:"column:wxuserid"`
 	Status                  goodStatus `gorm:"column:status"`
 	DataStatus              int64      `gorm:"column:datastatus"`
 	CreateTime              int64      `gorm:"column:createtime"`
@@ -105,6 +105,12 @@ func (this *_GoodsDao) Add(obj *Goods) (int64, error) {
 	return obj.GoodsId, err
 }
 
-func (this *_GoodsDao) ListByQRCode() {
+func (this *_GoodsDao) ListByQRCode(key string, limit, offset int64) ([]*Goods, error) {
+	objList := make([]*Goods, 0)
+	var err error
+	key = "%" + key + "%"
 
+	err = this.Db.Where("goodsname like ? and datastatus = ? ", key, 0).Offset(offset).Limit(limit).Order("createtime").Find(&objList).Error
+
+	return objList, err
 }

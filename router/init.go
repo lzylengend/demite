@@ -13,9 +13,10 @@ import (
 	"demite/controller/wx_user_api"
 	"encoding/json"
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"os"
 	"reflect"
+
+	"github.com/gin-gonic/gin"
 )
 
 type MyRouter interface {
@@ -74,6 +75,8 @@ func Init(g *gin.Engine) {
 		{
 			MyRouterPost(drugClass, "/add", drug_class_api.AddDrugClassApi{}, drug_class_api.AddDrugClass)
 			MyRouterPost(drugClass, "/list", drug_class_api.ListDrugClassApi{}, drug_class_api.ListDrugClass)
+			MyRouterPost(drugClass, "/update", drug_class_api.UpdateDrugClassApi{}, drug_class_api.UpdateDrugClass)
+			MyRouterPost(drugClass, "/del", drug_class_api.DelDrugClassApi{}, drug_class_api.DelDrugClass)
 		}
 
 		drug := manage.Group("/drug", middleware.CheckSession)
@@ -81,11 +84,14 @@ func Init(g *gin.Engine) {
 			MyRouterPost(drug, "/add", drug_api.AddDrugApi{}, drug_api.AddDrug)
 			MyRouterPost(drug, "/list", drug_api.ListDrugApi{}, drug_api.ListDrug)
 			MyRouterPost(drug, "/update", drug_api.UpdateDrugApi{}, drug_api.UpdateDrug)
+			MyRouterPost(drug, "/del", drug_api.DelDrugApi{}, drug_api.DelDrug)
 		}
 
 		goods := manage.Group("/goods", middleware.CheckSession)
 		{
 			MyRouterPost(goods, "/add", goods_api.GoodsAddApi{}, goods_api.GoodsAdd)
+			MyRouterPost(goods, "/list", goods_api.GoodsListApi{}, goods_api.GoodsList)
+			MyRouterPost(goods, "/update", goods_api.GoodsUpdateApi{}, goods_api.GoodsUpdate)
 		}
 	}
 
@@ -105,7 +111,7 @@ func MyRouterPost(group *gin.RouterGroup, path string, r MyRouter, handleFun ...
 }
 
 func DoDoc(g *gin.Engine) error {
-	doc, err := os.OpenFile("F:/doc", os.O_CREATE|os.O_WRONLY, 06667) // /tmp/doc
+	doc, err := os.OpenFile("D:/share/doc.txt", os.O_CREATE|os.O_WRONLY, 06667) // /tmp/doc
 	if err != nil {
 		return err
 	}

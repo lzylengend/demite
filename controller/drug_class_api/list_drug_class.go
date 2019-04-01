@@ -3,6 +3,7 @@ package drug_class_api
 import (
 	"demite/model"
 	"demite/my_error"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -15,6 +16,7 @@ type ListDrugClassResponse struct {
 }
 
 type drugClassData struct {
+	Id   int64  `json:"id"`
 	Name string `json:"name"`
 }
 
@@ -57,6 +59,7 @@ func ListDrugClass(c *gin.Context) {
 	dataList := make([]*drugClassData, 0)
 	for _, v := range res {
 		dataList = append(dataList, &drugClassData{
+			Id:   v.ClassId,
 			Name: v.ClassName,
 		})
 	}

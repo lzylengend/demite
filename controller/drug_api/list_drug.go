@@ -3,13 +3,15 @@ package drug_api
 import (
 	"demite/model"
 	"demite/my_error"
+
 	"github.com/gin-gonic/gin"
 )
 
 type ListDrugRequest struct {
-	Limit  int64  `json:"limit"`
-	Offset int64  `json:"offset"`
-	Key    string `json:"key"`
+	Limit   int64  `json:"limit"`
+	Offset  int64  `json:"offset"`
+	Key     string `json:"key"`
+	ClassId int64  `json:"classid"`
 }
 
 type ListDrugResponse struct {
@@ -20,6 +22,7 @@ type ListDrugResponse struct {
 
 type drugData struct {
 	Id                    int64  `json:"id"`
+	ClassId               int64  `json:"classid"`
 	ClassName             string `json:"classname"`
 	Name                  string `json:"name"`
 	Reagent               string `json:"reagent"`               //试剂
@@ -61,7 +64,7 @@ func ListDrug(c *gin.Context) {
 		return
 	}
 
-	data, err := model.DrugDao.ListByCreateTime(req.Key, req.Limit, req.Offset)
+	data, err := model.DrugDao.ListByCreateTime(req.ClassId, req.Key, req.Limit, req.Offset)
 	if err != nil {
 		rsp.Status = my_error.DbError(err.Error())
 		c.JSON(200, rsp)
@@ -85,6 +88,8 @@ func ListDrug(c *gin.Context) {
 		}
 
 		rsp.Data = append(rsp.Data, &drugData{
+			Id:                    v.DrugId,
+			ClassId:               v.DrugClassId,
 			Name:                  v.DrugName,
 			Reagent:               v.Reagent,
 			ChromatographicColumn: v.ChromatographicColumn,

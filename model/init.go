@@ -1,10 +1,11 @@
 package model
 
 import (
-	_ "github.com/go-sql-driver/mysql"
-	"github.com/jinzhu/gorm"
 	"log"
 	"os"
+
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/jinzhu/gorm"
 )
 
 var UserDao *_UserDao
@@ -19,6 +20,7 @@ var OrderLogDao *_OrdertLogDao
 var GoodsDao *_GoodsDao
 var DrugDao *_DrugDao
 var GoodDrugsDao *_GoodDrugsDao
+var GoodsWXUserDao *_GoodsWXUserDao
 
 func Init() error {
 	//db, err := gorm.Open("mysql", "debian-sys-maint:fYzuFNK68VdZTWJ0@/demite?charset=utf8&parseTime=True&loc=Local")
@@ -43,6 +45,7 @@ func Init() error {
 	DrugClassDao = newDrugClassDao(db)
 	DrugDao = newDrugDao(db)
 	GoodDrugsDao = newGoodDrugsDao(db)
+	GoodsWXUserDao = newGoodsWXUserDao(db)
 
 	//init
 	err = UserDao.initUserDao()
