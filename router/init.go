@@ -103,6 +103,8 @@ func Init(g *gin.Engine) {
 		wxUser := mini.Group("/wxuser", middleware.CheckWxSession)
 		{
 			MyRouterPost(wxUser, "/bindgood", wx_user_api.BindGoodsApi{}, wx_user_api.BindGoods)
+			MyRouterPost(wxUser, "/listgoods", wx_user_api.ListGoodsApi{}, wx_user_api.ListGoods)
+			MyRouterPost(wxUser, "/getgoods", wx_user_api.GetGoodApi{}, wx_user_api.GetGood)
 		}
 	}
 }

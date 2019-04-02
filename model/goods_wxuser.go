@@ -72,9 +72,9 @@ func (this *_GoodsWXUserDao) ListByUUID(uuid string) ([]*GoodsWXUser, error) {
 	return objList, err
 }
 
-func (this *_GoodsWXUserDao) ListByWXId(wxId int64) ([]*GoodsWXUser, error) {
+func (this *_GoodsWXUserDao) ListByWXId(wxId int64, limit int64, offset int64) ([]*GoodsWXUser, error) {
 	objList := make([]*GoodsWXUser, 0)
-	err := this.Db.Where("datastatus  = ? and wxuserid = ?", 0, wxId).Find(&objList).Error
+	err := this.Db.Where("datastatus  = ? and wxuserid = ?", 0, wxId).Find(&objList).Offset(offset).Limit(limit).Error
 
 	return objList, err
 }
