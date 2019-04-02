@@ -12,6 +12,7 @@ const (
 	GOODSWXUSERLOCK     goodsWXUserSatatus = "lock"
 	GOODSWXUSERAPPLYING goodsWXUserSatatus = "applying"
 	GOODSWXUSERUNLOCK   goodsWXUserSatatus = "unlock"
+	GOODSWXUSERREFUSE   goodsWXUserSatatus = "refuse"
 )
 
 type GoodsWXUser struct {
@@ -54,7 +55,9 @@ func (this *_GoodsWXUserDao) Set() {
 }
 
 func (this *_GoodsWXUserDao) GetAndExist(goodUUID string, wxUserId int64) (bool, *GoodsWXUser, error) {
-	obj := &GoodsWXUser{}
+	obj := &GoodsWXUser{
+		Status: GOODSWXUSERLOCK,
+	}
 	err := this.Db.Where("datastatus  = ? and goodsuuid = ? and wxuserid = ?", 0, goodUUID, wxUserId).First(obj).Error
 
 	if err != nil {

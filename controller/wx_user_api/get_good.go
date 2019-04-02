@@ -21,7 +21,7 @@ type GetGoodResponse struct {
 	GoodsPic                string                `json:"goodspic"`
 	GoodsTemplet            string                `json:"goodsteplet"`
 	GoodsTempletLockContext string                `json:"goodstempletlockcontext"`
-	Lock                    bool                  `json:"lock"`
+	LockStatus              string                `json:"lockstatus"`
 	GoodsPicData            string                `json:"goodpicdata"`
 }
 
@@ -90,13 +90,12 @@ func GetGood(c *gin.Context) {
 	rsp.GoodsPic = good.GoodsPic
 	rsp.GoodsTemplet = good.GoodsTemplet
 	rsp.Name = good.GoodsName
-	rsp.Lock = true
 	rsp.GoodsTempletLockContext = ""
 	rsp.GoodsPicData = base64.StdEncoding.EncodeToString(data)
+	rsp.LockStatus = string(gwObj.Status)
 
 	if gwObj.Status == model.GOODSWXUSERUNLOCK {
 		rsp.GoodsTempletLockContext = good.GoodsTempletLockContext
-		rsp.Lock = false
 	}
 
 	rsp.Status = my_error.NoError()

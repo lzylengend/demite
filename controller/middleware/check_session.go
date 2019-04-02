@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"demite/controller"
 	//	"demite/controller"
 	"demite/my_error"
 
@@ -12,29 +13,29 @@ type commonRespose struct {
 }
 
 func CheckSession(c *gin.Context) {
-	// rsp := &commonRespose{}
-	// _, err := controller.GetUserId(c)
+	rsp := &commonRespose{}
+	_, err := controller.GetUserId(c)
 
-	// if err != nil {
-	// 	rsp.Status = my_error.NoLoginError()
-	// 	c.JSON(200, rsp)
-	// 	c.Abort()
-	// 	return
-	// }
+	if err != nil {
+		rsp.Status = my_error.NoLoginError()
+		c.JSON(200, rsp)
+		c.Abort()
+		return
+	}
 
 	c.Next()
 }
 
 func CheckWxSession(c *gin.Context) {
-	//rsp := &commonRespose{}
-	//_, err := controller.GetWxUserId(c)
-	//
-	//if err != nil {
-	//	rsp.Status = my_error.NoLoginError()
-	//	c.JSON(200, rsp)
-	//	c.Abort()
-	//	return
-	//}
+	rsp := &commonRespose{}
+	_, err := controller.GetWxUserId(c)
+
+	if err != nil {
+		rsp.Status = my_error.NoLoginError()
+		c.JSON(200, rsp)
+		c.Abort()
+		return
+	}
 
 	c.Next()
 }

@@ -7,6 +7,7 @@ import (
 	"demite/controller/goods_api"
 	"demite/controller/middleware"
 	"demite/controller/place_api"
+	"demite/controller/unlocck_apply_api"
 	"demite/controller/user_api"
 	"demite/controller/wx_user_api"
 	"demite/controller/wx_user_banken_api"
@@ -91,9 +92,13 @@ func Init(g *gin.Engine) {
 		wxuUerBanken := manage.Group("/wxuser", middleware.CheckSession)
 		{
 			MyRouterPost(wxuUerBanken, "/list", wx_user_banken_api.ListWxUserApi{}, wx_user_banken_api.ListWxUser)
-			MyRouterPost(wxuUerBanken, "/download", wx_user_banken_api.GetWxUserApi{}, wx_user_banken_api.GetWxUser)
+			MyRouterPost(wxuUerBanken, "/getwxuser", wx_user_banken_api.GetWxUserApi{}, wx_user_banken_api.GetWxUser)
 		}
 
+		unlockApply := manage.Group("/unlockapply", middleware.CheckSession)
+		{
+			MyRouterPost(unlockApply, "/list", unlocck_apply_api.ListApplyApi{}, unlocck_apply_api.ListApply)
+		}
 		//produce := manage.Group("/product", middleware.CheckSession)
 		//{
 		//	MyRouterPost(produce, "/add", product_api.AddProductApi{}, product_api.AddProduct)
@@ -113,6 +118,7 @@ func Init(g *gin.Engine) {
 			MyRouterPost(wxUser, "/listgoods", wx_user_api.ListGoodsApi{}, wx_user_api.ListGoods)
 			MyRouterPost(wxUser, "/getgoods", wx_user_api.GetGoodApi{}, wx_user_api.GetGood)
 			MyRouterPost(wxUser, "/listdrugbygood", wx_user_api.ListDrugByGoodsApi{}, wx_user_api.ListDrugByGoods)
+			MyRouterPost(wxUser, "/unlockapply", wx_user_api.UnlockApplyApi{}, wx_user_api.UnlockApply)
 		}
 	}
 }

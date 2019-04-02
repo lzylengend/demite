@@ -10,6 +10,7 @@ type UnlockApply struct {
 	GoodsUUID  string             `gorm:"column:goodsuuid;index:goodsuuid"`
 	WXUserId   int64              `gorm:"column:wxuserid;index:wxuserid"`
 	Status     goodsWXUserSatatus `gorm:"column:status"`
+	Creater    int64              `gorm:"column:creater"`
 	DataStatus int64              `gorm:"column:datastatus"`
 	CreateTime int64              `gorm:"column:createtime"`
 	UpdateTime int64              `gorm:"column:updatetime"`
@@ -77,4 +78,54 @@ func (this *_UnlockApplyDao) Apply(goodUUID string, wxid int64, gw *GoodsWXUser)
 	tx.Commit()
 
 	return nil
+}
+
+func (this *_UnlockApplyDao) ListByGoodUUIdWxUserIdStatus(goodName string, wxUserName string, limit int64, offsert int64, status string) ([]*UnlockApply, error) {
+	sql := `datastatus  = ?`
+	args := make([]interface{}, 0)
+	args = append(args, 0)
+
+	if status != "" {
+		sql = sql + ` and status = ? `
+		args = append(args, status)
+	}
+
+	goodIdList := make([]string, 0)
+	if goodName != "" {
+		goodList, err := GoodsDao.ListByQRCode(goodName, 99999, 0)
+		if err != nil {
+			return nil, err
+		}
+
+		for _, v := range goodList {
+			goodIdList = append(goodIdList, v.GoodsUUID)
+		}
+
+		if len(goodIdList) != 0 {
+			sql = sql + " and goodsuuid in (?)"
+			args = append(args, goodIdList)
+		}
+	}
+
+	wxUserIdList := make([]int64, 0)
+	if wxUserName != "" {
+		wxUserList, err := WxUserDao.List(wxUserName, 99999, 0)
+		if err != nil {
+			return nil, err
+		}
+
+		for _, v := range wxUserList {
+			wxUserIdList = append(wxUserIdList, v.WxUserId)
+		}
+
+		if len(wxUserIdList) != 0 {
+			sql = sql + " and wxuserid in (?)"
+			args = append(args, wxUserIdList)
+		}
+	}
+
+	objList := make([]*UnlockApply, 0)
+	err := this.Db.Where(sql, args...).Order("createtime").Find(&objList).Error
+
+	return objList, err
 }
