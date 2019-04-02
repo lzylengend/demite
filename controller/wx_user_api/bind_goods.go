@@ -22,6 +22,25 @@ type BindGoodsResponse struct {
 	Lock                    bool                  `json:"lock"`
 }
 
+type BindGoodsApi struct {
+}
+
+func (BindGoodsApi) GetRequest() interface{} {
+	return &BindGoodsRequest{}
+}
+
+func (BindGoodsApi) GetResponse() interface{} {
+	return &BindGoodsResponse{}
+}
+
+func (BindGoodsApi) GetApi() string {
+	return "BindGoods"
+}
+
+func (BindGoodsApi) GetDesc() string {
+	return "绑定"
+}
+
 func BindGoods(c *gin.Context) {
 	req := &BindGoodsRequest{}
 	rsp := &BindGoodsResponse{}

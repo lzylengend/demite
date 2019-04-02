@@ -5,8 +5,9 @@ import (
 	"demite/model"
 	"demite/my_error"
 	"encoding/base64"
-	"github.com/gin-gonic/gin"
 	"io/ioutil"
+
+	"github.com/gin-gonic/gin"
 )
 
 type GetGoodRequest struct {
@@ -14,19 +15,23 @@ type GetGoodRequest struct {
 }
 
 type GetGoodResponse struct {
-	data                    []*drugData           `json:"data"`
-	Name                    string                `json:"name"`
-	GoodsUUID               string                `json:"goodsuuid"`
-	GoodsDecs               string                `json:"goodsdecs"`
-	GoodsPic                string                `json:"goodspic"`
-	GoodsTemplet            string                `json:"goodsteplet"`
-	GoodsTempletLockContext string                `json:"goodstempletlockcontext"`
-	CreateTime              int64                 `json:"createtime"`
-	QRCode                  string                `json:"qrcode"`
-	GoodsModel              string                `json:"goodmodel"`
-	GuaranteeTime           int64                 `json:"guaranteetime"`
-	GoodsPicData            string                `json:"goodpicdata"`
-	Status                  *my_error.ErrorCommon `json:"status"`
+	GoodData *goodData             `json:"gooddata"`
+	Status   *my_error.ErrorCommon `json:"status"`
+}
+
+type goodData struct {
+	Data                    []*drugData `json:"data"`
+	Name                    string      `json:"name"`
+	GoodsUUID               string      `json:"goodsuuid"`
+	GoodsDecs               string      `json:"goodsdecs"`
+	GoodsPic                string      `json:"goodspic"`
+	GoodsTemplet            string      `json:"goodsteplet"`
+	GoodsTempletLockContext string      `json:"goodstempletlockcontext"`
+	CreateTime              int64       `json:"createtime"`
+	QRCode                  string      `json:"qrcode"`
+	GoodsModel              string      `json:"goodmodel"`
+	GuaranteeTime           int64       `json:"guaranteetime"`
+	GoodsPicData            string      `json:"goodpicdata"`
 }
 
 type GetGoodApi struct {
@@ -79,17 +84,18 @@ func GetGood(c *gin.Context) {
 		//c.JSON(200, rsp)
 	}
 
-	rsp.Name = good.GoodsName
-	rsp.GoodsDecs = good.GoodsDecs
-	rsp.GoodsPic = good.GoodsPic
-	rsp.GoodsTemplet = good.GoodsTemplet
-	rsp.CreateTime = good.CreateTime
-	rsp.QRCode = good.QRCode
-	rsp.GoodsModel = good.GoodsModel
-	rsp.GoodsPicData = base64.StdEncoding.EncodeToString(data)
-	rsp.GuaranteeTime = good.GuaranteeTime
-	rsp.GoodsUUID = good.GoodsUUID
-	rsp.GoodsTempletLockContext = good.GoodsTempletLockContext
+	rsp.GoodData = &goodData{}
+	rsp.GoodData.Name = good.GoodsName
+	rsp.GoodData.GoodsDecs = good.GoodsDecs
+	rsp.GoodData.GoodsPic = good.GoodsPic
+	rsp.GoodData.GoodsTemplet = good.GoodsTemplet
+	rsp.GoodData.CreateTime = good.CreateTime
+	rsp.GoodData.QRCode = good.QRCode
+	rsp.GoodData.GoodsModel = good.GoodsModel
+	rsp.GoodData.GoodsPicData = base64.StdEncoding.EncodeToString(data)
+	rsp.GoodData.GuaranteeTime = good.GuaranteeTime
+	rsp.GoodData.GoodsUUID = good.GoodsUUID
+	rsp.GoodData.GoodsTempletLockContext = good.GoodsTempletLockContext
 
 	for _, v := range objList {
 		drug, err := model.DrugDao.Get(v.DrugId)
@@ -99,14 +105,14 @@ func GetGood(c *gin.Context) {
 			return
 		}
 
-		class, err := model.DrugClassDao.Get(drug.DrugId)
+		class, err := model.DrugClassDao.Get(drug.DrugClassId)
 		if err != nil {
 			rsp.Status = my_error.DbError(err.Error())
 			c.JSON(200, rsp)
 			return
 		}
 
-		rsp.data = append(rsp.data, &drugData{
+		rsp.GoodData.Data = append(rsp.GoodData.Data, &drugData{
 			Id:                    v.DrugId,
 			ClassId:               drug.DrugClassId,
 			ClassName:             class.ClassName,
