@@ -41,7 +41,7 @@ func (GetGoodApi) GetApi() string {
 }
 
 func (GetGoodApi) GetDesc() string {
-	return "绑定"
+	return "获取设备详情"
 }
 
 func GetGood(c *gin.Context) {

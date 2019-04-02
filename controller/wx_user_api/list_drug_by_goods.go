@@ -17,6 +17,25 @@ type ListDrugByGoodsResponse struct {
 	Data   []*drugData           `json:"data"`
 }
 
+type ListDrugByGoodsApi struct {
+}
+
+func (ListDrugByGoodsApi) GetRequest() interface{} {
+	return &ListDrugByGoodsRequest{}
+}
+
+func (ListDrugByGoodsApi) GetResponse() interface{} {
+	return &ListDrugByGoodsResponse{}
+}
+
+func (ListDrugByGoodsApi) GetApi() string {
+	return "ListDrugByGoods"
+}
+
+func (ListDrugByGoodsApi) GetDesc() string {
+	return "列出已经绑定的设备"
+}
+
 type drugData struct {
 	Id                    int64  `json:"id"`
 	ClassId               int64  `json:"classid"`

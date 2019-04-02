@@ -39,6 +39,12 @@ func (this *_WxUserDao) GetByOpenid(openId string) (*WxUser, error) {
 	return obj, err
 }
 
+func (this *_WxUserDao) GetById(id int64) (*WxUser, error) {
+	obj := &WxUser{}
+	err := this.Db.Where("wxuserid = ?", id).First(obj).Error
+	return obj, err
+}
+
 func (this *_WxUserDao) ExistOpenid(openId string) (*WxUser, bool, error) {
 	obj, err := this.GetByOpenid(openId)
 	if err != nil {
@@ -78,6 +84,20 @@ func (this *_WxUserDao) NewWxUser(openId, sessionKey, nickName, gender, city, pr
 	}
 }
 
-func (this *_WxUserDao) List() {
+func (this *_WxUserDao) List(key string, limit int64, offset int64) ([]*WxUser, error) {
+	objList := make([]*WxUser, 0)
+	var err error
+	key = "%" + key + "%"
 
+	err = this.Db.Where("nickname like ? and datastatus = ? ", key, 0).Offset(offset).Limit(limit).Order("createtime").Find(&objList).Error
+
+	return objList, err
+}
+
+func (this *_WxUserDao) Count(key string) (int64, error) {
+	var n int64
+	key = "%" + key + "%"
+
+	err := this.Db.Where("nickname like ? and datastatus = ? ", key, 0).Count(&n).Error
+	return n, err
 }
