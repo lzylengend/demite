@@ -33,7 +33,7 @@ func (ListDrugByGoodsApi) GetApi() string {
 }
 
 func (ListDrugByGoodsApi) GetDesc() string {
-	return "列出已经绑定的设备"
+	return "列出设备绑定的药品"
 }
 
 type drugData struct {

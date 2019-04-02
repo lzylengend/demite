@@ -6,21 +6,22 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-type goodsWXUser string
+type goodsWXUserSatatus string
 
 const (
-	GOODSWXUSERLOCK   goodsWXUser = "lock"
-	GOODSWXUSERUNLOCK goodsWXUser = "unlock"
+	GOODSWXUSERLOCK     goodsWXUserSatatus = "lock"
+	GOODSWXUSERAPPLYING goodsWXUserSatatus = "applying"
+	GOODSWXUSERUNLOCK   goodsWXUserSatatus = "unlock"
 )
 
 type GoodsWXUser struct {
-	Id         int64       `gorm:"column:id;primary_key;AUTO_INCREMENT"`
-	GoodsUUID  string      `gorm:"column:goodsuuid;index:goodsuuid"`
-	WXUserId   int64       `gorm:"column:wxuserid;index:wxuserid"`
-	Status     goodsWXUser `gorm:"column:status"`
-	DataStatus int64       `gorm:"column:datastatus"`
-	CreateTime int64       `gorm:"column:createtime"`
-	UpdateTime int64       `gorm:"column:updatetime"`
+	Id         int64              `gorm:"column:id;primary_key;AUTO_INCREMENT"`
+	GoodsUUID  string             `gorm:"column:goodsuuid;index:goodsuuid"`
+	WXUserId   int64              `gorm:"column:wxuserid;index:wxuserid"`
+	Status     goodsWXUserSatatus `gorm:"column:status"`
+	DataStatus int64              `gorm:"column:datastatus"`
+	CreateTime int64              `gorm:"column:createtime"`
+	UpdateTime int64              `gorm:"column:updatetime"`
 }
 type _GoodsWXUserDao struct {
 	Db *gorm.DB

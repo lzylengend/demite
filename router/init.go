@@ -9,6 +9,7 @@ import (
 	"demite/controller/place_api"
 	"demite/controller/user_api"
 	"demite/controller/wx_user_api"
+	"demite/controller/wx_user_banken_api"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -85,6 +86,12 @@ func Init(g *gin.Engine) {
 			MyRouterPost(goods, "/update", goods_api.GoodsUpdateApi{}, goods_api.GoodsUpdate)
 			MyRouterPost(goods, "/goodgetdrug", goods_api.GoodsGetDrugApi{}, goods_api.GoodsGetDrug)
 			MyRouterPost(goods, "/getgood", goods_api.GetGoodApi{}, goods_api.GetGood)
+		}
+
+		wxuUerBanken := manage.Group("/wxuser", middleware.CheckSession)
+		{
+			MyRouterPost(wxuUerBanken, "/list", wx_user_banken_api.ListWxUserApi{}, wx_user_banken_api.ListWxUser)
+			MyRouterPost(wxuUerBanken, "/download", wx_user_banken_api.GetWxUserApi{}, wx_user_banken_api.GetWxUser)
 		}
 
 		//produce := manage.Group("/product", middleware.CheckSession)
