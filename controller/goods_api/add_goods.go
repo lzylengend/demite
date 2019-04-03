@@ -16,7 +16,7 @@ type GoodsAddRequest struct {
 	DrugList                []int64 `json:"druglist"`
 	GoodsTemplet            string  `json:"goodsteplet"`
 	GoodsTempletLockContext string  `json:"goodstempletlockcontext"`
-	GoodsModel              string  `json:"goodmodel"`
+	GoodsModel              string  `json:"goodsmodel"`
 	GuaranteeTime           int64   `json:"guaranteetime"`
 }
 
@@ -75,6 +75,12 @@ func GoodsAdd(c *gin.Context) {
 
 	if req.GoodsModel == "" {
 		rsp.Status = my_error.NotNilError("goodsmodel")
+		c.JSON(200, rsp)
+		return
+	}
+
+	if req.GoodsUUID == "" {
+		rsp.Status = my_error.NotNilError("goodsuuid")
 		c.JSON(200, rsp)
 		return
 	}

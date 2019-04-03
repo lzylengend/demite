@@ -29,6 +29,12 @@ func newUnlockApplyDao(db *gorm.DB) *_UnlockApplyDao {
 	return &_UnlockApplyDao{Db: db.Model(&UnlockApply{})}
 }
 
+func (this *_UnlockApplyDao) Get(id int64) (*UnlockApply, error) {
+	obj := &UnlockApply{}
+	err := this.Db.Where("datastatus  = ? and id = ?", 0, id).First(obj).Error
+	return obj, err
+}
+
 func (this *_UnlockApplyDao) GetByStatusAndExit(goodUUID string, wxUser int64, status goodsWXUserSatatus) (bool, *UnlockApply, error) {
 	obj := &UnlockApply{}
 	err := this.Db.Where("datastatus  = ? and goodsuuid = ? and wxuserid = ? and status = ?", 0, goodUUID, wxUser, status).First(obj).Error
@@ -77,6 +83,47 @@ func (this *_UnlockApplyDao) Apply(goodUUID string, wxid int64, gw *GoodsWXUser)
 
 	tx.Commit()
 
+	return nil
+}
+
+func (this *_UnlockApplyDao) DealApply(id int64, agree bool, userId int64) error {
+	obj, err := UnlockApplyDao.Get(id)
+	if err != nil {
+		return err
+	}
+
+	_, gwObj, err := GoodsWXUserDao.GetAndExist(obj.GoodsUUID, obj.WXUserId)
+	if err != nil {
+		return err
+	}
+
+	status := GOODSWXUSERREFUSE
+	if agree {
+		status = GOODSWXUSERUNLOCK
+	}
+
+	obj.Status = status
+	obj.Creater = userId
+	obj.UpdateTime = time.Now().Unix()
+
+	gwObj.UpdateTime = time.Now().Unix()
+	gwObj.Status = status
+
+	tx := this.Db.Begin()
+
+	err = tx.Save(obj).Error
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	err = tx.Save(gwObj).Error
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	tx.Commit()
 	return nil
 }
 

@@ -98,6 +98,7 @@ func Init(g *gin.Engine) {
 		unlockApply := manage.Group("/unlockapply", middleware.CheckSession)
 		{
 			MyRouterPost(unlockApply, "/list", unlocck_apply_api.ListApplyApi{}, unlocck_apply_api.ListApply)
+			MyRouterPost(unlockApply, "/dealapply", unlocck_apply_api.DealApplyApi{}, unlocck_apply_api.DealApply)
 		}
 		//produce := manage.Group("/product", middleware.CheckSession)
 		//{
