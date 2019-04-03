@@ -22,7 +22,7 @@ var DrugDao *_DrugDao
 var GoodDrugsDao *_GoodDrugsDao
 var GoodsWXUserDao *_GoodsWXUserDao
 var UnlockApplyDao *_UnlockApplyDao
-var DelayGuaranteeApplDao *_DelayGuaranteeApplDao
+var DelayGuaranteeApplyDao *_DelayGuaranteeApplyDao
 
 func Init() error {
 	//db, err := gorm.Open("mysql", "debian-sys-maint:fYzuFNK68VdZTWJ0@/demite?charset=utf8&parseTime=True&loc=Local")
@@ -49,7 +49,7 @@ func Init() error {
 	GoodDrugsDao = newGoodDrugsDao(db)
 	GoodsWXUserDao = newGoodsWXUserDao(db)
 	UnlockApplyDao = newUnlockApplyDao(db)
-	DelayGuaranteeApplDao = newDelayGuaranteeApplDao(db)
+	DelayGuaranteeApplyDao = newDelayGuaranteeApplyDao(db)
 
 	//init
 	err = UserDao.initUserDao()

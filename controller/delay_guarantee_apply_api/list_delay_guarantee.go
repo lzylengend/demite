@@ -1,4 +1,4 @@
-package unlocck_apply_api
+package delay_guarantee_apply_api
 
 import (
 	"demite/model"
@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type ListApplyRequest struct {
+type ListDelayGuaranteeApplyRequest struct {
 	Limit       int64  `json:"limit"`
 	Offset      int64  `json:"offset"`
 	GoodName    string `json:"goodname"`
@@ -14,13 +14,13 @@ type ListApplyRequest struct {
 	ApplyStatus string `json:"applystatus"`
 }
 
-type ListApplyResponse struct {
-	Data   []*listApplyData      `json:"data"`
-	Count  int64                 `json:"count"`
-	Status *my_error.ErrorCommon `json:"status"`
+type ListDelayGuaranteeApplyResponse struct {
+	Data   []*listDelayGuaranteeApplyData `json:"data"`
+	Count  int64                          `json:"count"`
+	Status *my_error.ErrorCommon          `json:"status"`
 }
 
-type listApplyData struct {
+type listDelayGuaranteeApplyData struct {
 	Id          int64  `json:"id"`
 	GoodName    string `json:"goodname"`
 	NickName    string `json:"nickname"`
@@ -30,28 +30,28 @@ type listApplyData struct {
 	ApplyStatus string `json:"applystatus"`
 }
 
-type ListApplyApi struct {
+type ListDelayGuaranteeApplyApi struct {
 }
 
-func (ListApplyApi) GetRequest() interface{} {
-	return &ListApplyRequest{}
+func (ListDelayGuaranteeApplyApi) GetRequest() interface{} {
+	return &ListDelayGuaranteeApplyRequest{}
 }
 
-func (ListApplyApi) GetResponse() interface{} {
-	return &ListApplyResponse{}
+func (ListDelayGuaranteeApplyApi) GetResponse() interface{} {
+	return &ListDelayGuaranteeApplyResponse{}
 }
 
-func (ListApplyApi) GetApi() string {
-	return "ListApply"
+func (ListDelayGuaranteeApplyApi) GetApi() string {
+	return "ListDelayGuaranteeApply"
 }
 
-func (ListApplyApi) GetDesc() string {
-	return "获取列表 applystatus:lock,applying,unlock,refuse"
+func (ListDelayGuaranteeApplyApi) GetDesc() string {
+	return "获取列表 applystatus:applying,comfirm,refuse"
 }
 
-func ListApply(c *gin.Context) {
-	req := &ListApplyRequest{}
-	rsp := &ListApplyResponse{}
+func ListDelayGuaranteeApply(c *gin.Context) {
+	req := &ListDelayGuaranteeApplyRequest{}
+	rsp := &ListDelayGuaranteeApplyResponse{}
 	err := c.BindJSON(req)
 	if err != nil {
 		rsp.Status = my_error.JsonError(err.Error())
@@ -59,7 +59,7 @@ func ListApply(c *gin.Context) {
 		return
 	}
 
-	objList, err := model.UnlockApplyDao.ListByGoodUUIdWxUserIdStatus(req.GoodName, req.NickName, req.Limit, req.Offset, req.ApplyStatus)
+	objList, err := model.DelayGuaranteeApplyDao.ListByGoodUUIdWxUserIdStatus(req.GoodName, req.NickName, req.Limit, req.Offset, req.ApplyStatus)
 	if err != nil {
 		rsp.Status = my_error.DbError(err.Error())
 		c.JSON(200, rsp)
@@ -92,7 +92,7 @@ func ListApply(c *gin.Context) {
 			name = user.UserName
 		}
 
-		rsp.Data = append(rsp.Data, &listApplyData{
+		rsp.Data = append(rsp.Data, &listDelayGuaranteeApplyData{
 			Id:          v.Id,
 			GoodName:    good.GoodsName,
 			NickName:    wxUser.NickName,
@@ -103,7 +103,7 @@ func ListApply(c *gin.Context) {
 		})
 	}
 
-	count, err := model.UnlockApplyDao.CountByGoodUUIdWxUserIdStatus(req.GoodName, req.NickName, req.ApplyStatus)
+	count, err := model.DelayGuaranteeApplyDao.CountByGoodUUIdWxUserIdStatus(req.GoodName, req.NickName, req.ApplyStatus)
 	if err != nil {
 		rsp.Status = my_error.DbError(err.Error())
 		c.JSON(200, rsp)

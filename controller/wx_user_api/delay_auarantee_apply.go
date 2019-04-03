@@ -51,6 +51,26 @@ func DelayAuaranteeApply(c *gin.Context) {
 		return
 	}
 
+	n, err := model.DelayGuaranteeApplyDao.CountByGoodUUIDWXUserIdStatus(req.GoodUUID, wxId, model.DELAYGUARANTEEAPPLYNG)
+	if err != nil {
+		rsp.Status = my_error.DbError(err.Error())
+		c.JSON(200, rsp)
+		return
+	}
+
+	if n > 0 {
+		rsp.Status = my_error.ExistApplyError()
+		c.JSON(200, rsp)
+		return
+	}
+
+	_, err = model.DelayGuaranteeApplyDao.Add(req.GoodUUID, wxId)
+	if err != nil {
+		rsp.Status = my_error.DbError(err.Error())
+		c.JSON(200, rsp)
+		return
+	}
+
 	rsp.Status = my_error.NoError()
 	c.JSON(200, rsp)
 }

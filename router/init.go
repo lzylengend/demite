@@ -1,6 +1,7 @@
 package router
 
 import (
+	"demite/controller/delay_guarantee_apply_api"
 	"demite/controller/drug_api"
 	"demite/controller/drug_class_api"
 	"demite/controller/file_api"
@@ -100,6 +101,12 @@ func Init(g *gin.Engine) {
 			MyRouterPost(unlockApply, "/list", unlocck_apply_api.ListApplyApi{}, unlocck_apply_api.ListApply)
 			MyRouterPost(unlockApply, "/dealapply", unlocck_apply_api.DealApplyApi{}, unlocck_apply_api.DealApply)
 		}
+
+		delay_guarantee_apply := manage.Group("/delayguaranteeapply", middleware.CheckSession)
+		{
+			MyRouterPost(delay_guarantee_apply, "/list", delay_guarantee_apply_api.ListDelayGuaranteeApplyApi{}, delay_guarantee_apply_api.ListDelayGuaranteeApply)
+			MyRouterPost(delay_guarantee_apply, "/dealapply", delay_guarantee_apply_api.DealDelayGuaranteeApplyApi{}, delay_guarantee_apply_api.DealDelayGuaranteeApply)
+		}
 		//produce := manage.Group("/product", middleware.CheckSession)
 		//{
 		//	MyRouterPost(produce, "/add", product_api.AddProductApi{}, product_api.AddProduct)
@@ -120,6 +127,7 @@ func Init(g *gin.Engine) {
 			MyRouterPost(wxUser, "/getgoods", wx_user_api.GetGoodApi{}, wx_user_api.GetGood)
 			MyRouterPost(wxUser, "/listdrugbygood", wx_user_api.ListDrugByGoodsApi{}, wx_user_api.ListDrugByGoods)
 			MyRouterPost(wxUser, "/unlockapply", wx_user_api.UnlockApplyApi{}, wx_user_api.UnlockApply)
+			MyRouterPost(wxUser, "/delaygauaranteeapply", wx_user_api.DelayAuaranteeApplyApi{}, wx_user_api.DelayAuaranteeApply)
 		}
 	}
 }

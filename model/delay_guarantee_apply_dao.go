@@ -5,129 +5,60 @@ import (
 	"time"
 )
 
-type UnlockApply struct {
+type delayGuaranteeSatatus string
+
+const (
+	DELAYGUARANTEEAPPLYNG = "applying"
+	DELAYGUARANTEECOMFIRM = "comfirm"
+	DELAYGUARANTEEREFUSE  = "refuse"
+)
+
+type DelayGuaranteeApply struct {
 	Id         int64              `gorm:"column:id;primary_key;AUTO_INCREMENT"`
 	GoodsUUID  string             `gorm:"column:goodsuuid;index:goodsuuid"`
 	WXUserId   int64              `gorm:"column:wxuserid;index:wxuserid"`
 	Status     goodsWXUserSatatus `gorm:"column:status"`
+	DelayTime  int64              `gorm:"column:delaytime"`
 	Creater    int64              `gorm:"column:creater"`
 	DataStatus int64              `gorm:"column:datastatus"`
 	CreateTime int64              `gorm:"column:createtime"`
 	UpdateTime int64              `gorm:"column:updatetime"`
 }
-type _UnlockApplyDao struct {
+type _DelayGuaranteeApplyDao struct {
 	Db *gorm.DB
 }
 
-func (UnlockApply) TableName() string {
-	return "unlockapply"
+func (DelayGuaranteeApply) TableName() string {
+	return "delpayguranteeapply"
 }
 
-func newUnlockApplyDao(db *gorm.DB) *_UnlockApplyDao {
-	db.AutoMigrate(&UnlockApply{})
+func newDelayGuaranteeApplyDao(db *gorm.DB) *_DelayGuaranteeApplyDao {
+	db.AutoMigrate(&DelayGuaranteeApply{})
 
-	return &_UnlockApplyDao{Db: db.Model(&UnlockApply{})}
+	return &_DelayGuaranteeApplyDao{Db: db.Model(&DelayGuaranteeApply{})}
 }
 
-func (this *_UnlockApplyDao) Get(id int64) (*UnlockApply, error) {
-	obj := &UnlockApply{}
-	err := this.Db.Where("datastatus  = ? and id = ?", 0, id).First(obj).Error
-	return obj, err
-}
-
-func (this *_UnlockApplyDao) GetByStatusAndExit(goodUUID string, wxUser int64, status goodsWXUserSatatus) (bool, *UnlockApply, error) {
-	obj := &UnlockApply{}
-	err := this.Db.Where("datastatus  = ? and goodsuuid = ? and wxuserid = ? and status = ?", 0, goodUUID, wxUser, status).First(obj).Error
-
-	if err != nil {
-		if err == gorm.ErrRecordNotFound {
-			return false, obj, nil
-		}
-		return false, obj, err
-	}
-	return true, obj, nil
-}
-
-func (this *_UnlockApplyDao) CountByNotStatus(goodUUID string, wxUser int64, status goodsWXUserSatatus) (int64, error) {
-	var n int64
-	err := this.Db.Where("datastatus  = ? and goodsuuid = ? and wxuserid = ? and status <> ?", 0, goodUUID, wxUser, status).Count(&n).Error
-	return n, err
-}
-
-func (this *_UnlockApplyDao) Apply(goodUUID string, wxid int64, gw *GoodsWXUser) error {
-	obj := &UnlockApply{
+func (this *_DelayGuaranteeApplyDao) Add(goodUUID string, wxUserId int64) (*DelayGuaranteeApply, error) {
+	obj := &DelayGuaranteeApply{
 		GoodsUUID:  goodUUID,
-		WXUserId:   wxid,
-		Status:     GOODSWXUSERAPPLYING,
+		WXUserId:   wxUserId,
+		Status:     DELAYGUARANTEEAPPLYNG,
 		DataStatus: 0,
 		CreateTime: time.Now().Unix(),
 		UpdateTime: time.Now().Unix(),
 	}
 
-	gw.Status = GOODSWXUSERAPPLYING
-	gw.UpdateTime = time.Now().Unix()
-
-	tx := this.Db.Begin()
-
-	err := tx.Create(obj).Error
-	if err != nil {
-		tx.Rollback()
-		return err
-	}
-
-	err = tx.Save(gw).Error
-	if err != nil {
-		tx.Rollback()
-		return err
-	}
-
-	tx.Commit()
-
-	return nil
+	err := this.Db.Create(obj).Error
+	return obj, err
 }
 
-func (this *_UnlockApplyDao) DealApply(id int64, agree bool, userId int64) error {
-	obj, err := UnlockApplyDao.Get(id)
-	if err != nil {
-		return err
-	}
-
-	_, gwObj, err := GoodsWXUserDao.GetAndExist(obj.GoodsUUID, obj.WXUserId)
-	if err != nil {
-		return err
-	}
-
-	status := GOODSWXUSERREFUSE
-	if agree {
-		status = GOODSWXUSERUNLOCK
-	}
-
-	obj.Status = status
-	obj.Creater = userId
-	obj.UpdateTime = time.Now().Unix()
-
-	gwObj.UpdateTime = time.Now().Unix()
-	gwObj.Status = status
-
-	tx := this.Db.Begin()
-
-	err = tx.Save(obj).Error
-	if err != nil {
-		tx.Rollback()
-		return err
-	}
-
-	err = tx.Save(gwObj).Error
-	if err != nil {
-		tx.Rollback()
-		return err
-	}
-
-	tx.Commit()
-	return nil
+func (this *_DelayGuaranteeApplyDao) CountByGoodUUIDWXUserIdStatus(goodUUID string, wxUserId int64, status delayGuaranteeSatatus) (int64, error) {
+	var n int64
+	err := this.Db.Where("goodsuuid  = ? and wxuserid = ? and datastatus = ? and status = ?", goodUUID, wxUserId, 0, status).Count(&n).Error
+	return n, err
 }
 
-func (this *_UnlockApplyDao) ListByGoodUUIdWxUserIdStatus(goodName string, wxUserName string, limit int64, offsert int64, status string) ([]*UnlockApply, error) {
+func (this *_DelayGuaranteeApplyDao) ListByGoodUUIdWxUserIdStatus(goodName string, wxUserName string, limit int64, offsert int64, status string) ([]*DelayGuaranteeApply, error) {
 	sql := `datastatus  = ?`
 	args := make([]interface{}, 0)
 	args = append(args, 0)
@@ -171,13 +102,13 @@ func (this *_UnlockApplyDao) ListByGoodUUIdWxUserIdStatus(goodName string, wxUse
 		}
 	}
 
-	objList := make([]*UnlockApply, 0)
+	objList := make([]*DelayGuaranteeApply, 0)
 	err := this.Db.Where(sql, args...).Order("createtime").Find(&objList).Limit(limit).Offset(offsert).Error
 
 	return objList, err
 }
 
-func (this *_UnlockApplyDao) CountByGoodUUIdWxUserIdStatus(goodName string, wxUserName string, status string) (int64, error) {
+func (this *_DelayGuaranteeApplyDao) CountByGoodUUIdWxUserIdStatus(goodName string, wxUserName string, status string) (int64, error) {
 	sql := `datastatus  = ?`
 	args := make([]interface{}, 0)
 	args = append(args, 0)
@@ -225,4 +156,60 @@ func (this *_UnlockApplyDao) CountByGoodUUIdWxUserIdStatus(goodName string, wxUs
 	err := this.Db.Where(sql, args...).Count(&n).Error
 
 	return n, err
+}
+
+func (this *_DelayGuaranteeApplyDao) DealApply(id int64, agree bool, userId int64, delayTime int64) error {
+	obj, err := this.Get(id)
+	if err != nil {
+		return err
+	}
+
+	obj.Creater = userId
+	obj.UpdateTime = time.Now().Unix()
+	obj.DelayTime = delayTime
+
+	if !agree {
+		obj.Status = DELAYGUARANTEEREFUSE
+		err = this.Set(obj)
+		if err != nil {
+			return err
+		}
+		return nil
+	}
+
+	good, err := GoodsDao.GetByUUID(obj.GoodsUUID)
+	if err != nil {
+		return err
+	}
+	good.GuaranteeTime = delayTime
+	good.UpdateTime = time.Now().Unix()
+	obj.Status = DELAYGUARANTEECOMFIRM
+
+	tx := this.Db.Begin()
+
+	err = tx.Save(good).Error
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	err = tx.Save(obj).Error
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	tx.Commit()
+	return nil
+}
+
+func (this *_DelayGuaranteeApplyDao) Get(id int64) (*DelayGuaranteeApply, error) {
+	obj := &DelayGuaranteeApply{}
+	err := this.Db.Where("datastatus  = ? and id = ?", 0, id).First(obj).Error
+	return obj, err
+}
+
+func (this *_DelayGuaranteeApplyDao) Set(obj *DelayGuaranteeApply) error {
+	err := this.Db.Save(obj).Error
+	return err
 }
