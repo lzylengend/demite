@@ -8,6 +8,7 @@ import (
 	"demite/controller/goods_api"
 	"demite/controller/middleware"
 	"demite/controller/place_api"
+	"demite/controller/staff_api"
 	"demite/controller/unlocck_apply_api"
 	"demite/controller/user_api"
 	"demite/controller/wx_user_api"
@@ -106,6 +107,13 @@ func Init(g *gin.Engine) {
 		{
 			MyRouterPost(delay_guarantee_apply, "/list", delay_guarantee_apply_api.ListDelayGuaranteeApplyApi{}, delay_guarantee_apply_api.ListDelayGuaranteeApply)
 			MyRouterPost(delay_guarantee_apply, "/dealapply", delay_guarantee_apply_api.DealDelayGuaranteeApplyApi{}, delay_guarantee_apply_api.DealDelayGuaranteeApply)
+		}
+
+		staff := manage.Group("/staff", middleware.CheckSession)
+		{
+			MyRouterPost(staff, "/add", staff_api.AddStaffApi{}, staff_api.AddStaff)
+			MyRouterPost(staff, "/list", staff_api.ListStaffApi{}, staff_api.ListStaff)
+			MyRouterPost(staff, "/update", staff_api.UpdateStaffApi{}, staff_api.UpdateStaff)
 		}
 		//produce := manage.Group("/product", middleware.CheckSession)
 		//{

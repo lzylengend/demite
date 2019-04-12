@@ -29,3 +29,7 @@ func NotNilError(key string) *ErrorCommon {
 func ParamError(key string) *ErrorCommon {
 	return &ErrorCommon{HasError: true, ErrorShowDesc: key + "参数错误", ErrorDesc: ""}
 }
+
+func IdExistError(key string) *ErrorCommon {
+	return &ErrorCommon{HasError: true, ErrorShowDesc: key + "重复", ErrorDesc: ""}
+}
