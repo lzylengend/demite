@@ -9,6 +9,8 @@ import (
 type conf struct {
 	Port     string `yam:"port"`
 	FilePath string `yam:"filepath"`
+	DbPath   string `yam:"dbpath"`
+	Docpath  string `yam:"docpath"`
 }
 
 var defaltConf *conf
@@ -28,6 +30,8 @@ func Init(path string) (*conf, error) {
 	defaltConf = &conf{
 		Port:     c.Port,
 		FilePath: c.FilePath,
+		DbPath:   c.DbPath,
+		Docpath:  c.Docpath,
 	}
 
 	_, err = os.Open(c.FilePath)

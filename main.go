@@ -33,13 +33,13 @@ func main() {
 
 	router.Init(g)
 
-	err = router.DoDoc(g, "D:/share/doc.txt")
+	err = router.DoDoc(g, c.Docpath)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	err = model.Init()
+	err = model.Init(c.DbPath)
 	if err != nil {
 		fmt.Println(err)
 		return

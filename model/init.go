@@ -27,10 +27,11 @@ var StaffDao *_StaffDao
 var RepairScheduleDao *_RepairScheduleDao
 var RepairDao *_RepairDao
 
-func Init() error {
+func Init(dbPath string) error {
 	//db, err := gorm.Open("mysql", "debian-sys-maint:fYzuFNK68VdZTWJ0@/demite?charset=utf8&parseTime=True&loc=Local")
 	//db, err := gorm.Open("mysql", "debian-sys-maint:P7Mo08KJ9qIYEZ9b@/demite?charset=utf8&parseTime=True&loc=Local")
-	db, err := gorm.Open("mysql", "root:612345@/demite?charset=utf8&parseTime=True&loc=Local")
+	//db, err := gorm.Open("mysql", "root:612345@/demite?charset=utf8&parseTime=True&loc=Local")
+	db, err := gorm.Open("mysql", dbPath)
 	if err != nil {
 		return err
 	}

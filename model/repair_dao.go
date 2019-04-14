@@ -8,7 +8,8 @@ import (
 type repairStatus string
 
 const (
-	REPAIRSTATUSAPPLY = "apply"
+	REPAIRSTATUSAPPLY   = "apply"
+	REPAIRSTATUSCOMFIRM = "comfirm"
 )
 
 type Repair struct {
@@ -43,7 +44,7 @@ func newRepairDao(db *gorm.DB) *_RepairDao {
 	return &_RepairDao{Db: db.Model(&Repair{})}
 }
 
-func (this *_RepairDao) Add(gooduuid string, goodmodel string, phone string, name string, hospital string, office string,
+func (this *_RepairDao) Apply(gooduuid string, goodmodel string, phone string, name string, hospital string, office string,
 	faultdesc string, faulttype string, fileid1 string, fileid2 string, wxuserid int64) (*Repair, error) {
 	obj := &Repair{
 		GoodUUID:   gooduuid,
@@ -62,6 +63,113 @@ func (this *_RepairDao) Add(gooduuid string, goodmodel string, phone string, nam
 		DataStatus: 0,
 	}
 
-	err := this.Db.Create(obj).Error
+	tx := this.Db.Begin()
+	err := tx.Create(obj).Error
+	if err != nil {
+		tx.Rollback()
+		return nil, err
+	}
+
+	objSchedule := &RepairSchedule{
+		RepairId:   obj.RepairId,
+		CreateId:   0,
+		WxUserId:   wxuserid,
+		CreateTime: time.Now().Unix(),
+		UpdateTime: time.Now().Unix(),
+		Status:     REPAIRSTATUSAPPLY,
+		DataStatus: 0,
+	}
+	err = tx.Create(objSchedule).Error
+	if err != nil {
+		tx.Rollback()
+		return nil, err
+	}
+
+	tx.Commit()
+
+	return obj, nil
+}
+
+func (this *_RepairDao) List(name string, limit int64, offset int64) ([]*Repair, error) {
+	objList := make([]*Repair, 0)
+	var err error
+	name = "%" + name + "%"
+
+	err = this.Db.Where("name like ? and datastatus = ? ", name, 0).Offset(offset).Limit(limit).Order("createtime").Find(&objList).Error
+
+	return objList, err
+}
+
+func (this *_RepairDao) Count(name string) (int64, error) {
+	var n int64
+	var err error
+	name = "%" + name + "%"
+
+	err = this.Db.Where("name like ? and datastatus = ? ", name, 0).Count(&n).Error
+
+	return n, err
+}
+
+func (this *_RepairDao) ListByWxUserId(wxUserId int64, limit int64, offset int64) ([]*Repair, error) {
+	objList := make([]*Repair, 0)
+
+	err := this.Db.Where("wxuserid = ? and datastatus = ? ", wxUserId, 0).Offset(offset).Limit(limit).Order("createtime").Find(&objList).Error
+
+	return objList, err
+}
+
+func (this *_RepairDao) CountByWxUserId(wxUserId int64) (int64, error) {
+	var n int64
+	err := this.Db.Where("wxuserid = ? and datastatus = ? ", wxUserId, 0).Count(&n).Error
+
+	return n, err
+}
+
+func (this *_RepairDao) Get(id int64) (*Repair, error) {
+	obj := &Repair{}
+	err := this.Db.Where("repairid = ? and datastatus = ? ", id, 0).First(obj).Error
 	return obj, err
+}
+
+func (this *_RepairDao) GetByWIdAndxUserId(id, wxUserId int64) (*Repair, error) {
+	obj := &Repair{}
+	err := this.Db.Where("wxuserid = ? and repairid = ? and datastatus = ? ", wxUserId, id, 0).First(obj).Error
+	return obj, err
+}
+
+func (this *_RepairDao) Deal(id int64, userId int64, staffId int64, repairTime int64) error {
+	obj, err := this.Get(id)
+	if err != nil {
+		return err
+	}
+
+	obj.Status = REPAIRSTATUSCOMFIRM
+	obj.UpdateTime = time.Now().Unix()
+
+	tx := this.Db.Begin()
+	err = tx.Save(obj).Error
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	objSchedule := &RepairSchedule{
+		RepairId:   obj.RepairId,
+		CreateId:   userId,
+		CreateTime: time.Now().Unix(),
+		UpdateTime: time.Now().Unix(),
+		Status:     REPAIRSTATUSCOMFIRM,
+		StaffId:    staffId,
+		RepairTime: repairTime,
+		DataStatus: 0,
+	}
+	err = tx.Create(objSchedule).Error
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	tx.Commit()
+
+	return nil
 }
