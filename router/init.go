@@ -8,6 +8,7 @@ import (
 	"demite/controller/goods_api"
 	"demite/controller/middleware"
 	"demite/controller/place_api"
+	"demite/controller/repair_apply_api"
 	"demite/controller/staff_api"
 	"demite/controller/unlocck_apply_api"
 	"demite/controller/user_api"
@@ -34,6 +35,7 @@ func Init(g *gin.Engine) {
 	routerMap = make(map[string]MyRouter)
 
 	g.GET("test", file_api.Test)
+	g.Static("/file", "E:/")
 
 	manage := g.Group("/manage", middleware.LogReq)
 	{
@@ -115,6 +117,13 @@ func Init(g *gin.Engine) {
 			MyRouterPost(staff, "/list", staff_api.ListStaffApi{}, staff_api.ListStaff)
 			MyRouterPost(staff, "/update", staff_api.UpdateStaffApi{}, staff_api.UpdateStaff)
 		}
+
+		repairApply := manage.Group("/repairapply", middleware.CheckSession)
+		{
+			MyRouterPost(repairApply, "/list", repair_apply_api.ListRepairApi{}, repair_apply_api.ListRepair)
+			MyRouterPost(repairApply, "/get", repair_apply_api.GetRepairApplyApi{}, repair_apply_api.GetRepairApply)
+			MyRouterPost(repairApply, "/deal", repair_apply_api.DealRepairApplyApi{}, repair_apply_api.DealRepairApply)
+		}
 		//produce := manage.Group("/product", middleware.CheckSession)
 		//{
 		//	MyRouterPost(produce, "/add", product_api.AddProductApi{}, product_api.AddProduct)
@@ -136,6 +145,10 @@ func Init(g *gin.Engine) {
 			MyRouterPost(wxUser, "/listdrugbygood", wx_user_api.ListDrugByGoodsApi{}, wx_user_api.ListDrugByGoods)
 			MyRouterPost(wxUser, "/unlockapply", wx_user_api.UnlockApplyApi{}, wx_user_api.UnlockApply)
 			MyRouterPost(wxUser, "/delaygauaranteeapply", wx_user_api.DelayAuaranteeApplyApi{}, wx_user_api.DelayAuaranteeApply)
+			MyRouterPost(wxUser, "/repairapply", wx_user_api.RepairApplyApi{}, wx_user_api.RepairApply)
+			MyRouterPost(wxUser, "/lsitrepairapply", wx_user_api.ListRepairApplyApi{}, wx_user_api.ListRepairApply)
+			MyRouterPost(wxUser, "/getrepairapply", wx_user_api.GetRepairApplyApi{}, wx_user_api.GetRepairApply)
+			MyRouterPost(wxUser, "/uploadfile", wx_user_api.UploadFileApi{}, wx_user_api.UploadFile)
 		}
 	}
 }

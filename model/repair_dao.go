@@ -110,17 +110,17 @@ func (this *_RepairDao) Count(name string) (int64, error) {
 	return n, err
 }
 
-func (this *_RepairDao) ListByWxUserId(wxUserId int64, limit int64, offset int64) ([]*Repair, error) {
+func (this *_RepairDao) ListByWxUserIdAndGoodUUID(wxUserId int64, limit int64, offset int64, gooduuid string) ([]*Repair, error) {
 	objList := make([]*Repair, 0)
 
-	err := this.Db.Where("wxuserid = ? and datastatus = ? ", wxUserId, 0).Offset(offset).Limit(limit).Order("createtime").Find(&objList).Error
+	err := this.Db.Where("wxuserid = ? and datastatus = ? and gooduuid = ?", wxUserId, 0, gooduuid).Offset(offset).Limit(limit).Order("createtime").Find(&objList).Error
 
 	return objList, err
 }
 
-func (this *_RepairDao) CountByWxUserId(wxUserId int64) (int64, error) {
+func (this *_RepairDao) CountByWxUserIdAndGoodUUID(wxUserId int64, gooduuid string) (int64, error) {
 	var n int64
-	err := this.Db.Where("wxuserid = ? and datastatus = ? ", wxUserId, 0).Count(&n).Error
+	err := this.Db.Where("wxuserid = ? and datastatus = ? and gooduuid = ?", wxUserId, 0, gooduuid).Count(&n).Error
 
 	return n, err
 }

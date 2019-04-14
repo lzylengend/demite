@@ -20,19 +20,19 @@ type DealRepairApplyResponse struct {
 type DealRepairApplyApi struct {
 }
 
-func (DealRepairApplyApi) DealRequest() interface{} {
+func (DealRepairApplyApi) GetRequest() interface{} {
 	return &DealRepairApplyRequest{}
 }
 
-func (DealRepairApplyApi) DealResponse() interface{} {
+func (DealRepairApplyApi) GetResponse() interface{} {
 	return &DealRepairApplyResponse{}
 }
 
-func (DealRepairApplyApi) DealApi() string {
+func (DealRepairApplyApi) GetApi() string {
 	return "DealRepairApply"
 }
 
-func (DealRepairApplyApi) DealDesc() string {
+func (DealRepairApplyApi) GetDesc() string {
 	return "处理请求"
 }
 

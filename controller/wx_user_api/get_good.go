@@ -23,6 +23,8 @@ type GetGoodResponse struct {
 	GoodsTempletLockContext string                `json:"goodstempletlockcontext"`
 	LockStatus              string                `json:"lockstatus"`
 	GoodsPicData            string                `json:"goodpicdata"`
+	GuaranteeTime           int64                 `json:"guaranteetime"`
+	CreateTime              int64                 `json:"createtime"`
 }
 
 type GetGoodApi struct {
@@ -93,6 +95,8 @@ func GetGood(c *gin.Context) {
 	rsp.GoodsTempletLockContext = ""
 	rsp.GoodsPicData = base64.StdEncoding.EncodeToString(data)
 	rsp.LockStatus = string(gwObj.Status)
+	rsp.CreateTime = good.CreateTime
+	rsp.GuaranteeTime = good.GuaranteeTime
 
 	if gwObj.Status == model.GOODSWXUSERUNLOCK {
 		rsp.GoodsTempletLockContext = good.GoodsTempletLockContext

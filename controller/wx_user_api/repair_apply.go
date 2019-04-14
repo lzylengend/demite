@@ -9,7 +9,7 @@ import (
 
 type RepairApplyRequest struct {
 	GoodUUID  string `json:"gooduuid"`
-	GoodModel string `json:"gooduuid"`
+	GoodModel string `json:"goodmodel"`
 	Phone     string `json:"phone"`
 	Name      string `json:"name"`
 	Hospital  string `json:"hospital"`

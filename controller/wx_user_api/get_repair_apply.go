@@ -12,9 +12,25 @@ type GetRepairApplyRequest struct {
 }
 
 type GetRepairApplyResponse struct {
-	Data   *repair               `json:"data"`
-	List   []*getRepairApplyData `json:"list"`
+	Data   *getRepairApply       `json:"data"`
 	Status *my_error.ErrorCommon `json:"status"`
+}
+
+type getRepairApply struct {
+	GoodModel  string                `json:"goodmodel"`
+	GoodUUID   string                `json:"gooduuid"`
+	GoodName   string                `json:"goodname"`
+	GoodPic    string                `json:"goodpic"`
+	CreateTime int64                 `json:"createtime"`
+	Phone      string                `json:"phone"`
+	Name       string                `json:"name"`
+	Hospital   string                `json:"hospital"`
+	Office     string                `json:"office"`
+	Faultdesc  string                `json:"faultdesc"`
+	Faulttype  string                `json:"faulttype"`
+	Fileid1    string                `json:"fileid1"`
+	Fileid2    string                `json:"fileid2"`
+	List       []*getRepairApplyData `json:"list"`
 }
 
 type getRepairApplyData struct {
@@ -77,11 +93,20 @@ func GetRepairApply(c *gin.Context) {
 		return
 	}
 
-	rsp.Data = &repair{
+	rsp.Data = &getRepairApply{
 		GoodUUID:   good.GoodsUUID,
 		GoodModel:  good.GoodsModel,
 		GoodName:   good.GoodsName,
 		CreateTime: r.CreateTime,
+		Phone:      r.Phone,
+		Name:       r.Name,
+		Hospital:   r.Hospital,
+		Office:     r.Office,
+		Faultdesc:  r.FaultDesc,
+		Faulttype:  r.FaultType,
+		Fileid1:    r.FileId1,
+		Fileid2:    r.FileId2,
+		GoodPic:    good.GoodsPic,
 	}
 
 	objList, err := model.RepairScheduleDao.ListByRepairId(req.Id)
@@ -104,6 +129,7 @@ func GetRepairApply(c *gin.Context) {
 		})
 	}
 
+	rsp.Data.List = data
 	rsp.Status = my_error.NoError()
 	c.JSON(200, rsp)
 }

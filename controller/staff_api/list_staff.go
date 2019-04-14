@@ -34,7 +34,11 @@ func (ListStaffApi) GetRequest() interface{} {
 }
 
 func (ListStaffApi) GetResponse() interface{} {
-	return &ListStaffResponse{}
+	return &ListStaffResponse{
+		Data: []*staff{
+			&staff{},
+		},
+	}
 }
 
 func (ListStaffApi) GetApi() string {

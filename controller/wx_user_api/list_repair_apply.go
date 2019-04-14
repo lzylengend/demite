@@ -8,8 +8,9 @@ import (
 )
 
 type ListRepairApplyRequest struct {
-	Limit  int64 `json:"limit"`
-	Offset int64 `json:"offset"`
+	GoodUUID string `json:"gooduuid"`
+	Limit    int64  `json:"limit"`
+	Offset   int64  `json:"offset"`
 }
 
 type ListRepairApplyResponse struct {
@@ -19,7 +20,7 @@ type ListRepairApplyResponse struct {
 }
 
 type repair struct {
-	GoodUUID   string `json:"gooduuid"`
+	Id         int64  `json:"id"`
 	GoodModel  string `json:"gooduuid"`
 	GoodName   string `json:"goodname"`
 	CreateTime int64  `json:"createtime"`
@@ -61,14 +62,21 @@ func ListRepairApply(c *gin.Context) {
 		return
 	}
 
-	objList, err := model.RepairDao.ListByWxUserId(wxId, req.Limit, req.Offset)
+	objList, err := model.RepairDao.ListByWxUserIdAndGoodUUID(wxId, req.Limit, req.Offset, req.GoodUUID)
 	if err != nil {
 		rsp.Status = my_error.DbError(err.Error())
 		c.JSON(200, rsp)
 		return
 	}
 
-	count, err := model.RepairDao.CountByWxUserId(wxId)
+	good, err := model.GoodsDao.GetByUUID(req.GoodUUID)
+	if err != nil {
+		rsp.Status = my_error.DbError(err.Error())
+		c.JSON(200, rsp)
+		return
+	}
+
+	count, err := model.RepairDao.CountByWxUserIdAndGoodUUID(wxId, req.GoodUUID)
 	if err != nil {
 		rsp.Status = my_error.DbError(err.Error())
 		c.JSON(200, rsp)
@@ -77,18 +85,11 @@ func ListRepairApply(c *gin.Context) {
 
 	data := make([]*repair, 0)
 	for _, v := range objList {
-		good, err := model.GoodsDao.GetByUUID(v.GoodUUID)
-		if err != nil {
-			rsp.Status = my_error.DbError(err.Error())
-			c.JSON(200, rsp)
-			return
-		}
-
 		data = append(data, &repair{
-			GoodUUID:   good.GoodsUUID,
 			GoodModel:  good.GoodsModel,
 			GoodName:   good.GoodsName,
 			CreateTime: v.CreateTime,
+			Id:         v.RepairId,
 		})
 	}
 
