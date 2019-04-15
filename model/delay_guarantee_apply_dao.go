@@ -18,6 +18,7 @@ type DelayGuaranteeApply struct {
 	GoodsUUID  string             `gorm:"column:goodsuuid;index:goodsuuid"`
 	WXUserId   int64              `gorm:"column:wxuserid;index:wxuserid"`
 	Status     goodsWXUserSatatus `gorm:"column:status"`
+	SourceTime int64              `gorm:"column:sourcetime"`
 	DelayTime  int64              `gorm:"column:delaytime"`
 	Creater    int64              `gorm:"column:creater"`
 	DataStatus int64              `gorm:"column:datastatus"`
@@ -39,16 +40,22 @@ func newDelayGuaranteeApplyDao(db *gorm.DB) *_DelayGuaranteeApplyDao {
 }
 
 func (this *_DelayGuaranteeApplyDao) Add(goodUUID string, wxUserId int64) (*DelayGuaranteeApply, error) {
+	g, err := GoodsDao.GetByUUID(goodUUID)
+	if err != nil {
+		return nil, err
+	}
+
 	obj := &DelayGuaranteeApply{
 		GoodsUUID:  goodUUID,
 		WXUserId:   wxUserId,
 		Status:     DELAYGUARANTEEAPPLYNG,
+		SourceTime: g.GuaranteeTime,
 		DataStatus: 0,
 		CreateTime: time.Now().Unix(),
 		UpdateTime: time.Now().Unix(),
 	}
 
-	err := this.Db.Create(obj).Error
+	err = this.Db.Create(obj).Error
 	return obj, err
 }
 
@@ -75,6 +82,10 @@ func (this *_DelayGuaranteeApplyDao) ListByGoodUUIdWxUserIdStatus(goodName strin
 			return nil, err
 		}
 
+		if len(goodList) == 0 {
+			return nil, nil
+		}
+
 		for _, v := range goodList {
 			goodIdList = append(goodIdList, v.GoodsUUID)
 		}
@@ -90,6 +101,10 @@ func (this *_DelayGuaranteeApplyDao) ListByGoodUUIdWxUserIdStatus(goodName strin
 		wxUserList, err := WxUserDao.List(wxUserName, 99999, 0)
 		if err != nil {
 			return nil, err
+		}
+
+		if len(wxUserList) == 0 {
+			return nil, nil
 		}
 
 		for _, v := range wxUserList {
@@ -125,6 +140,10 @@ func (this *_DelayGuaranteeApplyDao) CountByGoodUUIdWxUserIdStatus(goodName stri
 			return 0, err
 		}
 
+		if len(goodList) == 0 {
+			return 0, nil
+		}
+
 		for _, v := range goodList {
 			goodIdList = append(goodIdList, v.GoodsUUID)
 		}
@@ -140,6 +159,10 @@ func (this *_DelayGuaranteeApplyDao) CountByGoodUUIdWxUserIdStatus(goodName stri
 		wxUserList, err := WxUserDao.List(wxUserName, 99999, 0)
 		if err != nil {
 			return 0, err
+		}
+
+		if len(wxUserList) == 0 {
+			return 0, nil
 		}
 
 		for _, v := range wxUserList {
@@ -166,7 +189,10 @@ func (this *_DelayGuaranteeApplyDao) DealApply(id int64, agree bool, userId int6
 
 	obj.Creater = userId
 	obj.UpdateTime = time.Now().Unix()
-	obj.DelayTime = delayTime
+
+	if delayTime != 0 {
+		obj.DelayTime = delayTime
+	}
 
 	if !agree {
 		obj.Status = DELAYGUARANTEEREFUSE

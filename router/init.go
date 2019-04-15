@@ -149,6 +149,7 @@ func Init(g *gin.Engine) {
 			MyRouterPost(wxUser, "/lsitrepairapply", wx_user_api.ListRepairApplyApi{}, wx_user_api.ListRepairApply)
 			MyRouterPost(wxUser, "/getrepairapply", wx_user_api.GetRepairApplyApi{}, wx_user_api.GetRepairApply)
 			MyRouterPost(wxUser, "/uploadfile", wx_user_api.UploadFileApi{}, wx_user_api.UploadFile)
+			MyRouterPost(wxUser, "/dealrepairapply", wx_user_api.DealRepairApplyApi{}, wx_user_api.DealRepairApply)
 		}
 	}
 }

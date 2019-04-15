@@ -34,13 +34,12 @@ type getRepairApply struct {
 }
 
 type getRepairApplyData struct {
-	UserName   string `json:"username"`
-	WxUserName string `json:"wxusername"`
 	StaffName  string `json:"staffname"`
 	StaffPhone string `json:"staffphone"`
 	RepairTime int64  `json:"repairtime"`
 	CreateTime int64  `json:"createtime"`
 	Status     string `json:"currentstatus"`
+	StaffNO    string `json:"staffno"`
 }
 
 type GetRepairApplyApi struct {
@@ -119,8 +118,6 @@ func GetRepairApply(c *gin.Context) {
 	data := make([]*getRepairApplyData, 0)
 	for _, v := range objList {
 		data = append(data, &getRepairApplyData{
-			UserName:   "",
-			WxUserName: "",
 			StaffName:  "",
 			StaffPhone: "",
 			RepairTime: v.RepairTime,

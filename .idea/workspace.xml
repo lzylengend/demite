@@ -2,17 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="61cdbbca-1e68-4568-87d2-817f128a13fa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/controller/wx_user_api/upload_file.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controller/wx_user_api/deal_repair_apply.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/repair_apply_api/deal_repair_apply.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/repair_apply_api/deal_repair_apply.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/staff_api/list_staff.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/staff_api/list_staff.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/wx_user_api/get_good.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/wx_user_api/get_good.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/repair_apply_api/list_repair_apply.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/repair_apply_api/list_repair_apply.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/wx_user_api/get_repair_apply.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/wx_user_api/get_repair_apply.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/wx_user_api/list_repair_apply.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/wx_user_api/list_repair_apply.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/wx_user_api/repair_apply.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/wx_user_api/repair_apply.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/delay_guarantee_apply_dao.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/delay_guarantee_apply_dao.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/repair_dao.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/repair_dao.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/router/init.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/init.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.conf" beforeDir="false" afterPath="$PROJECT_DIR$/server.conf" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,29 +18,47 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/controller/repair_apply_api/list_repair_apply.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="361">
+              <caret line="23" column="39" lean-forward="true" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/controller/wx_user_api/get_repair_apply.go">
+        <entry file="file://$PROJECT_DIR$/controller/repair_apply_api/deal_repair_apply.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
-              <caret line="96" column="32" selection-start-line="96" selection-start-column="32" selection-end-line="96" selection-end-column="32" />
+            <state relative-caret-position="114">
+              <caret line="11" column="35" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="35" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controller/wx_user_api/repair_apply.go">
+        <entry file="file://$PROJECT_DIR$/model/repair_dao.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="19" column="37" lean-forward="true" selection-start-line="12" selection-start-column="4" selection-end-line="19" selection-end-column="37" />
+            <state relative-caret-position="133">
+              <caret line="10" column="21" lean-forward="true" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controller/wx_user_api/list_repair_apply.go">
+        <entry file="file://$PROJECT_DIR$/model/delay_guarantee_apply_dao.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="25" column="41" lean-forward="true" selection-start-line="23" selection-start-column="4" selection-end-line="25" selection-end-column="41" />
+            <state relative-caret-position="178">
+              <caret line="67" column="51" lean-forward="true" selection-start-line="67" selection-start-column="51" selection-end-line="67" selection-end-column="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/router/init.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="177">
+              <caret line="122" column="74" selection-start-line="122" selection-start-column="74" selection-end-line="122" selection-end-column="74" />
             </state>
           </provider>
         </entry>
@@ -81,6 +95,7 @@
       <find>Add</find>
       <find>staff_api</find>
       <find>Repair</find>
+      <find>GetRepairApply</find>
     </findStrings>
     <replaceStrings>
       <replace>AddDrugClass</replace>
@@ -109,6 +124,7 @@
       <replace>staff</replace>
       <replace>staff_api</replace>
       <replace>RepairSchedule</replace>
+      <replace>DealRepairApply</replace>
     </replaceStrings>
   </component>
   <component name="GOROOT" path="C:\Go" />
@@ -118,8 +134,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/model/drug_dao.go" />
-        <option value="$PROJECT_DIR$/controller/drug_api/list_drug.go" />
         <option value="$PROJECT_DIR$/controller/drug_api/add_drug.go" />
         <option value="$PROJECT_DIR$/controller/drug_api/update_drug.go" />
         <option value="$PROJECT_DIR$/controller/wx_user_api/upload_repair.go" />
@@ -147,7 +161,6 @@
         <option value="$PROJECT_DIR$/controller/delay_guarantee_api/list_delay_guarantee.go" />
         <option value="$PROJECT_DIR$/controller/delay_guarantee_api/deal_delay_gurantee_apply.go" />
         <option value="$PROJECT_DIR$/model/goods_dao.go" />
-        <option value="$PROJECT_DIR$/model/delay_guarantee_apply_dao.go" />
         <option value="$PROJECT_DIR$/controller/unlocck_apply_api/deal_apply.go" />
         <option value="$PROJECT_DIR$/controller/delay_guarantee_apply_api/deal_delay_gurantee_apply.go" />
         <option value="$PROJECT_DIR$/controller/wx_user_api/delay_auarantee_apply.go" />
@@ -161,19 +174,22 @@
         <option value="$PROJECT_DIR$/controller/wx_user_api/get_good.go" />
         <option value="$PROJECT_DIR$/controller/wx_user_api/repair_apply.go" />
         <option value="$PROJECT_DIR$/controller/repair_apply_api/deal_repair_apply.go" />
-        <option value="$PROJECT_DIR$/model/repair_dao.go" />
         <option value="C:/GO/src/net/http/request.go" />
         <option value="$PROJECT_DIR$/controller/wx_user_api/upload_file.go" />
         <option value="$PROJECT_DIR$/server.conf" />
         <option value="$PROJECT_DIR$/controller/staff_api/list_staff.go" />
         <option value="$PROJECT_DIR$/controller/wx_user_api/list_repair_apply.go" />
+        <option value="$PROJECT_DIR$/controller/wx_user_api/deal_repair_apply.go" />
         <option value="$PROJECT_DIR$/router/init.go" />
         <option value="$PROJECT_DIR$/controller/wx_user_api/get_repair_apply.go" />
+        <option value="$PROJECT_DIR$/model/delay_guarantee_apply_dao.go" />
+        <option value="$PROJECT_DIR$/model/repair_dao.go" />
+        <option value="$PROJECT_DIR$/controller/repair_apply_api/list_repair_apply.go" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="563" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-1350" />
     <option name="y" value="-8" />
     <option name="width" value="960" />
     <option name="height" value="728" />
@@ -199,36 +215,22 @@
               <item name="demite" type="b2602c69:ProjectViewProjectNode" />
               <item name="demite" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
-              <item name="file_api" type="462c0819:PsiDirectoryNode" />
+              <item name="repair_apply_api" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="demite" type="b2602c69:ProjectViewProjectNode" />
               <item name="demite" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-              <item name="goods_api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="demite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="demite" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-              <item name="staff_api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="demite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="demite" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-              <item name="wx_user_api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="demite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="demite" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-              <item name="wx_user_banken_api" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="demite" type="b2602c69:ProjectViewProjectNode" />
               <item name="demite" type="462c0819:PsiDirectoryNode" />
               <item name="router" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="demite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="demite" type="462c0819:PsiDirectoryNode" />
+              <item name="tools" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -290,15 +292,15 @@
     </recent_temporary>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-1928" y="-8" width="1936" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27760968" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1359275" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49840087" visible="true" weight="0.29787233" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49840087" visible="true" weight="0.29698858" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39869988" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -306,7 +308,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4977307" weight="0.33060557" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4977307" weight="0.20435685" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50226927" side_tool="true" weight="0.33060557" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -339,23 +341,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/model/goods_drug_dao.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/wx_user_api/list_goods.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1587">
-          <caret line="95" lean-forward="true" selection-start-line="2" selection-end-line="95" />
-          <folding>
-            <element signature="e#21#163#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controller/apply_api/list_apply.go" />
     <entry file="file://$PROJECT_DIR$/controller/wx_user_api/login.go">
       <provider selected="true" editor-type-id="text-editor">
@@ -438,13 +423,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/delay_guarantee_apply_dao.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="189" column="22" selection-start-line="189" selection-start-column="18" selection-end-line="189" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/unlock_apply_dao.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="281">
@@ -463,20 +441,6 @@
           <folding>
             <element signature="e#27#121#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/delay_guarantee_apply_api/deal_delay_gurantee_apply.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="52">
-          <caret line="55" column="44" selection-start-line="55" selection-start-column="44" selection-end-line="55" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/delay_guarantee_apply_api/list_delay_guarantee.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="105" column="24" selection-start-line="105" selection-start-column="24" selection-end-line="105" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -522,13 +486,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/repair_schedule.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" column="23" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/model/repair_schedule.go" />
     <entry file="file://$PROJECT_DIR$/model/init.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -550,30 +508,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="310">
           <caret line="25" column="70" selection-start-line="25" selection-start-column="57" selection-end-line="25" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/goods_dao.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="36" column="65" lean-forward="true" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="65" />
-          <folding>
-            <element signature="e#15#86#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/wx_user_api/delay_auarantee_apply.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-146">
-          <caret line="24" column="47" lean-forward="true" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/repair_dao.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="120" column="82" selection-start-line="120" selection-start-column="82" selection-end-line="120" selection-end-column="82" />
         </state>
       </provider>
     </entry>
@@ -646,13 +580,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controller/repair_apply_api/deal_repair_apply.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="11" column="11" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controller/staff_api/add_staff.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
@@ -682,38 +609,104 @@
         <state relative-caret-position="-114" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/router/init.go">
+    <entry file="file://$PROJECT_DIR$/controller/wx_user_api/list_repair_apply.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="149" column="49" selection-start-line="149" selection-start-column="35" selection-end-line="149" selection-end-column="49" />
+        <state relative-caret-position="380">
+          <caret line="25" column="41" selection-start-line="23" selection-start-column="4" selection-end-line="25" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/goods_dao.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="109" column="23" selection-start-line="109" selection-start-column="23" selection-end-line="109" selection-end-column="23" />
+          <folding>
+            <element signature="e#15#86#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/controller/wx_user_api/repair_apply.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
-          <caret line="19" column="37" lean-forward="true" selection-start-line="12" selection-start-column="4" selection-end-line="19" selection-end-column="37" />
+          <caret line="19" column="37" selection-start-line="12" selection-start-column="4" selection-end-line="19" selection-end-column="37" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controller/wx_user_api/list_repair_apply.go">
+    <entry file="file://$PROJECT_DIR$/controller/delay_guarantee_apply_api/list_delay_guarantee.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="25" column="41" lean-forward="true" selection-start-line="23" selection-start-column="4" selection-end-line="25" selection-end-column="41" />
+        <state relative-caret-position="415">
+          <caret line="105" column="65" selection-start-line="105" selection-start-column="65" selection-end-line="105" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/delay_guarantee_apply_api/deal_delay_gurantee_apply.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-266">
+          <caret line="12" column="36" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/wx_user_api/deal_repair_apply.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="912">
+          <caret line="53" column="29" lean-forward="true" selection-start-line="53" selection-start-column="29" selection-end-line="53" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/model/repair_schedule_dao.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="30" column="32" selection-start-line="30" selection-start-column="32" selection-end-line="30" selection-end-column="32" />
+        <state relative-caret-position="-22">
+          <caret line="9" column="9" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/controller/wx_user_api/get_repair_apply.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="96" column="32" selection-start-line="96" selection-start-column="32" selection-end-line="96" selection-end-column="32" />
+        <state relative-caret-position="85">
+          <caret line="119" column="48" selection-start-line="119" selection-start-column="48" selection-end-line="119" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/wx_user_api/delay_auarantee_apply.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="66" column="44" selection-start-line="66" selection-start-column="44" selection-end-line="66" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/delay_guarantee_apply_dao.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="67" column="51" lean-forward="true" selection-start-line="67" selection-start-column="51" selection-end-line="67" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/router/init.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="122" column="74" selection-start-line="122" selection-start-column="74" selection-end-line="122" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/repair_dao.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="10" column="21" lean-forward="true" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/repair_apply_api/list_repair_apply.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="23" column="39" lean-forward="true" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/repair_apply_api/deal_repair_apply.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="11" column="35" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="35" />
         </state>
       </provider>
     </entry>

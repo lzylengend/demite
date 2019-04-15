@@ -28,6 +28,7 @@ type repair struct {
 	Name      string `json:"name"`
 	FaultDesc string `json:"faultdesc"`
 	FaultType string `json:"faulttype"`
+	Status    string `json:"applystatus"`
 	FileId1   string `json:"fileid1"`
 	FileId2   string `json:"fileid2"`
 }
@@ -96,6 +97,7 @@ func ListRepair(c *gin.Context) {
 			FaultType: v.FaultType,
 			FileId1:   v.FileId1,
 			FileId2:   v.FileId2,
+			Status:    string(v.Status),
 		})
 	}
 
