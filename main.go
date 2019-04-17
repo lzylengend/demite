@@ -6,6 +6,7 @@ import (
 	_ "demite/mylog"
 	"demite/router"
 	"fmt"
+
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/redis"
 	"github.com/gin-gonic/gin"
@@ -31,7 +32,7 @@ func main() {
 		return
 	}
 
-	router.Init(g)
+	router.Init(g, c.FilePath)
 
 	err = router.DoDoc(g, c.Docpath)
 	if err != nil {

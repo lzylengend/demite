@@ -14,20 +14,21 @@ const (
 )
 
 type Remote struct {
-	RemoteId   int64        `gorm:"column:remoteid;primary_key;AUTO_INCREMENT"`
-	WXUserId   int64        `gorm:"column:wxuserid;index:wxuserid"`
-	Hospital   string       `gorm:"column:hospital"`
-	Office     string       `gorm:"column:office"`
-	Phone      string       `gorm:"column:phone"`
-	Name       string       `gorm:"column:name"`
-	FaultDesc  string       `gorm:"column:faultdesc"`
-	FaultType  string       `gorm:"column:faulttype"`
-	CreateTime int64        `gorm:"column:createtime"`
-	UpdateTime int64        `gorm:"column:updatetime"`
-	FileId1    string       `gorm:"column:fileid1"`
-	FileId2    string       `gorm:"column:fileid2"`
-	Status     remoteStatus `gorm:"column:status"`
-	DataStatus int64        `gorm:"column:datastatus"`
+	RemoteId      int64        `gorm:"column:remoteid;primary_key;AUTO_INCREMENT"`
+	WXUserId      int64        `gorm:"column:wxuserid;index:wxuserid"`
+	Hospital      string       `gorm:"column:hospital"`
+	Office        string       `gorm:"column:office"`
+	Phone         string       `gorm:"column:phone"`
+	Name          string       `gorm:"column:name"`
+	FaultDesc     string       `gorm:"column:faultdesc"`
+	FaultDescSelf string       `gorm:"column:faultdescself"`
+	RemoteTime    int64        `gorm:"column:remotetime"`
+	CreateTime    int64        `gorm:"column:createtime"`
+	UpdateTime    int64        `gorm:"column:updatetime"`
+	FileId1       string       `gorm:"column:fileid1"`
+	FileId2       string       `gorm:"column:fileid2"`
+	Status        remoteStatus `gorm:"column:status"`
+	DataStatus    int64        `gorm:"column:datastatus"`
 }
 type _RemoteDao struct {
 	Db *gorm.DB
@@ -43,21 +44,22 @@ func newRemoteDao(db *gorm.DB) *_RemoteDao {
 	return &_RemoteDao{Db: db.Model(&Remote{})}
 }
 
-func (this *_RemoteDao) Apply(phone string, name string, hospital string, office string,
-	faultdesc string, faulttype string, fileid1 string, fileid2 string, wxuserid int64) (*Remote, error) {
+func (this *_RemoteDao) Apply(phone string, name string, hospital string, office string, remoteTime int64,
+	faultdesc string, faultDescSelf string, fileid1 string, fileid2 string, wxuserid int64) (*Remote, error) {
 	obj := &Remote{
-		WXUserId:   wxuserid,
-		Phone:      phone,
-		Name:       name,
-		Hospital:   hospital,
-		Office:     office,
-		FaultDesc:  faultdesc,
-		FaultType:  faulttype,
-		CreateTime: time.Now().Unix(),
-		FileId1:    fileid1,
-		FileId2:    fileid2,
-		Status:     REMOTESTATUSAPPLY,
-		DataStatus: 0,
+		WXUserId:      wxuserid,
+		Phone:         phone,
+		Name:          name,
+		Hospital:      hospital,
+		Office:        office,
+		FaultDesc:     faultdesc,
+		FaultDescSelf: faultDescSelf,
+		CreateTime:    time.Now().Unix(),
+		FileId1:       fileid1,
+		FileId2:       fileid2,
+		Status:        REMOTESTATUSAPPLY,
+		RemoteTime:    remoteTime,
+		DataStatus:    0,
 	}
 
 	tx := this.Db.Begin()
@@ -71,6 +73,7 @@ func (this *_RemoteDao) Apply(phone string, name string, hospital string, office
 		RemoteId:   obj.RemoteId,
 		CreateId:   0,
 		WxUserId:   wxuserid,
+		RemoteTime: remoteTime,
 		CreateTime: time.Now().Unix(),
 		UpdateTime: time.Now().Unix(),
 		Status:     REMOTESTATUSAPPLY,
@@ -107,17 +110,17 @@ func (this *_RemoteDao) Count(name string) (int64, error) {
 	return n, err
 }
 
-func (this *_RemoteDao) ListByWxUserIdAndGoodUUID(wxUserId int64, limit int64, offset int64, gooduuid string) ([]*Remote, error) {
+func (this *_RemoteDao) ListByWxUserId(wxUserId int64, limit int64, offset int64) ([]*Remote, error) {
 	objList := make([]*Remote, 0)
 
-	err := this.Db.Where("wxuserid = ? and datastatus = ? and gooduuid = ?", wxUserId, 0, gooduuid).Offset(offset).Limit(limit).Order("createtime").Find(&objList).Error
+	err := this.Db.Where("wxuserid = ? and datastatus = ?", wxUserId, 0).Offset(offset).Limit(limit).Order("createtime desc").Find(&objList).Error
 
 	return objList, err
 }
 
-func (this *_RemoteDao) CountByWxUserIdAndGoodUUID(wxUserId int64, gooduuid string) (int64, error) {
+func (this *_RemoteDao) CountByWxUserId(wxUserId int64) (int64, error) {
 	var n int64
-	err := this.Db.Where("wxuserid = ? and datastatus = ? and gooduuid = ?", wxUserId, 0, gooduuid).Count(&n).Error
+	err := this.Db.Where("wxuserid = ? and datastatus = ?", wxUserId, 0).Count(&n).Error
 
 	return n, err
 }
@@ -134,7 +137,7 @@ func (this *_RemoteDao) GetByWIdAndxUserId(id, wxUserId int64) (*Remote, error) 
 	return obj, err
 }
 
-func (this *_RemoteDao) Deal(id int64, userId int64, staffId int64, remoteTime int64) error {
+func (this *_RemoteDao) Deal(id int64, userId int64, staffId int64, dealTime int64) error {
 	obj, err := this.Get(id)
 	if err != nil {
 		return err
@@ -157,7 +160,7 @@ func (this *_RemoteDao) Deal(id int64, userId int64, staffId int64, remoteTime i
 		UpdateTime: time.Now().Unix(),
 		Status:     REMOTESTATUSCOMFIRM,
 		StaffId:    staffId,
-		RemoteTime: remoteTime,
+		DealTime:   dealTime,
 		DataStatus: 0,
 	}
 	err = tx.Create(objSchedule).Error

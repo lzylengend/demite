@@ -78,7 +78,14 @@ func (this *_GoodsWXUserDao) ListByUUID(uuid string) ([]*GoodsWXUser, error) {
 
 func (this *_GoodsWXUserDao) ListByWXId(wxId int64, limit int64, offset int64) ([]*GoodsWXUser, error) {
 	objList := make([]*GoodsWXUser, 0)
-	err := this.Db.Where("datastatus  = ? and wxuserid = ?", 0, wxId).Find(&objList).Offset(offset).Limit(limit).Error
+	err := this.Db.Where("datastatus  = ? and wxuserid = ?", 0, wxId).Order("createtime desc").Offset(offset).Limit(limit).Find(&objList).Error
 
 	return objList, err
+}
+
+func (this *_GoodsWXUserDao) CountByWXId(wxId int64) (int64, error) {
+	var n int64
+	err := this.Db.Where("datastatus  = ? and wxuserid = ?", 0, wxId).Count(&n).Error
+
+	return n, err
 }

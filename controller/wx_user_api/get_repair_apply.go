@@ -78,7 +78,7 @@ func GetRepairApply(c *gin.Context) {
 		return
 	}
 
-	r, err := model.RepairDao.GetByWIdAndxUserId(wxId, req.Id)
+	r, err := model.RepairDao.GetByWIdAndxUserId(req.Id, wxId)
 	if err != nil {
 		rsp.Status = my_error.DbError(err.Error())
 		c.JSON(200, rsp)
@@ -117,9 +117,20 @@ func GetRepairApply(c *gin.Context) {
 
 	data := make([]*getRepairApplyData, 0)
 	for _, v := range objList {
+		staff := &model.Staff{}
+		if v.StaffId != 0 {
+			staff, err = model.StaffDao.Get(v.StaffId)
+			if err != nil {
+				rsp.Status = my_error.DbError(err.Error())
+				c.JSON(200, rsp)
+				return
+			}
+		}
+
 		data = append(data, &getRepairApplyData{
-			StaffName:  "",
-			StaffPhone: "",
+			StaffName:  staff.StaffName,
+			StaffPhone: staff.StaffPhone,
+			StaffNO:    staff.StaffNO,
 			RepairTime: v.RepairTime,
 			CreateTime: v.CreateTime,
 			Status:     string(v.Status),

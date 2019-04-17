@@ -1,12 +1,9 @@
 package wx_user_api
 
 import (
-	"demite/conf"
 	"demite/controller"
 	"demite/model"
 	"demite/my_error"
-	"encoding/base64"
-	"io/ioutil"
 
 	"github.com/gin-gonic/gin"
 )
@@ -19,12 +16,13 @@ type ListGoodsRequest struct {
 type ListGoodsResponse struct {
 	Status *my_error.ErrorCommon `json:"status"`
 	Data   []*goodData           `json:"data"`
+	Count  int64                 `json:"count"`
 }
 
 type goodData struct {
-	UUID         string `json:"uuid"`
-	Name         string `json:"name"`
-	GoodsPicData string `json:"goodpicdata"`
+	UUID   string `json:"uuid"`
+	Name   string `json:"name"`
+	FileId string `json:"fileid"`
 }
 
 type ListGoodsApi struct {
@@ -70,6 +68,15 @@ func ListGoods(c *gin.Context) {
 		return
 	}
 
+	count, err := model.GoodsWXUserDao.CountByWXId(wxId)
+	if err != nil {
+		rsp.Status = my_error.DbError(err.Error())
+		c.JSON(200, rsp)
+		return
+	}
+
+	rsp.Count = count
+
 	for _, v := range gwObj {
 		good, err := model.GoodsDao.GetByUUID(v.GoodsUUID)
 		if err != nil {
@@ -78,15 +85,10 @@ func ListGoods(c *gin.Context) {
 			return
 		}
 
-		data, err := ioutil.ReadFile(conf.GetFilePath() + "/" + good.GoodsPic)
-		if err != nil {
-			data = []byte{}
-		}
-
 		rsp.Data = append(rsp.Data, &goodData{
-			UUID:         v.GoodsUUID,
-			Name:         good.GoodsName,
-			GoodsPicData: base64.StdEncoding.EncodeToString(data),
+			UUID:   v.GoodsUUID,
+			Name:   good.GoodsName,
+			FileId: good.GoodsPic,
 		})
 	}
 

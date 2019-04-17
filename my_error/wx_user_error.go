@@ -11,3 +11,7 @@ func NotBindError() *ErrorCommon {
 func ExistApplyError() *ErrorCommon {
 	return &ErrorCommon{HasError: true, ErrorShowDesc: "已经提交申请", ErrorDesc: ""}
 }
+
+func NotUserInfoError() *ErrorCommon {
+	return &ErrorCommon{HasError: true, ErrorShowDesc: "没有获取用户信息", ErrorDesc: ""}
+}

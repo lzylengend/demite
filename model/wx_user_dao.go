@@ -45,6 +45,19 @@ func (this *_WxUserDao) GetById(id int64) (*WxUser, error) {
 	return obj, err
 }
 
+func (this *_WxUserDao) GetAndExistById(id int64) (*WxUser, bool, error) {
+	obj := &WxUser{}
+	err := this.Db.Where("wxuserid = ?", id).First(obj).Error
+	if err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return nil, false, nil
+		}
+		return obj, true, err
+	}
+
+	return obj, true, nil
+}
+
 func (this *_WxUserDao) ExistOpenid(openId string) (*WxUser, bool, error) {
 	obj, err := this.GetByOpenid(openId)
 	if err != nil {

@@ -63,11 +63,44 @@ func GetRepairApply(c *gin.Context) {
 
 	data := make([]*repairDetal, 0)
 	for _, v := range objList {
+		wxUserName := ""
+		if v.WxUserId != 0 {
+			wxuser, err := model.WxUserDao.GetById(v.WxUserId)
+			if err != nil {
+				rsp.Status = my_error.DbError(err.Error())
+				c.JSON(200, rsp)
+				return
+			}
+			wxUserName = wxuser.NickName
+		}
+
+		createname := ""
+		if v.CreateId != 0 {
+			user, err := model.UserDao.GetById(v.CreateId)
+			if err != nil {
+				rsp.Status = my_error.DbError(err.Error())
+				c.JSON(200, rsp)
+				return
+			}
+
+			createname = user.UserName
+		}
+
+		staff := &model.Staff{}
+		if v.StaffId != 0 {
+			staff, err = model.StaffDao.Get(v.StaffId)
+			if err != nil {
+				rsp.Status = my_error.DbError(err.Error())
+				c.JSON(200, rsp)
+				return
+			}
+		}
+
 		data = append(data, &repairDetal{
-			UserName:   "",
-			WxUserName: "",
-			StaffName:  "",
-			StaffPhone: "",
+			UserName:   createname,
+			WxUserName: wxUserName,
+			StaffName:  staff.StaffName,
+			StaffPhone: staff.StaffPhone,
 			RepairTime: v.RepairTime,
 			CreateTime: v.CreateTime,
 			Status:     string(v.Status),

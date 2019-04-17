@@ -26,6 +26,8 @@ var DelayGuaranteeApplyDao *_DelayGuaranteeApplyDao
 var StaffDao *_StaffDao
 var RepairScheduleDao *_RepairScheduleDao
 var RepairDao *_RepairDao
+var RemoteDao *_RemoteDao
+var RemoteScheduleDao *_RemoteScheduleDao
 
 func Init(dbPath string) error {
 	//db, err := gorm.Open("mysql", "debian-sys-maint:fYzuFNK68VdZTWJ0@/demite?charset=utf8&parseTime=True&loc=Local")
@@ -57,6 +59,8 @@ func Init(dbPath string) error {
 	StaffDao = newStaffDao(db)
 	RepairDao = newRepairDao(db)
 	RepairScheduleDao = newRepairScheduleDao(db)
+	RemoteDao = newRemoteDao(db)
+	RemoteScheduleDao = newRemoteScheduleDao(db)
 
 	//init
 	err = UserDao.initUserDao()

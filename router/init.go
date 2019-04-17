@@ -8,6 +8,7 @@ import (
 	"demite/controller/goods_api"
 	"demite/controller/middleware"
 	"demite/controller/place_api"
+	"demite/controller/remote_apply_api"
 	"demite/controller/repair_apply_api"
 	"demite/controller/staff_api"
 	"demite/controller/unlocck_apply_api"
@@ -31,11 +32,11 @@ type MyRouter interface {
 
 var routerMap map[string]MyRouter
 
-func Init(g *gin.Engine) {
+func Init(g *gin.Engine, filePath string) {
 	routerMap = make(map[string]MyRouter)
 
 	g.GET("test", file_api.Test)
-	g.Static("/file", "E:/")
+	g.Static("/file", filePath)
 
 	manage := g.Group("/manage", middleware.LogReq)
 	{
@@ -124,6 +125,13 @@ func Init(g *gin.Engine) {
 			MyRouterPost(repairApply, "/get", repair_apply_api.GetRepairApplyApi{}, repair_apply_api.GetRepairApply)
 			MyRouterPost(repairApply, "/deal", repair_apply_api.DealRepairApplyApi{}, repair_apply_api.DealRepairApply)
 		}
+
+		remoteApply := manage.Group("/remoteapply", middleware.CheckSession)
+		{
+			MyRouterPost(remoteApply, "/list", remote_apply_api.ListRemoteApi{}, remote_apply_api.ListRemote)
+			MyRouterPost(remoteApply, "/get", remote_apply_api.GetRemoteApplyApi{}, remote_apply_api.GetRemoteApply)
+			MyRouterPost(remoteApply, "/deal", remote_apply_api.DealRemoteApplyApi{}, remote_apply_api.DealRemoteApply)
+		}
 		//produce := manage.Group("/product", middleware.CheckSession)
 		//{
 		//	MyRouterPost(produce, "/add", product_api.AddProductApi{}, product_api.AddProduct)
@@ -150,6 +158,12 @@ func Init(g *gin.Engine) {
 			MyRouterPost(wxUser, "/getrepairapply", wx_user_api.GetRepairApplyApi{}, wx_user_api.GetRepairApply)
 			MyRouterPost(wxUser, "/uploadfile", wx_user_api.UploadFileApi{}, wx_user_api.UploadFile)
 			MyRouterPost(wxUser, "/dealrepairapply", wx_user_api.DealRepairApplyApi{}, wx_user_api.DealRepairApply)
+			MyRouterPost(wxUser, "/remoteapply", wx_user_api.RemoteApplyApi{}, wx_user_api.RemoteApply)
+			MyRouterPost(wxUser, "/lsitremoteapply", wx_user_api.ListRemoteApplyApi{}, wx_user_api.ListRemoteApply)
+			MyRouterPost(wxUser, "/getremoteapply", wx_user_api.GetRemoteApplyApi{}, wx_user_api.GetRemoteApply)
+			MyRouterPost(wxUser, "/dealremoteapply", wx_user_api.DealRemoteApplyApi{}, wx_user_api.DealRemoteApply)
+			MyRouterPost(wxUser, "/uploaduserinfo", wx_user_api.UploadUserInfoApi{}, wx_user_api.UploadUserInfo)
+			MyRouterPost(wxUser, "/getduserinfo", wx_user_api.GetUserInfoApi{}, wx_user_api.GetUserInfo)
 		}
 	}
 }

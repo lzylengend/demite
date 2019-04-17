@@ -20,10 +20,11 @@ type ListRepairApplyResponse struct {
 }
 
 type repair struct {
-	Id         int64  `json:"id"`
-	GoodModel  string `json:"gooduuid"`
-	GoodName   string `json:"goodname"`
-	CreateTime int64  `json:"createtime"`
+	Id          int64  `json:"id"`
+	GoodModel   string `json:"gooduuid"`
+	GoodName    string `json:"goodname"`
+	ApplyStatus string `json:"applystatus"`
+	CreateTime  int64  `json:"createtime"`
 }
 
 type ListRepairApplyApi struct {
@@ -86,10 +87,11 @@ func ListRepairApply(c *gin.Context) {
 	data := make([]*repair, 0)
 	for _, v := range objList {
 		data = append(data, &repair{
-			GoodModel:  good.GoodsModel,
-			GoodName:   good.GoodsName,
-			CreateTime: v.CreateTime,
-			Id:         v.RepairId,
+			GoodModel:   good.GoodsModel,
+			GoodName:    good.GoodsName,
+			CreateTime:  v.CreateTime,
+			ApplyStatus: string(v.Status),
+			Id:          v.RepairId,
 		})
 	}
 

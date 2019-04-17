@@ -2,6 +2,7 @@ package model
 
 import (
 	"github.com/jinzhu/gorm"
+	"github.com/pkg/errors"
 	"time"
 )
 
@@ -114,7 +115,7 @@ func (this *_RepairDao) Count(name string) (int64, error) {
 func (this *_RepairDao) ListByWxUserIdAndGoodUUID(wxUserId int64, limit int64, offset int64, gooduuid string) ([]*Repair, error) {
 	objList := make([]*Repair, 0)
 
-	err := this.Db.Where("wxuserid = ? and datastatus = ? and gooduuid = ?", wxUserId, 0, gooduuid).Offset(offset).Limit(limit).Order("createtime").Find(&objList).Error
+	err := this.Db.Where("wxuserid = ? and datastatus = ? and gooduuid = ?", wxUserId, 0, gooduuid).Offset(offset).Limit(limit).Order("createtime  desc").Find(&objList).Error
 
 	return objList, err
 }
@@ -146,6 +147,10 @@ func (this *_RepairDao) Deal(id int64, userId int64, staffId int64, repairTime i
 
 	obj.Status = REPAIRSTATUSCOMFIRM
 	obj.UpdateTime = time.Now().Unix()
+
+	if repairTime < time.Now().Unix() {
+		return errors.New("time error")
+	}
 
 	tx := this.Db.Begin()
 	err = tx.Save(obj).Error
