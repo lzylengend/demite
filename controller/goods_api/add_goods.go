@@ -17,6 +17,9 @@ type GoodsAddRequest struct {
 	GoodsTemplet            string  `json:"goodsteplet"`
 	GoodsTempletLockContext string  `json:"goodstempletlockcontext"`
 	GoodsModel              string  `json:"goodsmodel"`
+	Hospital                string  `json:"hospital"`
+	Province                string  `json:"province"`
+	ProvinceId              int64   `json:"provinceid"`
 	GuaranteeTime           int64   `json:"guaranteetime"`
 }
 
@@ -108,6 +111,9 @@ func GoodsAdd(c *gin.Context) {
 		CreatorId:               uId,
 		GoodsModel:              req.GoodsModel,
 		GuaranteeTime:           req.GuaranteeTime,
+		Hospital:                req.Hospital,
+		Province:                req.Province,
+		ProvinceId:              req.ProvinceId,
 	}
 
 	err = model.GoodDrugsDao.Add(req.DrugList, req.GoodsUUID)

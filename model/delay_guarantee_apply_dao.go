@@ -77,7 +77,7 @@ func (this *_DelayGuaranteeApplyDao) ListByGoodUUIdWxUserIdStatus(goodName strin
 
 	goodIdList := make([]string, 0)
 	if goodName != "" {
-		goodList, err := GoodsDao.ListByQRCode(goodName, 99999, 0)
+		goodList, err := GoodsDao.ListByQRCode(goodName, 99999, 0, "", "")
 		if err != nil {
 			return nil, err
 		}
@@ -135,7 +135,7 @@ func (this *_DelayGuaranteeApplyDao) CountByGoodUUIdWxUserIdStatus(goodName stri
 
 	goodIdList := make([]string, 0)
 	if goodName != "" {
-		goodList, err := GoodsDao.ListByQRCode(goodName, 99999, 0)
+		goodList, err := GoodsDao.ListByQRCode(goodName, 99999, 0, "", "")
 		if err != nil {
 			return 0, err
 		}

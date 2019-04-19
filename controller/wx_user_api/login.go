@@ -62,6 +62,7 @@ func Login(c *gin.Context) {
 	session := sessions.Default(c)
 	session.Set(controller.SessionWxUserId, obj.WxUserId)
 	session.Save()
+	rsp.Openid = obj.OpenId
 	rsp.Status = my_error.NoError()
 	c.JSON(200, rsp)
 }

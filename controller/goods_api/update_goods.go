@@ -18,6 +18,9 @@ type GoodsUpdateRequest struct {
 	GoodsModel              string  `json:"goodmodel"`
 	GuaranteeTime           int64   `json:"guaranteetime"`
 	ClassId                 int64   `json:"classid"`
+	Hospital                string  `json:"hospital"`
+	Province                string  `json:"province"`
+	ProvinceId              int64   `json:"provinceid"`
 }
 
 type GoodsUpdateResponse struct {
@@ -82,6 +85,9 @@ func GoodsUpdate(c *gin.Context) {
 	g.GoodsPic = req.GoodsPic
 	g.GoodsTemplet = req.GoodsTemplet
 	g.GoodsTempletLockContext = req.GoodsTempletLockContext
+	g.Hospital = req.Hospital
+	g.Province = req.Province
+	g.ProvinceId = req.ProvinceId
 
 	err = model.GoodsDao.Set(g)
 	if err != nil {

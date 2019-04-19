@@ -40,6 +40,7 @@ type getRepairApplyData struct {
 	CreateTime int64  `json:"createtime"`
 	Status     string `json:"currentstatus"`
 	StaffNO    string `json:"staffno"`
+	Reason     string `json:"reason"`
 }
 
 type GetRepairApplyApi struct {
@@ -134,6 +135,7 @@ func GetRepairApply(c *gin.Context) {
 			RepairTime: v.RepairTime,
 			CreateTime: v.CreateTime,
 			Status:     string(v.Status),
+			Reason:     v.Reason,
 		})
 	}
 

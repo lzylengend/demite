@@ -38,6 +38,7 @@ type getRemoteApplyData struct {
 	CreateTime int64  `json:"createtime"`
 	Status     string `json:"currentstatus"`
 	StaffNO    string `json:"staffno"`
+	Reason     string `json:"reason"`
 }
 
 type GetRemoteApplyApi struct {
@@ -123,6 +124,7 @@ func GetRemoteApply(c *gin.Context) {
 			DealTime:   v.DealTime,
 			CreateTime: v.CreateTime,
 			Status:     string(v.Status),
+			Reason:     v.Reason,
 		})
 	}
 

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"demite/conf"
 	"demite/model"
 	"encoding/json"
 	"fmt"
@@ -23,7 +24,13 @@ func main() {
 		return
 	}
 
-	err = model.Init()
+	c, err := conf.Init("../../server.conf")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	err = model.Init(c.DbPath)
 	if err != nil {
 		fmt.Println(err)
 		return

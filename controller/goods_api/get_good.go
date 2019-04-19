@@ -29,9 +29,11 @@ type goodData struct {
 	GoodsTempletLockContext string      `json:"goodstempletlockcontext"`
 	CreateTime              int64       `json:"createtime"`
 	QRCode                  string      `json:"qrcode"`
-	GoodsModel              string      `json:"goodmodel"`
+	GoodsModel              string      `json:"goodsmodel"`
 	GuaranteeTime           int64       `json:"guaranteetime"`
 	GoodsPicData            string      `json:"goodpicdata"`
+	Hospital                string      `json:"hospital"`
+	Province                string      `json:"province"`
 }
 
 type GetGoodApi struct {
@@ -96,6 +98,8 @@ func GetGood(c *gin.Context) {
 	rsp.GoodData.GuaranteeTime = good.GuaranteeTime
 	rsp.GoodData.GoodsUUID = good.GoodsUUID
 	rsp.GoodData.GoodsTempletLockContext = good.GoodsTempletLockContext
+	rsp.GoodData.Province = good.Province
+	rsp.GoodData.Hospital = good.Hospital
 
 	for _, v := range objList {
 		drug, err := model.DrugDao.Get(v.DrugId)

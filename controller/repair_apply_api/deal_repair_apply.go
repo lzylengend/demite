@@ -8,9 +8,11 @@ import (
 )
 
 type DealRepairApplyRequest struct {
-	Id         int64 `json:"id"`
-	StaffId    int64 `json:"staffid"`
-	RepairTime int64 `json:"repairtime"`
+	Id         int64  `json:"id"`
+	StaffId    int64  `json:"staffid"`
+	RepairTime int64  `json:"repairtime"`
+	Agree      bool   `json:"agree"`
+	Reason     string `json:"reason"`
 }
 
 type DealRepairApplyResponse struct {
@@ -53,18 +55,27 @@ func DealRepairApply(c *gin.Context) {
 		return
 	}
 
-	_, err = model.StaffDao.Get(req.StaffId)
-	if err != nil {
-		rsp.Status = my_error.DbError(err.Error())
-		c.JSON(200, rsp)
-		return
-	}
+	if req.Agree {
+		_, err = model.StaffDao.Get(req.StaffId)
+		if err != nil {
+			rsp.Status = my_error.DbError(err.Error())
+			c.JSON(200, rsp)
+			return
+		}
 
-	err = model.RepairDao.Deal(req.Id, userId, req.StaffId, req.RepairTime)
-	if err != nil {
-		rsp.Status = my_error.DbError(err.Error())
-		c.JSON(200, rsp)
-		return
+		err = model.RepairDao.Deal(req.Id, userId, req.StaffId, req.RepairTime)
+		if err != nil {
+			rsp.Status = my_error.DbError(err.Error())
+			c.JSON(200, rsp)
+			return
+		}
+	} else {
+		err = model.RepairDao.Refuse(req.Id, userId, req.Reason)
+		if err != nil {
+			rsp.Status = my_error.DbError(err.Error())
+			c.JSON(200, rsp)
+			return
+		}
 	}
 
 	rsp.Status = my_error.NoError()

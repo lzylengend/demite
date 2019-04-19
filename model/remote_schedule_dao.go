@@ -9,6 +9,7 @@ type RemoteSchedule struct {
 	WxUserId         int64        `gorm:"column:wxuserid;"`
 	StaffId          int64        `gorm:"column:staffid"`
 	RemoteTime       int64        `gorm:"column:remotetime"`
+	Reason           string       `gorm:"column:reason"`
 	DealTime         int64        `gorm:"column:dealtime"`
 	CreateTime       int64        `gorm:"column:createtime"`
 	UpdateTime       int64        `gorm:"column:updatetime"`

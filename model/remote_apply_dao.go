@@ -11,6 +11,7 @@ const (
 	REMOTESTATUSAPPLY   = "applying"
 	REMOTESTATUSCOMFIRM = "comfirm"
 	REMOTESTATUSFINISH  = "finish"
+	REMOTESTATUSREFUSE  = "refuse"
 )
 
 type Remote struct {
@@ -95,7 +96,7 @@ func (this *_RemoteDao) List(name string, limit int64, offset int64) ([]*Remote,
 	var err error
 	name = "%" + name + "%"
 
-	err = this.Db.Where("name like ? and datastatus = ? ", name, 0).Offset(offset).Limit(limit).Order("createtime").Find(&objList).Error
+	err = this.Db.Where("name like ? and datastatus = ? ", name, 0).Offset(offset).Limit(limit).Order("createtime desc").Find(&objList).Error
 
 	return objList, err
 }
@@ -135,6 +136,42 @@ func (this *_RemoteDao) GetByWIdAndxUserId(id, wxUserId int64) (*Remote, error) 
 	obj := &Remote{}
 	err := this.Db.Where("wxuserid = ? and remoteid = ? and datastatus = ? ", wxUserId, id, 0).First(obj).Error
 	return obj, err
+}
+
+func (this *_RemoteDao) Refuse(id int64, userId int64, reason string) error {
+	obj, err := this.Get(id)
+	if err != nil {
+		return err
+	}
+
+	obj.Status = REMOTESTATUSREFUSE
+	obj.UpdateTime = time.Now().Unix()
+
+	tx := this.Db.Begin()
+	err = tx.Save(obj).Error
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	objSchedule := &RemoteSchedule{
+		RemoteId:   obj.RemoteId,
+		CreateId:   userId,
+		CreateTime: time.Now().Unix(),
+		UpdateTime: time.Now().Unix(),
+		Status:     REMOTESTATUSREFUSE,
+		Reason:     reason,
+		DataStatus: 0,
+	}
+	err = tx.Create(objSchedule).Error
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	tx.Commit()
+
+	return nil
 }
 
 func (this *_RemoteDao) Deal(id int64, userId int64, staffId int64, dealTime int64) error {

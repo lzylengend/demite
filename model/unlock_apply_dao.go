@@ -139,7 +139,7 @@ func (this *_UnlockApplyDao) ListByGoodUUIdWxUserIdStatus(goodName string, wxUse
 
 	goodIdList := make([]string, 0)
 	if goodName != "" {
-		goodList, err := GoodsDao.ListByQRCode(goodName, 99999, 0)
+		goodList, err := GoodsDao.ListByQRCode(goodName, 99999, 0, "", "")
 		if err != nil {
 			return nil, err
 		}
@@ -189,7 +189,7 @@ func (this *_UnlockApplyDao) CountByGoodUUIdWxUserIdStatus(goodName string, wxUs
 
 	goodIdList := make([]string, 0)
 	if goodName != "" {
-		goodList, err := GoodsDao.ListByQRCode(goodName, 99999, 0)
+		goodList, err := GoodsDao.ListByQRCode(goodName, 99999, 0, "", "")
 		if err != nil {
 			return 0, err
 		}

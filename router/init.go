@@ -156,7 +156,6 @@ func Init(g *gin.Engine, filePath string) {
 			MyRouterPost(wxUser, "/repairapply", wx_user_api.RepairApplyApi{}, wx_user_api.RepairApply)
 			MyRouterPost(wxUser, "/lsitrepairapply", wx_user_api.ListRepairApplyApi{}, wx_user_api.ListRepairApply)
 			MyRouterPost(wxUser, "/getrepairapply", wx_user_api.GetRepairApplyApi{}, wx_user_api.GetRepairApply)
-			MyRouterPost(wxUser, "/uploadfile", wx_user_api.UploadFileApi{}, wx_user_api.UploadFile)
 			MyRouterPost(wxUser, "/dealrepairapply", wx_user_api.DealRepairApplyApi{}, wx_user_api.DealRepairApply)
 			MyRouterPost(wxUser, "/remoteapply", wx_user_api.RemoteApplyApi{}, wx_user_api.RemoteApply)
 			MyRouterPost(wxUser, "/lsitremoteapply", wx_user_api.ListRemoteApplyApi{}, wx_user_api.ListRemoteApply)
@@ -164,6 +163,10 @@ func Init(g *gin.Engine, filePath string) {
 			MyRouterPost(wxUser, "/dealremoteapply", wx_user_api.DealRemoteApplyApi{}, wx_user_api.DealRemoteApply)
 			MyRouterPost(wxUser, "/uploaduserinfo", wx_user_api.UploadUserInfoApi{}, wx_user_api.UploadUserInfo)
 			MyRouterPost(wxUser, "/getduserinfo", wx_user_api.GetUserInfoApi{}, wx_user_api.GetUserInfo)
+		}
+		wxUserEx := mini.Group("/wxuserex")
+		{
+			MyRouterPost(wxUserEx, "/uploadfile", wx_user_api.UploadFileApi{}, wx_user_api.UploadFile)
 		}
 	}
 }

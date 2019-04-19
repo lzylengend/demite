@@ -1,23 +1,23 @@
 package goods_api
 
 import (
-	"demite/conf"
 	"demite/model"
 	"demite/my_error"
-	"encoding/base64"
 	"github.com/gin-gonic/gin"
-	"io/ioutil"
 )
 
 type GoodsListRequest struct {
 	Limit        int64  `json:"limit"`
 	Offset       int64  `json:"offset"`
 	Key          string `json:"key"`
+	Hospital     string `json:"hospital"`
+	Province     string `json:"province"`
 	CreateQRCode string `json:"createqrcode"`
 }
 
 type GoodsListResponse struct {
 	Data   []*good               `json:"data"`
+	Count  int64                 `json:"count"`
 	Status *my_error.ErrorCommon `json:"status"`
 }
 
@@ -25,14 +25,14 @@ type good struct {
 	Name                    string `json:"name"`
 	GoodsUUID               string `json:"goodsuuid"`
 	GoodsDecs               string `json:"goodsdecs"`
-	GoodsPic                string `json:"goodspic"`
 	GoodsTemplet            string `json:"goodsteplet"`
 	GoodsTempletLockContext string `json:"goodstempletlockcontext"`
 	CreateTime              int64  `json:"createtime"`
 	QRCode                  string `json:"qrcode"`
 	GoodsModel              string `json:"goodmodel"`
 	GuaranteeTime           int64  `json:"guaranteetime"`
-	GoodsPicData            string `json:"goodpicdata"`
+	Hospital                string `json:"hospital"`
+	Province                string `json:"province"`
 }
 
 type GoodsListApi struct {
@@ -64,7 +64,14 @@ func GoodsList(c *gin.Context) {
 		return
 	}
 
-	objList, err := model.GoodsDao.ListByQRCode(req.Key, req.Limit, req.Offset)
+	objList, err := model.GoodsDao.ListByQRCode(req.Key, req.Limit, req.Offset, req.Hospital, req.Province)
+	if err != nil {
+		rsp.Status = my_error.DbError(err.Error())
+		c.JSON(200, rsp)
+		return
+	}
+
+	count, err := model.GoodsDao.CountByQRCode(req.Key, req.Hospital, req.Province)
 	if err != nil {
 		rsp.Status = my_error.DbError(err.Error())
 		c.JSON(200, rsp)
@@ -72,28 +79,22 @@ func GoodsList(c *gin.Context) {
 	}
 
 	for _, v := range objList {
-		data, err := ioutil.ReadFile(conf.GetFilePath() + "/" + v.GoodsPic)
-		if err != nil {
-			data = []byte{}
-			//rsp.Status = my_error.FileReadError(err.Error())
-			//c.JSON(200, rsp)
-		}
-
 		rsp.Data = append(rsp.Data, &good{
 			Name:                    v.GoodsName,
 			GoodsUUID:               v.GoodsUUID,
 			GoodsDecs:               v.GoodsDecs,
-			GoodsPic:                v.GoodsPic,
 			GoodsTemplet:            v.GoodsTemplet,
 			GoodsTempletLockContext: v.GoodsTempletLockContext,
 			CreateTime:              v.CreateTime,
 			QRCode:                  v.QRCode,
 			GoodsModel:              v.GoodsModel,
 			GuaranteeTime:           v.GuaranteeTime,
-			GoodsPicData:            base64.StdEncoding.EncodeToString(data),
+			Province:                v.Province,
+			Hospital:                v.Hospital,
 		})
 	}
 
+	rsp.Count = count
 	rsp.Status = my_error.NoError()
 	c.JSON(200, rsp)
 	return

@@ -8,9 +8,11 @@ import (
 )
 
 type DealRemoteApplyRequest struct {
-	Id       int64 `json:"id"`
-	StaffId  int64 `json:"staffid"`
-	DealTime int64 `json:"dealtime"`
+	Id       int64  `json:"id"`
+	StaffId  int64  `json:"staffid"`
+	DealTime int64  `json:"dealtime"`
+	Agree    bool   `json:"agree"`
+	Reason   string `json:"reason"`
 }
 
 type DealRemoteApplyResponse struct {
@@ -53,18 +55,27 @@ func DealRemoteApply(c *gin.Context) {
 		return
 	}
 
-	_, err = model.StaffDao.Get(req.StaffId)
-	if err != nil {
-		rsp.Status = my_error.DbError(err.Error())
-		c.JSON(200, rsp)
-		return
-	}
+	if req.Agree {
+		_, err = model.StaffDao.Get(req.StaffId)
+		if err != nil {
+			rsp.Status = my_error.DbError(err.Error())
+			c.JSON(200, rsp)
+			return
+		}
 
-	err = model.RemoteDao.Deal(req.Id, userId, req.StaffId, req.DealTime)
-	if err != nil {
-		rsp.Status = my_error.DbError(err.Error())
-		c.JSON(200, rsp)
-		return
+		err = model.RemoteDao.Deal(req.Id, userId, req.StaffId, req.DealTime)
+		if err != nil {
+			rsp.Status = my_error.DbError(err.Error())
+			c.JSON(200, rsp)
+			return
+		}
+	} else {
+		err = model.RemoteDao.Refuse(req.Id, userId, req.Reason)
+		if err != nil {
+			rsp.Status = my_error.DbError(err.Error())
+			c.JSON(200, rsp)
+			return
+		}
 	}
 
 	rsp.Status = my_error.NoError()

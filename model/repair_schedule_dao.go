@@ -8,6 +8,7 @@ type RepairSchedule struct {
 	CreateId         int64        `gorm:"column:createid;"`
 	WxUserId         int64        `gorm:"column:wxuserid;"`
 	StaffId          int64        `gorm:"column:staffid"`
+	Reason           string       `gorm:"column:reason"`
 	RepairTime       int64        `gorm:"column:repairtime"`
 	CreateTime       int64        `gorm:"column:createtime"`
 	UpdateTime       int64        `gorm:"column:updatetime"`

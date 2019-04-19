@@ -32,6 +32,9 @@ type Goods struct {
 	ClassId                 int64      `gorm:"column:classid;index:classid"`
 	CreatorId               int64      `gorm:"column:creatorid"`
 	Status                  goodStatus `gorm:"column:status"`
+	Province                string     `gorm:"column:province;index:province"`
+	ProvinceId              int64      `gorm:"column:provinceid;index:provinceid"`
+	Hospital                string     `gorm:"column:hospital;index:hospital"`
 	GuaranteeTime           int64      `gorm:"column:guaranteetime"`
 	DataStatus              int64      `gorm:"column:datastatus"`
 	CreateTime              int64      `gorm:"column:createtime"`
@@ -107,12 +110,54 @@ func (this *_GoodsDao) Add(obj *Goods) (int64, error) {
 	return obj.GoodsId, err
 }
 
-func (this *_GoodsDao) ListByQRCode(key string, limit, offset int64) ([]*Goods, error) {
+func (this *_GoodsDao) ListByQRCode(key string, limit, offset int64, hospital string, province string) ([]*Goods, error) {
 	objList := make([]*Goods, 0)
-	var err error
-	key = "%" + key + "%"
+	sql := `datastatus  = ?`
+	args := make([]interface{}, 0)
+	args = append(args, 0)
 
-	err = this.Db.Where("goodsname like ? and datastatus = ? ", key, 0).Offset(offset).Limit(limit).Order("createtime").Find(&objList).Error
+	if key != "" {
+		sql = sql + ` and goodsname like ? `
+		args = append(args, "%"+key+"%")
+	}
+
+	if hospital != "" {
+		sql = sql + ` and hospital like ? `
+		args = append(args, "%"+hospital+"%")
+	}
+
+	if province != "" {
+		sql = sql + ` and province = ? `
+		args = append(args, province)
+	}
+
+	err := this.Db.Where(sql, args...).Offset(offset).Limit(limit).Order("createtime desc").Find(&objList).Error
 
 	return objList, err
+}
+
+func (this *_GoodsDao) CountByQRCode(key string, hospital string, province string) (int64, error) {
+	var n int64
+	sql := `datastatus  = ?`
+	args := make([]interface{}, 0)
+	args = append(args, 0)
+
+	if key != "" {
+		sql = sql + ` and goodsname like ? `
+		args = append(args, "%"+key+"%")
+	}
+
+	if hospital != "" {
+		sql = sql + ` and hospital like ? `
+		args = append(args, "%"+hospital+"%")
+	}
+
+	if province != "" {
+		sql = sql + ` and province = ? `
+		args = append(args, province)
+	}
+
+	err := this.Db.Where(sql, args...).Count(&n).Error
+
+	return n, err
 }

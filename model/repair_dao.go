@@ -12,6 +12,7 @@ const (
 	REPAIRSTATUSAPPLY   = "applying"
 	REPAIRSTATUSCOMFIRM = "comfirm"
 	REPAIRSTATUSFINISH  = "finish"
+	REPAIRSTATUSREFUSE  = "refuse"
 )
 
 type Repair struct {
@@ -97,7 +98,7 @@ func (this *_RepairDao) List(name string, limit int64, offset int64) ([]*Repair,
 	var err error
 	name = "%" + name + "%"
 
-	err = this.Db.Where("name like ? and datastatus = ? ", name, 0).Offset(offset).Limit(limit).Order("createtime").Find(&objList).Error
+	err = this.Db.Where("name like ? and datastatus = ? ", name, 0).Offset(offset).Limit(limit).Order("createtime desc").Find(&objList).Error
 
 	return objList, err
 }
@@ -137,6 +138,42 @@ func (this *_RepairDao) GetByWIdAndxUserId(id, wxUserId int64) (*Repair, error) 
 	obj := &Repair{}
 	err := this.Db.Where("wxuserid = ? and repairid = ? and datastatus = ? ", wxUserId, id, 0).First(obj).Error
 	return obj, err
+}
+
+func (this *_RepairDao) Refuse(id int64, userId int64, reason string) error {
+	obj, err := this.Get(id)
+	if err != nil {
+		return err
+	}
+
+	obj.Status = REPAIRSTATUSREFUSE
+	obj.UpdateTime = time.Now().Unix()
+
+	tx := this.Db.Begin()
+	err = tx.Save(obj).Error
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	objSchedule := &RepairSchedule{
+		RepairId:   obj.RepairId,
+		CreateId:   userId,
+		CreateTime: time.Now().Unix(),
+		UpdateTime: time.Now().Unix(),
+		Status:     REPAIRSTATUSREFUSE,
+		Reason:     reason,
+		DataStatus: 0,
+	}
+	err = tx.Create(objSchedule).Error
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	tx.Commit()
+
+	return nil
 }
 
 func (this *_RepairDao) Deal(id int64, userId int64, staffId int64, repairTime int64) error {
