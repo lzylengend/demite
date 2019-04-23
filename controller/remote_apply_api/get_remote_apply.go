@@ -11,8 +11,21 @@ type GetRemoteApplyRequest struct {
 }
 
 type GetRemoteApplyResponse struct {
-	Data   []*remoteDetal        `json:"data"`
+	Data   *remoteApplyDetal     `json:"data"`
 	Status *my_error.ErrorCommon `json:"status"`
+}
+
+type remoteApplyDetal struct {
+	Hospital      string         `json:"hospital"`
+	Office        string         `json:"office"`
+	Phone         string         `json:"phone"`
+	Name          string         `json:"name"`
+	FaultDescSelf string         `json:"faultdescself"`
+	FaultDesc     string         `json:"faultdesc"`
+	FileId1       string         `json:"fileid1"`
+	FileId2       string         `json:"fileid2"`
+	Status        string         `json:"status"`
+	Data          []*remoteDetal `json:"data"`
 }
 
 type remoteDetal struct {
@@ -24,6 +37,7 @@ type remoteDetal struct {
 	DealTime   int64  `json:"dealtime"`
 	CreateTime int64  `json:"createtime"`
 	Status     string `json:"currentstatus"`
+	Reason     string `json:"reason"`
 }
 
 type GetRemoteApplyApi struct {
@@ -53,6 +67,25 @@ func GetRemoteApply(c *gin.Context) {
 		rsp.Status = my_error.JsonError(err.Error())
 		c.JSON(200, rsp)
 		return
+	}
+
+	obj, err := model.RemoteDao.Get(req.Id)
+	if err != nil {
+		rsp.Status = my_error.DbError(err.Error())
+		c.JSON(200, rsp)
+		return
+	}
+
+	detail := &remoteApplyDetal{
+		Hospital:      obj.Hospital,
+		Office:        obj.Office,
+		Phone:         obj.Phone,
+		Name:          obj.Name,
+		FaultDescSelf: obj.FaultDescSelf,
+		FaultDesc:     obj.FaultDesc,
+		FileId1:       obj.FileId1,
+		FileId2:       obj.FileId2,
+		Status:        string(obj.Status),
 	}
 
 	objList, err := model.RemoteScheduleDao.ListByRemoteId(req.Id)
@@ -106,10 +139,12 @@ func GetRemoteApply(c *gin.Context) {
 			CreateTime: v.CreateTime,
 			DealTime:   v.DealTime,
 			Status:     string(v.Status),
+			Reason:     v.Reason,
 		})
 	}
 
-	rsp.Data = data
+	rsp.Data = detail
+	rsp.Data.Data = data
 	rsp.Status = my_error.NoError()
 	c.JSON(200, rsp)
 	return

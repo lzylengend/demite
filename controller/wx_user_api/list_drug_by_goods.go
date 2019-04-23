@@ -13,8 +13,9 @@ type ListDrugByGoodsRequest struct {
 }
 
 type ListDrugByGoodsResponse struct {
-	Status *my_error.ErrorCommon `json:"status"`
-	Data   []*drugData           `json:"data"`
+	Status   *my_error.ErrorCommon `json:"status"`
+	GoodName string                `json:"goodname"`
+	Data     []*drugData           `json:"data"`
 }
 
 type ListDrugByGoodsApi struct {
@@ -70,6 +71,15 @@ func ListDrugByGoods(c *gin.Context) {
 		c.JSON(200, rsp)
 		return
 	}
+
+	g, err := model.GoodsDao.GetByUUID(req.GoodUUID)
+	if err != nil {
+		rsp.Status = my_error.DbError(err.Error())
+		c.JSON(200, rsp)
+		return
+	}
+
+	rsp.GoodName = g.GoodsName
 
 	for _, v := range gdList {
 		drug, err := model.DrugDao.Get(v.DrugId)

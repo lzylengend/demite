@@ -11,7 +11,7 @@ type GetRepairApplyRequest struct {
 }
 
 type GetRepairApplyResponse struct {
-	Data   []*repairDetal        `json:"data"`
+	Data   *repairApplyDetal     `json:"data"`
 	Status *my_error.ErrorCommon `json:"status"`
 }
 
@@ -23,6 +23,22 @@ type repairDetal struct {
 	RepairTime int64  `json:"repairtime"`
 	CreateTime int64  `json:"createtime"`
 	Status     string `json:"currentstatus"`
+	Reason     string `json:"reason"`
+}
+
+type repairApplyDetal struct {
+	GoodName  string         `json:"goodname"`
+	GoodModel string         `json:"goodmodel"`
+	Hospital  string         `json:"hospital"`
+	Office    string         `json:"office"`
+	Phone     string         `json:"phone"`
+	Name      string         `json:"name"`
+	FaultDesc string         `json:"faultdesc"`
+	FaultType string         `json:"faulttype"`
+	FileId1   string         `json:"fileid1"`
+	FileId2   string         `json:"fileid2"`
+	Status    string         `json:"status"`
+	Data      []*repairDetal `json:"data"`
 }
 
 type GetRepairApplyApi struct {
@@ -52,6 +68,34 @@ func GetRepairApply(c *gin.Context) {
 		rsp.Status = my_error.JsonError(err.Error())
 		c.JSON(200, rsp)
 		return
+	}
+
+	obj, err := model.RepairDao.Get(req.Id)
+	if err != nil {
+		rsp.Status = my_error.DbError(err.Error())
+		c.JSON(200, rsp)
+		return
+	}
+
+	good, err := model.GoodsDao.GetByUUID(obj.GoodUUID)
+	if err != nil {
+		rsp.Status = my_error.DbError(err.Error())
+		c.JSON(200, rsp)
+		return
+	}
+
+	detail := &repairApplyDetal{
+		GoodName:  good.GoodsName,
+		GoodModel: obj.GoodModel,
+		Hospital:  obj.Hospital,
+		Office:    obj.Office,
+		Phone:     obj.Phone,
+		Name:      obj.Name,
+		FaultDesc: obj.FaultDesc,
+		FaultType: obj.FaultType,
+		FileId1:   obj.FileId1,
+		FileId2:   obj.FileId2,
+		Status:    string(obj.Status),
 	}
 
 	objList, err := model.RepairScheduleDao.ListByRepairId(req.Id)
@@ -104,10 +148,12 @@ func GetRepairApply(c *gin.Context) {
 			RepairTime: v.RepairTime,
 			CreateTime: v.CreateTime,
 			Status:     string(v.Status),
+			Reason:     v.Reason,
 		})
 	}
 
-	rsp.Data = data
+	rsp.Data = detail
+	rsp.Data.Data = data
 	rsp.Status = my_error.NoError()
 	c.JSON(200, rsp)
 	return
