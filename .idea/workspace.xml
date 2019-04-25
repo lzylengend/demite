@@ -2,27 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="61cdbbca-1e68-4568-87d2-817f128a13fa" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/model/user_group_dao.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/common.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/common.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/goods_api/add_goods.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/goods_api/add_goods.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/goods_api/get_good.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/goods_api/get_good.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/goods_api/list_goods.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/goods_api/list_goods.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/goods_api/update_goods.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/goods_api/update_goods.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/remote_apply_api/deal_remote_apply.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/remote_apply_api/deal_remote_apply.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/repair_apply_api/deal_repair_apply.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/repair_apply_api/deal_repair_apply.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/wx_user_api/get_remote_apply.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/wx_user_api/get_remote_apply.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/wx_user_api/get_repair_apply.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/wx_user_api/get_repair_apply.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/wx_user_api/login.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/wx_user_api/login.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demite.exe" beforeDir="false" afterPath="$PROJECT_DIR$/demite.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/delay_guarantee_apply_dao.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/delay_guarantee_apply_dao.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/goods_dao.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/goods_dao.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/remote_apply_dao.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/remote_apply_dao.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/remote_schedule_dao.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/remote_schedule_dao.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/repair_dao.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/repair_dao.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/repair_schedule_dao.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/repair_schedule_dao.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/unlock_apply_dao.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/unlock_apply_dao.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/router/init.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/init.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/import_place/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/tools/import_place/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.conf" beforeDir="false" afterPath="$PROJECT_DIR$/server.conf" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,19 +16,19 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model/remote_apply_dao.go">
+        <entry file="file://$PROJECT_DIR$/main.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="98" column="118" selection-start-line="98" selection-start-column="118" selection-end-line="98" selection-end-column="118" />
+            <state relative-caret-position="66">
+              <caret line="34" column="12" lean-forward="true" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="12" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/model/repair_dao.go">
+        <entry file="file://$PROJECT_DIR$/router/init.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="100" column="118" selection-start-line="100" selection-start-column="118" selection-end-line="100" selection-end-column="118" />
+            <state relative-caret-position="285">
+              <caret line="38" column="31" lean-forward="true" selection-start-line="38" selection-start-column="31" selection-end-line="38" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -87,6 +70,7 @@
       <find>Login</find>
       <find>UnlockApply</find>
       <find>Upload</find>
+      <find>new</find>
     </findStrings>
     <replaceStrings>
       <replace>Repari</replace>
@@ -103,7 +87,6 @@
       <replace>ListApply</replace>
       <replace>Deal</replace>
       <replace>DelayGuaranteeAppl</replace>
-      <replace>DelayAuaranteeApply</replace>
       <replace>DelayGuaranteeApply</replace>
       <replace>ListDelayGuaranteeApply</replace>
       <replace>DealDelayGuaranteeApply</replace>
@@ -119,6 +102,7 @@
       <replace>Remote</replace>
       <replace>UploadUserInfo</replace>
       <replace>Get</replace>
+      <replace>DelayAuaranteeApply</replace>
     </replaceStrings>
   </component>
   <component name="GOROOT" path="C:\Go" />
@@ -128,7 +112,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/controller/delay_guarantee_apply_api/deal_delay_gurantee_apply.go" />
         <option value="$PROJECT_DIR$/controller/wx_user_api/delay_auarantee_apply.go" />
         <option value="$PROJECT_DIR$/controller/staff_api.go" />
         <option value="$PROJECT_DIR$/my_error/error_common.go" />
@@ -140,7 +123,6 @@
         <option value="$PROJECT_DIR$/controller/wx_user_api/repair_apply.go" />
         <option value="C:/GO/src/net/http/request.go" />
         <option value="$PROJECT_DIR$/controller/wx_user_api/upload_file.go" />
-        <option value="$PROJECT_DIR$/server.conf" />
         <option value="$PROJECT_DIR$/controller/staff_api/list_staff.go" />
         <option value="$PROJECT_DIR$/controller/wx_user_api/deal_repair_apply.go" />
         <option value="$PROJECT_DIR$/controller/repair_apply_api/list_repair_apply.go" />
@@ -176,24 +158,25 @@
         <option value="$PROJECT_DIR$/controller/wx_user_api/get_repair_apply.go" />
         <option value="$PROJECT_DIR$/controller/repair_apply_api/deal_repair_apply.go" />
         <option value="$PROJECT_DIR$/controller/remote_apply_api/deal_remote_apply.go" />
-        <option value="$PROJECT_DIR$/router/init.go" />
         <option value="$PROJECT_DIR$/model/remote_apply_dao.go" />
         <option value="$PROJECT_DIR$/model/repair_dao.go" />
+        <option value="$PROJECT_DIR$/server.conf" />
+        <option value="$PROJECT_DIR$/model/user_group_dao.go" />
+        <option value="$PROJECT_DIR$/router/init.go" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="340" />
-    <option name="y" value="118" />
-    <option name="width" value="983" />
-    <option name="height" value="502" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -204,68 +187,13 @@
             <path>
               <item name="demite" type="b2602c69:ProjectViewProjectNode" />
               <item name="demite" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="demite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="demite" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-              <item name="goods_api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="demite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="demite" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-              <item name="remote_apply_api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="demite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="demite" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-              <item name="repair_apply_api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="demite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="demite" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-              <item name="unlocck_apply_api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="demite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="demite" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-              <item name="wx_user_api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="demite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="demite" type="462c0819:PsiDirectoryNode" />
               <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="demite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="demite" type="462c0819:PsiDirectoryNode" />
-              <item name="router" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="demite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="demite" type="462c0819:PsiDirectoryNode" />
-              <item name="tools" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="demite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="demite" type="462c0819:PsiDirectoryNode" />
-              <item name="tools" type="462c0819:PsiDirectoryNode" />
-              <item name="import_place" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="demite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="demite" type="462c0819:PsiDirectoryNode" />
-              <item name="wx_api" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -278,7 +206,7 @@
     <property name="go.gopath.indexing.explicitly.defined" value="true" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../test_algo_tun" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -322,15 +250,15 @@
     </recent_temporary>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19969743" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26865673" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49840087" visible="true" weight="0.28968903" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49840087" visible="true" weight="0.2892741" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39770868" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -381,51 +309,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/controller/wx_user_api/delay_auarantee_apply.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="66" column="44" selection-start-line="66" selection-start-column="44" selection-end-line="66" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/staff_api/list_staff.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-398">
-          <caret line="22" column="33" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="33" />
-          <folding>
-            <element signature="e#19#92#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/delay_guarantee_apply_api/deal_delay_gurantee_apply.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="55" column="43" selection-start-line="55" selection-start-column="43" selection-end-line="55" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../github.com/jinzhu/gorm/main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="869">
-          <caret line="369" column="58" lean-forward="true" selection-start-line="369" selection-start-column="58" selection-end-line="369" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/wx_user_api/list_repair_apply.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="72" column="55" lean-forward="true" selection-end-line="102" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/wx_user_api/repair_apply.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="14" column="38" selection-end-line="86" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controller/wx_user_api/deal_repair_apply.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="638">
@@ -506,13 +389,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/controller/wx_user_api/upload_repair.go">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/init.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="73">
-          <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/controller/wx_user_api/upload_user_info.go">
       <provider selected="true" editor-type-id="text-editor">
@@ -600,13 +476,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="32" column="5" selection-start-line="28" selection-start-column="4" selection-end-line="32" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tools/import_place/main.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
@@ -666,13 +535,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/router/init.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
-          <caret line="166" column="42" selection-start-line="166" selection-start-column="42" selection-end-line="166" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controller/wx_user_api/upload_file.go">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -728,6 +590,68 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="100" column="118" selection-start-line="100" selection-start-column="118" selection-end-line="100" selection-end-column="118" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/init.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="883">
+          <caret line="72" selection-start-line="72" selection-end-line="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/wx_user_api/delay_auarantee_apply.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="51" column="5" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/user_dao.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="16" column="1" selection-start-line="2" selection-end-line="16" selection-end-column="1" />
+          <folding>
+            <element signature="e#15#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../test_algo_tun/main.go">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/user_group_dao.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="34" column="12" lean-forward="true" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../git.speakin.mobi/algo_windows/algo_tun.git/proto/algo.pb.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="324" column="14" selection-start-line="324" selection-start-column="11" selection-end-line="324" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/router/init.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="38" column="31" lean-forward="true" selection-start-line="38" selection-start-column="31" selection-end-line="38" selection-end-column="31" />
         </state>
       </provider>
     </entry>
