@@ -9,11 +9,12 @@ const defaltUserName = "admin"
 const DefaltUserPwd = "123456"
 
 type User struct {
-	UserId     int64  `gorm:"column:userid;primary_key;AUTO_INCREMENT"`
-	UserName   string `gorm:"column:username;index:name"`
-	DataStatus int64  `gorm:"column:datastatus"`
-	CreateTime int64  `gorm:"column:createtime"`
-	UpdateTime int64  `gorm:"column:updatetime"`
+	UserId      int64  `gorm:"column:userid;primary_key;AUTO_INCREMENT"`
+	UserName    string `gorm:"column:username;index:name"`
+	UserGroupId int64  `gorm:"column:usergroupid;index:usergroupid"`
+	DataStatus  int64  `gorm:"column:datastatus"`
+	CreateTime  int64  `gorm:"column:createtime"`
+	UpdateTime  int64  `gorm:"column:updatetime"`
 }
 
 type _UserDao struct {
@@ -45,15 +46,15 @@ func (this *_UserDao) initUserDao() error {
 		return nil
 	}
 
-	err = this.AddUser(defaltUserName, DefaltUserPwd)
+	err = this.AddUser(defaltUserName, DefaltUserPwd, 1)
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
-func (this *_UserDao) AddUser(username string, pwd string) error {
-	objUser := this.NewUser(username)
+func (this *_UserDao) AddUser(username string, pwd string, userGroupId int64) error {
+	objUser := this.NewUser(username, userGroupId)
 
 	tx := this.Db.Begin()
 
@@ -75,12 +76,13 @@ func (this *_UserDao) AddUser(username string, pwd string) error {
 	return nil
 }
 
-func (this *_UserDao) NewUser(username string) *User {
+func (this *_UserDao) NewUser(username string, groupId int64) *User {
 	return &User{
-		UserName:   username,
-		DataStatus: 0,
-		CreateTime: time.Now().Unix(),
-		UpdateTime: time.Now().Unix(),
+		UserName:    username,
+		UserGroupId: groupId,
+		DataStatus:  0,
+		CreateTime:  time.Now().Unix(),
+		UpdateTime:  time.Now().Unix(),
 	}
 }
 

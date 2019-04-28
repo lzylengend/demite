@@ -9,6 +9,7 @@ import (
 )
 
 var UserDao *_UserDao
+var UserGroupDao *_UserGroupDao
 var UserPasswordDao *_UserPasswordDao
 var WxUserDao *_WxUserDao
 var ClassDao *_ClassDao
@@ -61,9 +62,15 @@ func Init(dbPath string) error {
 	RepairScheduleDao = newRepairScheduleDao(db)
 	RemoteDao = newRemoteDao(db)
 	RemoteScheduleDao = newRemoteScheduleDao(db)
+	UserGroupDao = newUserGroupDao(db)
 
 	//init
 	err = UserDao.initUserDao()
+	if err != nil {
+		return err
+	}
+
+	err = UserGroupDao.initUserGroupDao()
 	if err != nil {
 		return err
 	}

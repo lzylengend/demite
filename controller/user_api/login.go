@@ -15,7 +15,15 @@ type LoginRequest struct {
 }
 
 type LoginResponse struct {
-	Status *my_error.ErrorCommon `json:"status"`
+	AuthList *authList             `json:"data"`
+	Status   *my_error.ErrorCommon `json:"status"`
+}
+
+type authList struct {
+	AuthDelGoods     bool `json:"authdelgoods"`
+	AuthShieldWxUser bool `json:"authshieldwxuser"`
+	AuthUserManage   bool `json:"authusermanage"`
+	AuthDelStaff     bool `json:"authdelstaff"`
 }
 
 func Login(c *gin.Context) {
@@ -48,9 +56,25 @@ func Login(c *gin.Context) {
 		return
 	}
 
+	g, err := model.UserGroupDao.Get(u.UserGroupId)
+	if err != nil {
+		rsp.Status = my_error.DbError(err.Error())
+		c.JSON(200, rsp)
+		return
+		return
+	}
+
+	aList := &authList{
+		AuthDelGoods:     g.AuthDelGoods,
+		AuthShieldWxUser: g.AuthShieldWxUser,
+		AuthUserManage:   g.AuthUserManage,
+		AuthDelStaff:     g.AuthDelStaff,
+	}
+
 	session := sessions.Default(c)
 	session.Set(controller.SessionUserId, u.UserId)
 	session.Save()
+	rsp.AuthList = aList
 	rsp.Status = my_error.NoError()
 	c.JSON(200, rsp)
 }

@@ -38,7 +38,7 @@ func AddUser(c *gin.Context) {
 		return
 	}
 
-	err = model.UserDao.AddUser(req.Name, model.DefaltUserPwd)
+	err = model.UserDao.AddUser(req.Name, model.DefaltUserPwd, 2)
 	if err != nil {
 		rsp.Status = my_error.DbError(err.Error())
 		c.JSON(200, rsp)
