@@ -89,8 +89,8 @@ func (this *_UserGroupDao) initUserGroupDao() error {
 	return nil
 }
 
-func (this *_UserGroupDao) Count() (int, error) {
-	n := 0
+func (this *_UserGroupDao) Count() (int64, error) {
+	var n int64 = 0
 	err := this.Db.Count(&n).Error
 	return n, err
 }
@@ -103,4 +103,11 @@ func (this *_UserGroupDao) Get(id int64) (*UserGroup, error) {
 	}
 
 	return obj, nil
+}
+
+func (this *_UserGroupDao) List() ([]*UserGroup, error) {
+	objList := make([]*UserGroup, 0)
+
+	err := this.Db.Where("datastatus = ?", 0).Find(&objList).Error
+	return objList, err
 }

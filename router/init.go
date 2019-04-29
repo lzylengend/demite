@@ -13,6 +13,7 @@ import (
 	"demite/controller/staff_api"
 	"demite/controller/unlocck_apply_api"
 	"demite/controller/user_api"
+	"demite/controller/user_group_api"
 	"demite/controller/wx_user_api"
 	"demite/controller/wx_user_banken_api"
 	"encoding/json"
@@ -131,6 +132,11 @@ func Init(g *gin.Engine, filePath string) {
 			MyRouterPost(remoteApply, "/list", remote_apply_api.ListRemoteApi{}, remote_apply_api.ListRemote)
 			MyRouterPost(remoteApply, "/get", remote_apply_api.GetRemoteApplyApi{}, remote_apply_api.GetRemoteApply)
 			MyRouterPost(remoteApply, "/deal", remote_apply_api.DealRemoteApplyApi{}, remote_apply_api.DealRemoteApply)
+		}
+
+		userGroup := manage.Group("/usergroup", middleware.CheckSession)
+		{
+			MyRouterPost(userGroup, "/list", user_group_api.ListUserGroupApi{}, user_group_api.ListUserGroup)
 		}
 		//produce := manage.Group("/product", middleware.CheckSession)
 		//{
