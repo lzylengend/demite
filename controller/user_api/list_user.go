@@ -19,8 +19,9 @@ type ListUserResponse struct {
 }
 
 type userData struct {
-	Name string `json:"name"`
-	Id   int64  `json:"id"`
+	Name      string `json:"name"`
+	GroupName string `json:"groupname"`
+	Id        int64  `json:"id"`
 }
 
 func ListUser(c *gin.Context) {
@@ -49,9 +50,17 @@ func ListUser(c *gin.Context) {
 
 	resList := make([]*userData, 0)
 	for _, v := range res {
+		g, err := model.UserGroupDao.Get(v.UserGroupId)
+		if err != nil {
+			rsp.Status = my_error.DbError(err.Error())
+			c.JSON(200, rsp)
+			return
+		}
+
 		resList = append(resList, &userData{
-			Name: v.UserName,
-			Id:   v.UserId,
+			Name:      v.UserName,
+			Id:        v.UserId,
+			GroupName: g.UserGroupName,
 		})
 	}
 

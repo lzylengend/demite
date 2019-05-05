@@ -27,7 +27,7 @@ type _UserGroupDao struct {
 }
 
 func (UserGroup) TableName() string {
-	return "user"
+	return "usergroup"
 }
 
 func newUserGroupDao(db *gorm.DB) *_UserGroupDao {

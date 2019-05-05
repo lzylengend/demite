@@ -7,9 +7,10 @@ import (
 )
 
 type ListRepairRequest struct {
-	Limit  int64  `json:"limit"`
-	Offset int64  `json:"offset"`
-	Name   string `json:"name"`
+	Limit       int64  `json:"limit"`
+	Offset      int64  `json:"offset"`
+	Name        string `json:"name"`
+	ApplyStatus string `json:"applystatus"`
 }
 
 type ListRepairResponse struct {

@@ -137,6 +137,7 @@ func Init(g *gin.Engine, filePath string) {
 		userGroup := manage.Group("/usergroup", middleware.CheckSession)
 		{
 			MyRouterPost(userGroup, "/list", user_group_api.ListUserGroupApi{}, user_group_api.ListUserGroup)
+			MyRouterPost(userGroup, "/getauth", user_group_api.GetUserAuthApi{}, user_group_api.GetUserAuth)
 		}
 		//produce := manage.Group("/product", middleware.CheckSession)
 		//{
