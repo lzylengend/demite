@@ -18,6 +18,10 @@ func NoLoginError() *ErrorCommon {
 	return &ErrorCommon{HasError: true, ErrorShowDesc: "未登录", ErrorDesc: ""}
 }
 
+func NoAuthError() *ErrorCommon {
+	return &ErrorCommon{HasError: true, ErrorShowDesc: "没有权限，请联系客服", ErrorDesc: ""}
+}
+
 func DbError(errorDesc string) *ErrorCommon {
 	return &ErrorCommon{HasError: true, ErrorShowDesc: "数据库错误", ErrorDesc: errorDesc}
 }

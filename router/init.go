@@ -36,7 +36,7 @@ var routerMap map[string]MyRouter
 func Init(g *gin.Engine, filePath string) {
 	routerMap = make(map[string]MyRouter)
 
-	g.GET("test", file_api.Test)
+	g.GET("t est", file_api.Test)
 	g.Static("/file", filePath)
 
 	manage := g.Group("/manage", middleware.LogReq)
@@ -99,6 +99,7 @@ func Init(g *gin.Engine, filePath string) {
 		{
 			MyRouterPost(wxuUerBanken, "/list", wx_user_banken_api.ListWxUserApi{}, wx_user_banken_api.ListWxUser)
 			MyRouterPost(wxuUerBanken, "/getwxuser", wx_user_banken_api.GetWxUserApi{}, wx_user_banken_api.GetWxUser)
+			MyRouterPost(wxuUerBanken, "/shield", wx_user_banken_api.ShieldWxUserApi{}, wx_user_banken_api.ShieldWxUser)
 		}
 
 		unlockApply := manage.Group("/unlockapply", middleware.CheckSession)
@@ -118,6 +119,7 @@ func Init(g *gin.Engine, filePath string) {
 			MyRouterPost(staff, "/add", staff_api.AddStaffApi{}, staff_api.AddStaff)
 			MyRouterPost(staff, "/list", staff_api.ListStaffApi{}, staff_api.ListStaff)
 			MyRouterPost(staff, "/update", staff_api.UpdateStaffApi{}, staff_api.UpdateStaff)
+			MyRouterPost(staff, "/del", staff_api.DelStaffApi{}, staff_api.DelStaff)
 		}
 
 		repairApply := manage.Group("/repairapply", middleware.CheckSession)
@@ -138,6 +140,7 @@ func Init(g *gin.Engine, filePath string) {
 		{
 			MyRouterPost(userGroup, "/list", user_group_api.ListUserGroupApi{}, user_group_api.ListUserGroup)
 			MyRouterPost(userGroup, "/getauth", user_group_api.GetUserAuthApi{}, user_group_api.GetUserAuth)
+			//MyRouterPost(userGroup, "/getauth", user_group_api.GetUserAuthApi{}, user_group_api.GetUserAuth)
 		}
 		//produce := manage.Group("/product", middleware.CheckSession)
 		//{
@@ -152,7 +155,7 @@ func Init(g *gin.Engine, filePath string) {
 	{
 		//MyRouterPost(mini, "/login", wx_user_api.LoginApi{}, wx_user_api.Login)
 		mini.POST("/login", wx_user_api.Login)
-		wxUser := mini.Group("/wxuser", middleware.CheckWxSession)
+		wxUser := mini.Group("/wxuser", middleware.CheckWxSession, middleware.CheckWxAuth)
 		{
 			MyRouterPost(wxUser, "/bindgood", wx_user_api.BindGoodsApi{}, wx_user_api.BindGoods)
 			MyRouterPost(wxUser, "/listgoods", wx_user_api.ListGoodsApi{}, wx_user_api.ListGoods)

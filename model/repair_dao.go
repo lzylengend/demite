@@ -93,22 +93,46 @@ func (this *_RepairDao) Apply(gooduuid string, goodmodel string, phone string, n
 	return obj, nil
 }
 
-func (this *_RepairDao) List(name string, limit int64, offset int64) ([]*Repair, error) {
+func (this *_RepairDao) ListByStatus(name string, limit int64, offset int64, status string) ([]*Repair, error) {
 	objList := make([]*Repair, 0)
-	var err error
-	name = "%" + name + "%"
+	sql := `datastatus  = ?`
+	args := make([]interface{}, 0)
+	args = append(args, 0)
 
-	err = this.Db.Where("name like ? and datastatus = ? ", name, 0).Offset(offset).Limit(limit).Order("createtime desc").Find(&objList).Error
+	if status != "" {
+		sql = sql + ` and status = ? `
+		args = append(args, status)
+	}
+
+	if name != "" {
+		sql = sql + ` and name like ?`
+		name = "%" + name + "%"
+		args = append(args, name)
+	}
+
+	err := this.Db.Where(sql, args...).Offset(offset).Limit(limit).Order("createtime desc").Find(&objList).Error
 
 	return objList, err
 }
 
-func (this *_RepairDao) Count(name string) (int64, error) {
+func (this *_RepairDao) CountByStatus(name string, status string) (int64, error) {
 	var n int64
-	var err error
-	name = "%" + name + "%"
+	sql := `datastatus  = ?`
+	args := make([]interface{}, 0)
+	args = append(args, 0)
 
-	err = this.Db.Where("name like ? and datastatus = ? ", name, 0).Count(&n).Error
+	if status != "" {
+		sql = sql + ` and status = ? `
+		args = append(args, status)
+	}
+
+	if name != "" {
+		sql = sql + ` and name like ?`
+		name = "%" + name + "%"
+		args = append(args, name)
+	}
+
+	err := this.Db.Where(sql, args...).Count(&n).Error
 
 	return n, err
 }

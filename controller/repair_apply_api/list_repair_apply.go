@@ -63,14 +63,14 @@ func ListRepair(c *gin.Context) {
 		return
 	}
 
-	objList, err := model.RepairDao.List(req.Name, req.Limit, req.Offset)
+	objList, err := model.RepairDao.ListByStatus(req.Name, req.Limit, req.Offset, req.ApplyStatus)
 	if err != nil {
 		rsp.Status = my_error.DbError(err.Error())
 		c.JSON(200, rsp)
 		return
 	}
 
-	count, err := model.RepairDao.Count(req.Name)
+	count, err := model.RepairDao.CountByStatus(req.Name, req.ApplyStatus)
 	if err != nil {
 		rsp.Status = my_error.DbError(err.Error())
 		c.JSON(200, rsp)

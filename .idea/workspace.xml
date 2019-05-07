@@ -2,9 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="61cdbbca-1e68-4568-87d2-817f128a13fa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/controller/user_group_api/list_user_group.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controller/staff_api/del_staff.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controller/wx_user_banken_api/shield_wx_user.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/user_group_dao.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/user_group_dao.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/remote_apply_api/list_remote_apply.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/remote_apply_api/list_remote_apply.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/repair_apply_api/list_repair_apply.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/repair_apply_api/list_repair_apply.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/wx_user_banken_api/list_wx_user.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/wx_user_banken_api/list_wx_user.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/remote_apply_dao.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/remote_apply_dao.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/repair_dao.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/repair_dao.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/wx_user_dao.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/wx_user_dao.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my_error/error_common.go" beforeDir="false" afterPath="$PROJECT_DIR$/my_error/error_common.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/router/init.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/init.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,41 +22,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="528">
-              <caret line="34" column="12" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/router/init.go">
+        <entry file="file://$PROJECT_DIR$/controller/wx_user_banken_api/shield_wx_user.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="210">
-              <caret line="201" column="26" lean-forward="true" selection-start-line="201" selection-start-column="26" selection-end-line="201" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controller/user_group_api/list_user_group.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="466">
-              <caret line="67" column="39" lean-forward="true" selection-start-line="67" selection-start-column="39" selection-end-line="67" selection-end-column="39" />
-              <folding>
-                <element signature="e#24#97#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model/user_group_dao.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-7">
-              <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
+              <caret line="55" column="20" lean-forward="true" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -65,7 +42,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Drug</find>
       <find>AddClass</find>
       <find>Class</find>
       <find>WxUser</find>
@@ -94,10 +70,10 @@
       <find>new</find>
       <find>Staff</find>
       <find>gorm:&quot;column:</find>
+      <find>UpdateStaff</find>
+      <find>Get</find>
     </findStrings>
     <replaceStrings>
-      <replace>UploadRepair</replace>
-      <replace>BindGoods</replace>
       <replace>ListGoods</replace>
       <replace>GetGood</replace>
       <replace>ListDrugByGoods</replace>
@@ -126,6 +102,8 @@
       <replace>DelayAuaranteeApply</replace>
       <replace>UserGroup</replace>
       <replace>json:&quot;</replace>
+      <replace>DelStaff</replace>
+      <replace>Shield</replace>
     </replaceStrings>
   </component>
   <component name="GOROOT" path="C:\Go" />
@@ -135,18 +113,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/my_error/error_common.go" />
-        <option value="$PROJECT_DIR$/controller/staff_api/add_staff.go" />
-        <option value="$PROJECT_DIR$/model/staff_dao.go" />
-        <option value="$PROJECT_DIR$/controller/staff_api/update_staff.go" />
-        <option value="$PROJECT_DIR$/model/repair_schedule.go" />
-        <option value="$PROJECT_DIR$/controller/wx_user_api/get_good.go" />
-        <option value="$PROJECT_DIR$/controller/wx_user_api/repair_apply.go" />
         <option value="C:/GO/src/net/http/request.go" />
         <option value="$PROJECT_DIR$/controller/wx_user_api/upload_file.go" />
         <option value="$PROJECT_DIR$/controller/staff_api/list_staff.go" />
         <option value="$PROJECT_DIR$/controller/wx_user_api/deal_repair_apply.go" />
-        <option value="$PROJECT_DIR$/controller/repair_apply_api/list_repair_apply.go" />
         <option value="$PROJECT_DIR$/model/remote_apply.go" />
         <option value="$PROJECT_DIR$/controller/wx_user_api/list_repair_apply.go" />
         <option value="$PROJECT_DIR$/model/init.go" />
@@ -156,8 +126,6 @@
         <option value="$PROJECT_DIR$/controller/remote_apply_api/list_repair_apply.go" />
         <option value="$PROJECT_DIR$/controller/repair_apply_api/get_repair_apply.go" />
         <option value="$PROJECT_DIR$/controller/remote_apply_api/get_remote_apply.go" />
-        <option value="$PROJECT_DIR$/controller/remote_apply_api/list_remote_apply.go" />
-        <option value="$PROJECT_DIR$/model/wx_user_dao.go" />
         <option value="$PROJECT_DIR$/my_error/wx_user_error.go" />
         <option value="$PROJECT_DIR$/controller/wx_user_api/get_user_info.go" />
         <option value="$PROJECT_DIR$/controller/wx_user_api/upload_user_info.go" />
@@ -179,13 +147,23 @@
         <option value="$PROJECT_DIR$/controller/wx_user_api/get_repair_apply.go" />
         <option value="$PROJECT_DIR$/controller/repair_apply_api/deal_repair_apply.go" />
         <option value="$PROJECT_DIR$/controller/remote_apply_api/deal_remote_apply.go" />
-        <option value="$PROJECT_DIR$/model/remote_apply_dao.go" />
-        <option value="$PROJECT_DIR$/model/repair_dao.go" />
-        <option value="$PROJECT_DIR$/server.conf" />
         <option value="$PROJECT_DIR$/controller/user_group_api/list_user_group_api.go" />
         <option value="$PROJECT_DIR$/controller/user_group_api/list_user_group.go" />
         <option value="$PROJECT_DIR$/model/user_group_dao.go" />
+        <option value="$PROJECT_DIR$/controller/user_api/list_user.go" />
+        <option value="$PROJECT_DIR$/controller/staff_api/del_staff.go" />
+        <option value="$PROJECT_DIR$/server.conf" />
+        <option value="$PROJECT_DIR$/model/wx_user_dao.go" />
+        <option value="$PROJECT_DIR$/controller/wx_user_banken_api/list_wx_user.go" />
+        <option value="$PROJECT_DIR$/model/repair_dao.go" />
+        <option value="$PROJECT_DIR$/controller/repair_apply_api/list_repair_apply.go" />
+        <option value="$PROJECT_DIR$/model/remote_apply_dao.go" />
+        <option value="$PROJECT_DIR$/controller/remote_apply_api/list_remote_apply.go" />
+        <option value="$PROJECT_DIR$/controller/middleware/check、.go" />
+        <option value="$PROJECT_DIR$/my_error/error_common.go" />
+        <option value="$PROJECT_DIR$/controller/middleware/check_auth.go" />
         <option value="$PROJECT_DIR$/router/init.go" />
+        <option value="$PROJECT_DIR$/controller/wx_user_banken_api/shield_wx_user.go" />
       </list>
     </option>
   </component>
@@ -200,7 +178,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -217,13 +194,13 @@
               <item name="demite" type="b2602c69:ProjectViewProjectNode" />
               <item name="demite" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
-              <item name="staff_api" type="462c0819:PsiDirectoryNode" />
+              <item name="middleware" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="demite" type="b2602c69:ProjectViewProjectNode" />
               <item name="demite" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
-              <item name="user_group_api" type="462c0819:PsiDirectoryNode" />
+              <item name="wx_user_banken_api" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="demite" type="b2602c69:ProjectViewProjectNode" />
@@ -239,6 +216,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -299,7 +277,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2803838" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2835821" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -355,80 +333,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/controller/wx_user_api/list_remote_apply.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1425">
-          <caret line="86" selection-start-line="86" selection-end-line="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/repair_apply_api/list_repair_apply.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1140">
-          <caret line="16" column="47" selection-end-line="109" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/repair_apply_api/get_repair_apply.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1672">
-          <caret line="92" column="58" lean-forward="true" selection-end-line="114" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/remote_apply_api/get_remote_apply.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="681">
-          <caret line="106" column="35" selection-start-line="106" selection-start-column="35" selection-end-line="106" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/remote_apply_api/list_remote_apply.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="446">
-          <caret line="82" column="36" lean-forward="true" selection-start-line="82" selection-start-column="36" selection-end-line="82" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wx_api/common.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="56" column="25" selection-start-line="56" selection-start-column="25" selection-end-line="56" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/wx_user_api/upload_wx_user.go" />
-    <entry file="file://$PROJECT_DIR$/controller/wx_user_api/remote_apply.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="59" column="5" selection-start-line="54" selection-start-column="4" selection-end-line="59" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/wx_user_dao.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="47" column="39" selection-start-line="47" selection-start-column="24" selection-end-line="47" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/my_error/wx_user_error.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="21" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/wx_user_api/upload_repair.go">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/wx_user_api/upload_user_info.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1235">
-          <caret line="70" column="30" selection-start-line="70" selection-start-column="30" selection-end-line="70" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controller/wx_user_api/unlock_apply.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="551">
@@ -543,20 +447,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/delay_guarantee_apply_dao.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="137" column="73" selection-start-line="137" selection-start-column="73" selection-end-line="137" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/unlock_apply_dao.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="191" column="73" selection-start-line="191" selection-start-column="73" selection-end-line="191" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controller/remote_apply_api/deal_remote_apply.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
@@ -611,27 +501,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/remote_apply_dao.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="98" column="118" selection-start-line="98" selection-start-column="118" selection-end-line="98" selection-end-column="118" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/repair_dao.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="100" column="118" selection-start-line="100" selection-start-column="118" selection-end-line="100" selection-end-column="118" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server.conf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/init.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="883">
@@ -656,13 +525,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="34" column="12" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controller/staff_api/list_staff.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="44">
@@ -683,27 +545,159 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/user_group_dao.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7">
-          <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controller/user_group_api/list_user_group.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="466">
-          <caret line="67" column="39" lean-forward="true" selection-start-line="67" selection-start-column="39" selection-end-line="67" selection-end-column="39" />
+        <state relative-caret-position="1386">
+          <caret line="67" column="39" selection-start-line="67" selection-start-column="39" selection-end-line="67" selection-end-column="39" />
           <folding>
             <element signature="e#24#97#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/model/user_group_dao.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1672">
+          <caret line="79" selection-start-line="79" selection-end-line="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/user_api/list_user.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="46" column="24" selection-start-line="46" selection-start-column="24" selection-end-line="46" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/staff_api/del_staff.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="466">
+          <caret line="62" column="17" selection-start-line="62" selection-start-column="17" selection-end-line="62" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/staff_api/update_staff.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="11" lean-forward="true" selection-start-column="11" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/wx_user_banken_api/get_wx_user.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/wx_user_dao.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="54" column="9" lean-forward="true" selection-start-line="54" selection-start-column="9" selection-end-line="54" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/wx_user_banken_api/list_wx_user.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1144">
+          <caret line="96" column="11" selection-start-line="96" selection-start-column="11" selection-end-line="96" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/delay_guarantee_apply_dao.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2948">
+          <caret line="137" column="73" selection-start-line="137" selection-start-column="73" selection-end-line="137" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/unlock_apply_dao.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="137" column="5" lean-forward="true" selection-start-line="130" selection-start-column="4" selection-end-line="137" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/repair_apply_api/list_repair_apply.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="12" column="43" lean-forward="true" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/repair_dao.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="110" column="5" lean-forward="true" selection-start-line="97" selection-start-column="4" selection-end-line="110" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/remote_apply_api/list_remote_apply.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="25" column="39" lean-forward="true" selection-start-line="25" selection-start-column="39" selection-end-line="25" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/remote_apply_dao.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="115" column="37" selection-start-line="115" selection-start-column="24" selection-end-line="115" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/middleware/check_session.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="28" selection-start-line="28" selection-end-line="40" selection-end-column="1" />
+          <folding>
+            <element signature="e#20#123#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my_error/error_common.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="20" column="16" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/middleware/check_auth.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="9" column="16" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="16" />
+          <folding>
+            <element signature="e#20#98#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/router/init.go">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-462">
+          <caret line="157" column="89" selection-start-line="157" selection-start-column="89" selection-end-line="157" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="572">
+          <caret line="36" column="32" selection-start-line="36" selection-start-column="32" selection-end-line="36" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/wx_user_banken_api/shield_wx_user.go">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
-          <caret line="201" column="26" lean-forward="true" selection-start-line="201" selection-start-column="26" selection-end-line="201" selection-end-column="26" />
+          <caret line="55" column="20" lean-forward="true" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="20" />
         </state>
       </provider>
     </entry>

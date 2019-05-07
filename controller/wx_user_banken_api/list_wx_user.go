@@ -28,6 +28,7 @@ type wxData struct {
 	Province  string `json:"province"`
 	AvatarUrl string `json:"avatarUrl"`
 	Country   string `json:"country"`
+	Shield    bool   `json:"shield"`
 }
 
 type ListWxUserApi struct {
@@ -87,6 +88,7 @@ func ListWxUser(c *gin.Context) {
 			Province:  v.Province,
 			AvatarUrl: v.AvatarUrl,
 			Country:   v.Country,
+			Shield:    v.Shield == 0,
 		})
 	}
 

@@ -7,9 +7,10 @@ import (
 )
 
 type ListRemoteRequest struct {
-	Limit  int64  `json:"limit"`
-	Offset int64  `json:"offset"`
-	Name   string `json:"name"`
+	Limit       int64  `json:"limit"`
+	Offset      int64  `json:"offset"`
+	Name        string `json:"name"`
+	ApplyStatus string `json:"applystatus"`
 }
 
 type ListRemoteResponse struct {
@@ -61,14 +62,14 @@ func ListRemote(c *gin.Context) {
 		return
 	}
 
-	objList, err := model.RemoteDao.List(req.Name, req.Limit, req.Offset)
+	objList, err := model.RemoteDao.ListByStatus(req.Name, req.Limit, req.Offset, req.ApplyStatus)
 	if err != nil {
 		rsp.Status = my_error.DbError(err.Error())
 		c.JSON(200, rsp)
 		return
 	}
 
-	count, err := model.RemoteDao.Count(req.Name)
+	count, err := model.RemoteDao.CountByStatus(req.Name, req.ApplyStatus)
 	if err != nil {
 		rsp.Status = my_error.DbError(err.Error())
 		c.JSON(200, rsp)
