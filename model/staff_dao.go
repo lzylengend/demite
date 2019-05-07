@@ -81,7 +81,7 @@ func (this *_StaffDao) Count(key string) (int64, error) {
 
 func (this *_StaffDao) Get(id int64) (*Staff, error) {
 	obj := &Staff{}
-	err := this.Db.Where("staffid = ? and datastatus = ?", id, 0).First(obj).Error
+	err := this.Db.Where("staffid = ?", id).First(obj).Error // and datastatus = ?
 	if err != nil {
 		return obj, err
 	}
