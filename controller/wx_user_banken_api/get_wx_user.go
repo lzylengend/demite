@@ -23,6 +23,10 @@ type getWxData struct {
 	Province  string            `json:"province"`
 	AvatarUrl string            `json:"avatarUrl"`
 	Country   string            `json:"country"`
+	Name      string            `json:"name"`
+	Phone     string            `json:"phone"`
+	Hospital  string            `json:"hospital"`
+	Position  string            `json:"position"`
 	Data      []*getWxUserGoods `json:"data"`
 }
 
@@ -105,6 +109,10 @@ func GetWxUser(c *gin.Context) {
 		Province:  obj.Province,
 		AvatarUrl: obj.AvatarUrl,
 		Country:   obj.Country,
+		Name:      obj.Name,
+		Hospital:  obj.Hospital,
+		Phone:     obj.Phone,
+		Position:  obj.Position,
 		Data:      gwData,
 	}
 

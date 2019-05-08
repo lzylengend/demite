@@ -88,7 +88,7 @@ func ListWxUser(c *gin.Context) {
 			Province:  v.Province,
 			AvatarUrl: v.AvatarUrl,
 			Country:   v.Country,
-			Shield:    v.Shield == 0,
+			Shield:    v.Shield != 0,
 		})
 	}
 

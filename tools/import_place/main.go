@@ -24,7 +24,7 @@ func main() {
 		return
 	}
 
-	c, err := conf.Init("../../server.conf")
+	c, err := conf.Init("./server.conf")
 	if err != nil {
 		fmt.Println(err)
 		return

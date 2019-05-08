@@ -53,7 +53,7 @@ func ShieldWxUser(c *gin.Context) {
 	}
 
 	var shield int64 = 0
-	if !req.Shield {
+	if req.Shield {
 		shield = time.Now().Unix()
 	}
 

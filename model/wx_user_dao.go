@@ -19,6 +19,10 @@ type WxUser struct {
 	CreateTime int64  `gorm:"column:createtime"`
 	UpdateTime int64  `gorm:"column:updatetime"`
 	Shield     int64  `gorm:"column:shield"`
+	Name       string `gorm:"column:name"`
+	Phone      string `gorm:"column:phone"`
+	Hospital   string `gorm:"column:hospital"`
+	Position   string `gorm:"column:position"`
 }
 type _WxUserDao struct {
 	Db *gorm.DB

@@ -93,6 +93,7 @@ func Init(g *gin.Engine, filePath string) {
 			MyRouterPost(goods, "/update", goods_api.GoodsUpdateApi{}, goods_api.GoodsUpdate)
 			MyRouterPost(goods, "/goodgetdrug", goods_api.GoodsGetDrugApi{}, goods_api.GoodsGetDrug)
 			MyRouterPost(goods, "/getgood", goods_api.GetGoodApi{}, goods_api.GetGood)
+			MyRouterPost(goods, "/del", goods_api.GoodsDelApi{}, middleware.CheckUserAuth, goods_api.GoodsDel)
 		}
 
 		wxuUerBanken := manage.Group("/wxuser", middleware.CheckSession)
@@ -100,6 +101,7 @@ func Init(g *gin.Engine, filePath string) {
 			MyRouterPost(wxuUerBanken, "/list", wx_user_banken_api.ListWxUserApi{}, wx_user_banken_api.ListWxUser)
 			MyRouterPost(wxuUerBanken, "/getwxuser", wx_user_banken_api.GetWxUserApi{}, wx_user_banken_api.GetWxUser)
 			MyRouterPost(wxuUerBanken, "/shield", wx_user_banken_api.ShieldWxUserApi{}, wx_user_banken_api.ShieldWxUser)
+			MyRouterPost(wxuUerBanken, "/update", wx_user_banken_api.UpdateWxUserApi{}, middleware.CheckUserAuth, wx_user_banken_api.UpdateWxUser)
 		}
 
 		unlockApply := manage.Group("/unlockapply", middleware.CheckSession)
@@ -119,7 +121,7 @@ func Init(g *gin.Engine, filePath string) {
 			MyRouterPost(staff, "/add", staff_api.AddStaffApi{}, staff_api.AddStaff)
 			MyRouterPost(staff, "/list", staff_api.ListStaffApi{}, staff_api.ListStaff)
 			MyRouterPost(staff, "/update", staff_api.UpdateStaffApi{}, staff_api.UpdateStaff)
-			MyRouterPost(staff, "/del", staff_api.DelStaffApi{}, staff_api.DelStaff)
+			MyRouterPost(staff, "/del", staff_api.DelStaffApi{}, middleware.CheckUserAuth, staff_api.DelStaff)
 		}
 
 		repairApply := manage.Group("/repairapply", middleware.CheckSession)
