@@ -7,7 +7,8 @@ import (
 )
 
 type AddDrugClassRequest struct {
-	Name string `json:"name"`
+	Name      string `json:"name"`
+	UpClassId int64  `json:"upclassid"`
 }
 
 type AddDrugClassResponse struct {
@@ -50,7 +51,18 @@ func AddDrugClass(c *gin.Context) {
 		return
 	}
 
-	class, err := model.DrugClassDao.AddDrugClass(req.Name)
+	path := ""
+	if req.UpClassId != 0 {
+		upClass, err := model.DrugClassDao.Get(req.UpClassId)
+		if err != nil {
+			rsp.Status = my_error.DbError(err.Error())
+			c.JSON(200, rsp)
+			return
+		}
+		path = upClass.Path
+	}
+
+	class, err := model.DrugClassDao.AddDrugClass(req.Name, req.UpClassId, path)
 	if err != nil {
 		rsp.Status = my_error.DbError(err.Error())
 		c.JSON(200, rsp)

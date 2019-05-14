@@ -16,6 +16,12 @@ type ListDrugClassResponse struct {
 }
 
 type drugClassData struct {
+	Id   int64             `json:"id"`
+	Name string            `json:"name"`
+	Data []*drugClassData2 `json:"data"`
+}
+
+type drugClassData2 struct {
 	Id   int64  `json:"id"`
 	Name string `json:"name"`
 }
@@ -49,7 +55,7 @@ func ListDrugClass(c *gin.Context) {
 		return
 	}
 
-	res, err := model.DrugClassDao.List()
+	res, err := model.DrugClassDao.ListClassByUp(0)
 	if err != nil {
 		rsp.Status = my_error.DbError(err.Error())
 		c.JSON(200, rsp)
@@ -58,9 +64,25 @@ func ListDrugClass(c *gin.Context) {
 
 	dataList := make([]*drugClassData, 0)
 	for _, v := range res {
+		res2, err := model.DrugClassDao.ListClassByUp(v.ClassId)
+		if err != nil {
+			rsp.Status = my_error.DbError(err.Error())
+			c.JSON(200, rsp)
+			return
+		}
+
+		drugCList := make([]*drugClassData2, 0)
+		for _, v2 := range res2 {
+			drugCList = append(drugCList, &drugClassData2{
+				Id:   v2.ClassId,
+				Name: v2.ClassName,
+			})
+		}
+
 		dataList = append(dataList, &drugClassData{
 			Id:   v.ClassId,
 			Name: v.ClassName,
+			Data: drugCList,
 		})
 	}
 	rsp.Data = dataList
