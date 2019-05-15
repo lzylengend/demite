@@ -97,8 +97,8 @@ func (this *_DrugClassDao) List() ([]*DrugClass, error) {
 	return objList, err
 }
 
-func (this *_DrugClassDao) ListClassByUp(upClassId int64) ([]*Class, error) {
-	objList := make([]*Class, 0)
+func (this *_DrugClassDao) ListClassByUp(upClassId int64) ([]*DrugClass, error) {
+	objList := make([]*DrugClass, 0)
 	err := this.Db.Where("upclassid = ? and datastatus = ?", upClassId, 0).Find(&objList).Error
 	return objList, err
 }
