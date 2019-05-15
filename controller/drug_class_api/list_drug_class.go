@@ -17,7 +17,7 @@ type ListDrugClassResponse struct {
 
 type drugClassData struct {
 	Id   int64             `json:"id"`
-	Name string            `json:"name"`
+	Name string            `json:"label"`
 	Data []*drugClassData2 `json:"children"`
 }
 
