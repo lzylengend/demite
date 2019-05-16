@@ -17,13 +17,13 @@ type ListDrugClassResponse struct {
 
 type drugClassData struct {
 	Id   int64             `json:"id"`
-	Name string            `json:"label"`
-	Data []*drugClassData2 `json:"children"`
+	Name string            `json:"name"`
+	Data []*drugClassData2 `json:"data"`
 }
 
 type drugClassData2 struct {
 	Id   int64  `json:"id"`
-	Name string `json:"label"`
+	Name string `json:"name"`
 }
 
 type ListDrugClassApi struct {

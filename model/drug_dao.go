@@ -66,12 +66,12 @@ func (this *_DrugDao) GetByClassId(classid int64) ([]*Drug, error) {
 	return obj, err
 }
 
-func (this *_DrugDao) ListByCreateTime(classId int64, key string, limit, offset int64) ([]*Drug, error) {
+func (this *_DrugDao) ListByCreateTime(classId []int64, key string, limit, offset int64) ([]*Drug, error) {
 	objList := make([]*Drug, 0)
 	var err error
 	key = "%" + key + "%"
-	if classId > 0 {
-		err = this.Db.Where("drugname like ? and datastatus = ? and drugclassid = ?", key, 0, classId).Offset(offset).Limit(limit).Order("createtime").Find(&objList).Error
+	if len(classId) > 0 {
+		err = this.Db.Where("drugname like ? and datastatus = ? and drugclassid in (?)", key, 0, classId).Offset(offset).Limit(limit).Order("createtime").Find(&objList).Error
 	} else {
 		err = this.Db.Where("drugname like ? and datastatus = ?", key, 0).Offset(offset).Limit(limit).Order("createtime").Find(&objList).Error
 	}
@@ -79,10 +79,16 @@ func (this *_DrugDao) ListByCreateTime(classId int64, key string, limit, offset 
 	return objList, err
 }
 
-func (this *_DrugDao) CountByKey(key string) (int64, error) {
+func (this *_DrugDao) CountByKey(classId []int64, key string) (int64, error) {
 	n := 0
+	var err error
 
 	key = "%" + key + "%"
-	err := this.Db.Where("drugname like ? and datastatus = ?", key, 0).Count(&n).Error
+	if len(classId) > 0 {
+		err = this.Db.Where("drugname like ? and datastatus = ? and drugclassid in (?)", key, 0, classId).Count(&n).Error
+	} else {
+		err = this.Db.Where("drugname like ? and datastatus = ?", key, 0).Count(&n).Error
+	}
+
 	return int64(n), err
 }

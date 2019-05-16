@@ -64,14 +64,38 @@ func ListDrug(c *gin.Context) {
 		return
 	}
 
-	data, err := model.DrugDao.ListByCreateTime(req.ClassId, req.Key, req.Limit, req.Offset)
+	classList := make([]int64, 0)
+	if req.ClassId != 0 {
+		class, err := model.DrugClassDao.Get(req.ClassId)
+		if err != nil {
+			rsp.Status = my_error.DbError(err.Error())
+			c.JSON(200, rsp)
+			return
+		}
+		classList = append(classList, req.ClassId)
+
+		if class.UpClassId == 0 {
+			cList, err := model.DrugClassDao.ListClassByUp(req.ClassId)
+			if err != nil {
+				rsp.Status = my_error.DbError(err.Error())
+				c.JSON(200, rsp)
+				return
+			}
+
+			for _, v := range cList {
+				classList = append(classList, v.ClassId)
+			}
+		}
+	}
+
+	data, err := model.DrugDao.ListByCreateTime(classList, req.Key, req.Limit, req.Offset)
 	if err != nil {
 		rsp.Status = my_error.DbError(err.Error())
 		c.JSON(200, rsp)
 		return
 	}
 
-	count, err := model.DrugDao.CountByKey(req.Key)
+	count, err := model.DrugDao.CountByKey(classList, req.Key)
 	if err != nil {
 		rsp.Status = my_error.DbError(err.Error())
 		c.JSON(200, rsp)
