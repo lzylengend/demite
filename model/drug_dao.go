@@ -14,6 +14,8 @@ type Drug struct {
 	ChromatographicColumn string `gorm:"column:chromatographiccolumn;type:text"` //色谱柱
 	Controls              string `gorm:"column:controls;type:text"`              //质控品
 	TestMethod            string `gorm:"column:testmethod;type:text"`            //检测方法
+	Preprocessing         string `gorm:"column:preprocessing;type:text"`         //样品预处理
+	PotencyRange          string `gorm:"column:potencyrange;type:text"`          //浓度范围
 	DataStatus            int64  `gorm:"column:datastatus"`
 	CreateTime            int64  `gorm:"column:createtime"`
 	UpdateTime            int64  `gorm:"column:updatetime"`
@@ -32,7 +34,8 @@ func newDrugDao(db *gorm.DB) *_DrugDao {
 	return &_DrugDao{Db: db.Model(&Drug{})}
 }
 
-func (this *_DrugDao) AddDrug(name string, classId int64, reagent string, chromatographiccolumn string, controls string, testmethod string) (*Drug, error) {
+func (this *_DrugDao) AddDrug(name string, classId int64, reagent string, chromatographiccolumn string, controls string,
+	testmethod string, preprocessing string, potencyRange string) (*Drug, error) {
 	obj := &Drug{
 		DrugName:              name,
 		DrugClassId:           classId,
@@ -40,6 +43,8 @@ func (this *_DrugDao) AddDrug(name string, classId int64, reagent string, chroma
 		ChromatographicColumn: chromatographiccolumn,
 		Controls:              controls,
 		TestMethod:            testmethod,
+		Preprocessing:         preprocessing,
+		PotencyRange:          potencyRange,
 		DataStatus:            0,
 		CreateTime:            time.Now().Unix(),
 		UpdateTime:            time.Now().Unix(),

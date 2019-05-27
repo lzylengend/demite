@@ -13,6 +13,8 @@ type AddDrugRequest struct {
 	ChromatographicColumn string `json:"chromatographiccolumn"` //色谱柱
 	Controls              string `json:"controls"`              //质控品
 	TestMethod            string `json:"testmethod"`            //检测方法
+	Preprocessing         string `json:"preprocessing"`         //样品预处理
+	PotencyRange          string `json:"potencyrange"`          //浓度范围
 }
 
 type AddDrugResponse struct {
@@ -62,7 +64,8 @@ func AddDrug(c *gin.Context) {
 		return
 	}
 
-	drug, err := model.DrugDao.AddDrug(req.Name, req.ClassId, req.Reagent, req.ChromatographicColumn, req.Controls, req.TestMethod)
+	drug, err := model.DrugDao.AddDrug(req.Name, req.ClassId, req.Reagent, req.ChromatographicColumn, req.Controls,
+		req.TestMethod, req.Preprocessing, req.PotencyRange)
 	if err != nil {
 		rsp.Status = my_error.DbError(err.Error())
 		c.JSON(200, rsp)

@@ -14,6 +14,8 @@ type UpdateDrugRequest struct {
 	ChromatographicColumn string `json:"chromatographiccolumn"` //色谱柱
 	Controls              string `json:"controls"`              //质控品
 	TestMethod            string `json:"testmethod"`            //检测方法
+	Preprocessing         string `json:"preprocessing"`         //样品预处理
+	PotencyRange          string `json:"potencyrange"`          //浓度范围
 }
 
 type UpdateDrugResponse struct {
@@ -75,6 +77,8 @@ func UpdateDrug(c *gin.Context) {
 	obj.Controls = req.Controls
 	obj.ChromatographicColumn = req.ChromatographicColumn
 	obj.Reagent = req.Reagent
+	obj.PotencyRange = req.PotencyRange
+	obj.Preprocessing = req.Preprocessing
 
 	err = model.DrugDao.Set(obj)
 	if err != nil {

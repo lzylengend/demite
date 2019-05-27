@@ -29,6 +29,8 @@ type drugData struct {
 	ChromatographicColumn string `json:"chromatographiccolumn"` //色谱柱
 	Controls              string `json:"controls"`              //质控品
 	TestMethod            string `json:"testmethod"`            //检测方法
+	Preprocessing         string `json:"preprocessing"`         //样品预处理
+	PotencyRange          string `json:"potencyrange"`          //浓度范围
 }
 
 type ListDrugApi struct {
@@ -120,6 +122,8 @@ func ListDrug(c *gin.Context) {
 			Controls:              v.Controls,
 			TestMethod:            v.TestMethod,
 			ClassName:             class.ClassName,
+			Preprocessing:         v.Preprocessing,
+			PotencyRange:          v.PotencyRange,
 		})
 	}
 	rsp.Count = count
