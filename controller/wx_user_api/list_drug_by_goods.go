@@ -46,6 +46,8 @@ type drugData struct {
 	ChromatographicColumn string `json:"chromatographiccolumn"` //色谱柱
 	Controls              string `json:"controls"`              //质控品
 	TestMethod            string `json:"testmethod"`            //检测方法
+	Preprocessing         string `json:"preprocessing"`         //样品预处理
+	PotencyRange          string `json:"range"`                 //浓度范围
 }
 
 func ListDrugByGoods(c *gin.Context) {
@@ -105,6 +107,8 @@ func ListDrugByGoods(c *gin.Context) {
 			Controls:              drug.Controls,
 			TestMethod:            drug.TestMethod,
 			ClassName:             class.ClassName,
+			Preprocessing:         drug.Preprocessing,
+			PotencyRange:          drug.PotencyRange,
 		})
 	}
 
