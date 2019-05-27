@@ -14,7 +14,7 @@ type AddDrugRequest struct {
 	Controls              string `json:"controls"`              //质控品
 	TestMethod            string `json:"testmethod"`            //检测方法
 	Preprocessing         string `json:"preprocessing"`         //样品预处理
-	PotencyRange          string `json:"potencyrange"`          //浓度范围
+	PotencyRange          string `json:"range"`                 //浓度范围
 }
 
 type AddDrugResponse struct {
