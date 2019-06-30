@@ -13,6 +13,7 @@ type ListVideoBankendRequest struct {
 }
 
 type ListVideoBankendResponse struct {
+	Count  int64                 `json:"count"`
 	Data   []*ListVideoData      `json:"data"`
 	Status *my_error.ErrorCommon `json:"status"`
 }
@@ -65,6 +66,13 @@ func ListVideoBankend(c *gin.Context) {
 		return
 	}
 
+	count, err := model.VideoDao.Count(req.ClassId)
+	if err != nil {
+		rsp.Status = my_error.DbError(err.Error())
+		c.JSON(200, rsp)
+		return
+	}
+
 	for _, v := range res {
 		name := ""
 		cla, err := model.VideoClassDao.Get(v.ClassId)
@@ -84,6 +92,7 @@ func ListVideoBankend(c *gin.Context) {
 		})
 	}
 
+	rsp.Count = count
 	rsp.Status = my_error.NoError()
 	c.JSON(200, rsp)
 }

@@ -14,6 +14,7 @@ type ListMaterialBankendRequest struct {
 
 type ListMaterialBankendResponse struct {
 	Data   []*ListMaterialData   `json:"data"`
+	Count  int64                 `json:"count"`
 	Status *my_error.ErrorCommon `json:"status"`
 }
 
@@ -62,6 +63,13 @@ func ListMaterialBankend(c *gin.Context) {
 		return
 	}
 
+	count, err := model.MaterialDao.Count(req.ClassId)
+	if err != nil {
+		rsp.Status = my_error.DbError(err.Error())
+		c.JSON(200, rsp)
+		return
+	}
+
 	for _, v := range res {
 		name := ""
 
@@ -80,6 +88,7 @@ func ListMaterialBankend(c *gin.Context) {
 		})
 	}
 
+	rsp.Count = count
 	rsp.Status = my_error.NoError()
 	c.JSON(200, rsp)
 }
