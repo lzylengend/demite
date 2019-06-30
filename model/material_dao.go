@@ -46,6 +46,19 @@ func (this *_MaterialDao) List(classId int64, limit int64, offset int64) ([]*Mat
 	return res, err
 }
 
+func (this *_MaterialDao) Count(classId int64) (int64, error) {
+	var n int64
+	var err error
+
+	if classId == 0 {
+		err = this.Db.Where("datastatus = ?", 0).Count(&n).Error
+	} else {
+		err = this.Db.Where("datastatus = ? and classid = ?", 0, classId).Count(&n).Error
+	}
+
+	return n, err
+}
+
 func (this *_MaterialDao) Update(c *Material) error {
 	return this.Db.Save(c).Error
 }

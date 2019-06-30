@@ -11,6 +11,7 @@ type UpdateSchemeBankendRequest struct {
 	Content string `json:"content"`
 	Title   string `json:"title"`
 	Desc    string `json:"desc"`
+	FileId  string `json:"fileid"`
 }
 
 type UpdateSchemeBankendResponse struct {
@@ -33,7 +34,7 @@ func (UpdateSchemeBankendApi) GetApi() string {
 }
 
 func (UpdateSchemeBankendApi) GetDesc() string {
-	return "修改数据"
+	return "修改解决方案"
 }
 
 func UpdateSchemeBankend(c *gin.Context) {
@@ -56,6 +57,7 @@ func UpdateSchemeBankend(c *gin.Context) {
 	s.Content = req.Content
 	s.Desc = req.Desc
 	s.Title = req.Title
+	s.FileId = req.FileId
 
 	err = model.SchemeDao.Update(s)
 	if err != nil {

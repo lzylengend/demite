@@ -14,6 +14,7 @@ type ListSoftRequest struct {
 
 type ListSoftResponse struct {
 	Data   []*ListSoftData       `json:"data"`
+	Count  int64                 `json:"count"`
 	Status *my_error.ErrorCommon `json:"status"`
 }
 
@@ -61,6 +62,13 @@ func ListSoft(c *gin.Context) {
 		return
 	}
 
+	count, err := model.SoftDao.Count(req.ClassId)
+	if err != nil {
+		rsp.Status = my_error.DbError(err.Error())
+		c.JSON(200, rsp)
+		return
+	}
+
 	for _, v := range res {
 		rsp.Data = append(rsp.Data, &ListSoftData{
 			Id:      v.Id,
@@ -71,6 +79,7 @@ func ListSoft(c *gin.Context) {
 		})
 	}
 
+	rsp.Count = count
 	rsp.Status = my_error.NoError()
 	c.JSON(200, rsp)
 }

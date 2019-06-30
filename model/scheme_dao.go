@@ -15,6 +15,7 @@ type Scheme struct {
 	Content    string `gorm:"column:content;type:text"`
 	Title      string `gorm:"column:title"`
 	Desc       string `gorm:"column:desc"`
+	FileId     string `json:"fileid"`
 	SchemeType string `gorm:"column:schemetype"`
 	DataStatus int64  `gorm:"column:datastatus"`
 	CreateTime int64  `gorm:"column:createtime"`
@@ -80,6 +81,15 @@ func (this *_SchemeDao) List(limit int64, offset int64) ([]*Scheme, error) {
 	err = this.Db.Where("datastatus = ? and schemetype = ?", 0, "").Limit(limit).Offset(offset).Order("updatetime desc").Find(&res).Error
 
 	return res, err
+}
+
+func (this *_SchemeDao) Count() (int64, error) {
+	var n int64
+	var err error
+
+	err = this.Db.Where("datastatus = ? and schemetype = ?", 0, "").Count(&n).Error
+
+	return n, err
 }
 
 func (this *_SchemeDao) Update(c *Scheme) error {

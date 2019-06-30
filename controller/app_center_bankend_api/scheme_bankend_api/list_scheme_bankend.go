@@ -17,9 +17,10 @@ type ListSchemeBankendResponse struct {
 }
 
 type ListSchemeData struct {
-	Id    int64  `json:"id"`
-	Title string `json:"title"`
-	Desc  string `json:"desc"`
+	Id     int64  `json:"id"`
+	Title  string `json:"title"`
+	Desc   string `json:"desc"`
+	FileId string `json:"fileid"`
 }
 
 type ListSchemeBankendApi struct {
@@ -60,9 +61,10 @@ func ListSchemeBankend(c *gin.Context) {
 
 	for _, v := range res {
 		rsp.Data = append(rsp.Data, &ListSchemeData{
-			Id:    v.Id,
-			Desc:  v.Desc,
-			Title: v.Title,
+			Id:     v.Id,
+			Desc:   v.Desc,
+			Title:  v.Title,
+			FileId: v.FileId,
 		})
 	}
 

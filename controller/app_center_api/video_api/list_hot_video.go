@@ -11,6 +11,7 @@ type ListHotVideoRequest struct {
 
 type ListHotVideoResponse struct {
 	Data   []*ListHotVideoData   `json:"data"`
+	Count  int64                 `json:"count"`
 	Status *my_error.ErrorCommon `json:"status"`
 }
 
@@ -57,6 +58,13 @@ func ListHotVideo(c *gin.Context) {
 		return
 	}
 
+	count, err := model.VideoDao.CountHot()
+	if err != nil {
+		rsp.Status = my_error.DbError(err.Error())
+		c.JSON(200, rsp)
+		return
+	}
+
 	for _, v := range res {
 		rsp.Data = append(rsp.Data, &ListHotVideoData{
 			Id:     v.Id,
@@ -66,6 +74,7 @@ func ListHotVideo(c *gin.Context) {
 		})
 	}
 
+	rsp.Count = count
 	rsp.Status = my_error.NoError()
 	c.JSON(200, rsp)
 }

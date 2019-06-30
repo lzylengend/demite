@@ -8,10 +8,10 @@ import (
 )
 
 type AddSchemeBankendRequest struct {
-	Content    string `json:"content"`
-	Title      string `json:"title"`
-	Desc       string `json:"desc"`
-	SchemeType string `json:"schemetype"`
+	Content string `json:"content"`
+	Title   string `json:"title"`
+	Desc    string `json:"desc"`
+	FileId  string `json:"fileid"`
 }
 
 type AddSchemeBankendResponse struct {
@@ -34,7 +34,7 @@ func (AddSchemeBankendApi) GetApi() string {
 }
 
 func (AddSchemeBankendApi) GetDesc() string {
-	return "新增数据"
+	return "新增解决方案"
 }
 
 func AddSchemeBankend(c *gin.Context) {
@@ -54,6 +54,7 @@ func AddSchemeBankend(c *gin.Context) {
 		CreateTime: time.Now().Unix(),
 		Title:      req.Title,
 		Desc:       req.Desc,
+		FileId:     req.FileId,
 	})
 	if err != nil {
 		rsp.Status = my_error.DbError(err.Error())

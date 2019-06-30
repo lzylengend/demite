@@ -13,13 +13,15 @@ type ListSchemeRequest struct {
 
 type ListSchemeResponse struct {
 	Data   []*ListSchemeData     `json:"data"`
+	Count  int64                 `json:"count"`
 	Status *my_error.ErrorCommon `json:"status"`
 }
 
 type ListSchemeData struct {
-	Id    int64  `json:"id"`
-	Title string `json:"title"`
-	Desc  string `json:"desc"`
+	Id     int64  `json:"id"`
+	Title  string `json:"title"`
+	Desc   string `json:"desc"`
+	FileId string `json:"fileid"`
 }
 
 type ListSchemeApi struct {
@@ -58,14 +60,23 @@ func ListScheme(c *gin.Context) {
 		return
 	}
 
+	count, err := model.SchemeDao.Count()
+	if err != nil {
+		rsp.Status = my_error.DbError(err.Error())
+		c.JSON(200, rsp)
+		return
+	}
+
 	for _, v := range res {
 		rsp.Data = append(rsp.Data, &ListSchemeData{
-			Id:    v.Id,
-			Desc:  v.Desc,
-			Title: v.Title,
+			Id:     v.Id,
+			Desc:   v.Desc,
+			Title:  v.Title,
+			FileId: v.FileId,
 		})
 	}
 
+	rsp.Count = count
 	rsp.Status = my_error.NoError()
 	c.JSON(200, rsp)
 }

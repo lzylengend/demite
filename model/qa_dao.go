@@ -45,6 +45,19 @@ func (this *_QADao) List(classId int64, limit int64, offset int64) ([]*QA, error
 	return res, err
 }
 
+func (this *_QADao) Count(classId int64) (int64, error) {
+	var n int64
+	var err error
+
+	if classId == 0 {
+		err = this.Db.Where("datastatus = ? ", 0).Count(&n).Error
+	} else {
+		err = this.Db.Where("datastatus = ? and classid = ?", 0, classId).Count(&n).Error
+	}
+
+	return n, err
+}
+
 func (this *_QADao) Update(c *QA) error {
 	return this.Db.Save(c).Error
 }
