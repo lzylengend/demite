@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="61cdbbca-1e68-4568-87d2-817f128a13fa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/controller/app_center_bankend_api/material_bankend_api/list_material_bankend.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/app_center_bankend_api/material_bankend_api/list_material_bankend.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/app_center_bankend_api/qa_bankend_api/list_qa_bankend.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/app_center_bankend_api/qa_bankend_api/list_qa_bankend.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/app_center_bankend_api/scheme_bankend_api/list_scheme_bankend.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/app_center_bankend_api/scheme_bankend_api/list_scheme_bankend.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/app_center_bankend_api/soft_bankend_api/list_soft_bankend.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/app_center_bankend_api/soft_bankend_api/list_soft_bankend.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/conf/conf.go" beforeDir="false" afterPath="$PROJECT_DIR$/conf/conf.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/app_center_bankend_api/scheme_bankend_api/get_scheme_bankend.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/app_center_bankend_api/scheme_bankend_api/get_scheme_bankend.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/user_api/login.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/user_api/login.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demite" beforeDir="false" afterPath="$PROJECT_DIR$/demite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.conf" beforeDir="false" afterPath="$PROJECT_DIR$/server.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/util/util.go" beforeDir="false" afterPath="$PROJECT_DIR$/util/util.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,6 +18,54 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/controller/app_center_bankend_api/video_bankend_api/list_video_bankend.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="368">
+              <caret line="94" column="21" selection-start-line="94" selection-start-column="21" selection-end-line="94" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/controller/app_center_bankend_api/scheme_bankend_api/get_scheme_bankend.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="53">
+              <caret line="66" column="28" selection-start-line="66" selection-start-column="28" selection-end-line="66" selection-end-column="28" />
+              <folding>
+                <element signature="e#28#101#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/conf/conf.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="54" column="10" selection-start-line="54" selection-start-column="5" selection-end-line="54" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/util/util.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="167">
+              <caret line="39" selection-start-line="39" selection-end-line="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/controller/user_api/login.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="209">
+              <caret line="81" column="26" selection-start-line="81" selection-start-column="26" selection-end-line="81" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controller/app_center_bankend_api/qa_bankend_api/list_qa_bankend.go">
           <provider selected="true" editor-type-id="text-editor">
@@ -36,11 +87,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controller/app_center_bankend_api/soft_bankend_api/list_soft_bankend.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="167">
-              <caret line="90" column="19" selection-start-line="90" selection-start-column="19" selection-end-line="90" selection-end-column="19" />
+              <caret line="90" column="21" selection-start-line="90" selection-start-column="21" selection-end-line="90" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -127,12 +178,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/controller/app_center_bankend_api/material_bankend_api/update_material_bankend.go" />
-        <option value="$PROJECT_DIR$/controller/app_center_bankend_api/scheme_bankend_api/del_scheme_bankend.go" />
         <option value="$PROJECT_DIR$/controller/common.go" />
-        <option value="$PROJECT_DIR$/util/util.go" />
-        <option value="$PROJECT_DIR$/controller/app_center_bankend_api/video_bankend_api/list_video_bankend.go" />
-        <option value="$PROJECT_DIR$/controller/user_api/login.go" />
         <option value="$PROJECT_DIR$/controller/app_center_bankend_api/item_api.go" />
         <option value="$PROJECT_DIR$/controller/app_center_bankend_api/intelligence_bankend_api.go" />
         <option value="$PROJECT_DIR$/controller/app_center_api/intelligence_api/get_intelligence.go" />
@@ -148,7 +194,6 @@
         <option value="$PROJECT_DIR$/controller/app_center_bankend_api/soft_bankend_api/update_soft_bankend.go" />
         <option value="$PROJECT_DIR$/controller/app_center_bankend_api/soft_bankend_api/update_soft_class_bankend.go" />
         <option value="$PROJECT_DIR$/controller/app_center_api/soft_api/list_soft_class.go" />
-        <option value="$PROJECT_DIR$/controller/app_center_bankend_api/scheme_bankend_api/get_scheme_bankend.go" />
         <option value="$PROJECT_DIR$/controller/app_center_api/scheme_api/get_scheme.go" />
         <option value="$PROJECT_DIR$/model/qa——dao.go" />
         <option value="$PROJECT_DIR$/controller/app_center_bankend_api/item_bankend_api/get_item_bankend.go" />
@@ -178,6 +223,12 @@
         <option value="$PROJECT_DIR$/controller/app_center_bankend_api/qa_bankend_api/list_qa_bankend.go" />
         <option value="$PROJECT_DIR$/controller/app_center_bankend_api/scheme_bankend_api/list_scheme_bankend.go" />
         <option value="$PROJECT_DIR$/controller/app_center_bankend_api/soft_bankend_api/list_soft_bankend.go" />
+        <option value="$PROJECT_DIR$/controller/app_center_bankend_api/video_bankend_api/list_video_bankend.go" />
+        <option value="$PROJECT_DIR$/controller/app_center_bankend_api/scheme_bankend_api/get_scheme_bankend.go" />
+        <option value="$PROJECT_DIR$/server.conf" />
+        <option value="$PROJECT_DIR$/conf/conf.go" />
+        <option value="$PROJECT_DIR$/util/util.go" />
+        <option value="$PROJECT_DIR$/controller/user_api/login.go" />
       </list>
     </option>
   </component>
@@ -198,6 +249,11 @@
             <path>
               <item name="demite" type="b2602c69:ProjectViewProjectNode" />
               <item name="demite" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="demite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="demite" type="462c0819:PsiDirectoryNode" />
+              <item name="conf" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="demite" type="b2602c69:ProjectViewProjectNode" />
@@ -236,6 +292,13 @@
               <item name="controller" type="462c0819:PsiDirectoryNode" />
               <item name="app_center_bankend_api" type="462c0819:PsiDirectoryNode" />
               <item name="soft_bankend_api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="demite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="demite" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+              <item name="app_center_bankend_api" type="462c0819:PsiDirectoryNode" />
+              <item name="video_bankend_api" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="demite" type="b2602c69:ProjectViewProjectNode" />
@@ -317,12 +380,12 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31770045" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.31770045" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4969743" visible="true" weight="0.45335516" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4969743" visible="true" weight="0.45335516" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39761648" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -373,30 +436,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/controller/app_center_bankend_api/intelligence_bankend_api.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="30" selection-start-column="30" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/app_center_bankend_api/video_bankend_api/add_video_bankend.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="30" column="37" lean-forward="true" selection-end-line="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/app_center_api/intelligence_api/get_intelligence.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-          <folding>
-            <element signature="e#26#71#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controller/app_center_api/item_api/get_item.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
@@ -452,13 +491,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controller/user_api/login.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="81" column="34" selection-start-line="81" selection-start-column="27" selection-end-line="81" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controller/app_center_bankend_api/soft_bankend_api/del_soft_class_bankend.go">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -501,13 +533,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/util/util.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="55" column="5" lean-forward="true" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controller/app_center_bankend_api/scheme_bankend_api/del_scheme_bankend.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="950">
@@ -518,16 +543,6 @@
     <entry file="file://$PROJECT_DIR$/controller/app_center_bankend_api/material_bankend_api/del_material_bankend.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-741" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/app_center_bankend_api/scheme_bankend_api/get_scheme_bankend.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="17" selection-start-line="17" selection-end-line="22" selection-end-column="1" />
-          <folding>
-            <element signature="e#28#101#0" expanded="true" />
-          </folding>
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/controller/app_center_bankend_api/soft_bankend_api/del_soft_bankend.go">
@@ -757,7 +772,52 @@
     <entry file="file://$PROJECT_DIR$/controller/app_center_bankend_api/soft_bankend_api/list_soft_bankend.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="167">
-          <caret line="90" column="19" selection-start-line="90" selection-start-column="19" selection-end-line="90" selection-end-column="19" />
+          <caret line="90" column="21" selection-start-line="90" selection-start-column="21" selection-end-line="90" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/app_center_bankend_api/video_bankend_api/list_video_bankend.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="94" column="21" selection-start-line="94" selection-start-column="21" selection-end-line="94" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/app_center_bankend_api/scheme_bankend_api/get_scheme_bankend.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="53">
+          <caret line="66" column="28" selection-start-line="66" selection-start-column="28" selection-end-line="66" selection-end-column="28" />
+          <folding>
+            <element signature="e#28#101#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="17" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conf/conf.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="54" column="10" selection-start-line="54" selection-start-column="5" selection-end-line="54" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/util.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="39" selection-start-line="39" selection-end-line="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/user_api/login.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="81" column="26" selection-start-line="81" selection-start-column="26" selection-end-line="81" selection-end-column="26" />
         </state>
       </provider>
     </entry>

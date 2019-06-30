@@ -11,6 +11,7 @@ type conf struct {
 	FilePath string `yam:"filepath"`
 	DbPath   string `yam:"dbpath"`
 	Docpath  string `yam:"docpath"`
+	Ip       string `yam:"ip"`
 }
 
 var defaltConf *conf
@@ -32,6 +33,7 @@ func Init(path string) (*conf, error) {
 		FilePath: c.FilePath,
 		DbPath:   c.DbPath,
 		Docpath:  c.Docpath,
+		Ip:       c.Ip,
 	}
 
 	_, err = os.Open(c.FilePath)
@@ -48,4 +50,8 @@ func GetFilePath() string {
 
 func GetPort() string {
 	return defaltConf.Port
+}
+
+func GetIp() string {
+	return defaltConf.Ip
 }

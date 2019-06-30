@@ -20,6 +20,7 @@ type GetSchemeData struct {
 	Title   string `json:"title"`
 	Desc    string `json:"desc"`
 	Content string `json:"content"`
+	FileId  string `json:"fileid"`
 }
 
 type GetSchemeBankendApi struct {
@@ -63,6 +64,7 @@ func GetSchemeBankend(c *gin.Context) {
 		Desc:    res.Desc,
 		Title:   res.Title,
 		Content: res.Content,
+		FileId:  res.FileId,
 	}
 
 	rsp.Status = my_error.NoError()

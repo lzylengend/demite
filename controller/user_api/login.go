@@ -72,14 +72,13 @@ func Login(c *gin.Context) {
 		AuthDelStaff:     g.AuthDelStaff,
 	}
 
-	rsp.Ip, err = util.GetIp()
 	if err != nil {
 		rsp.Status = my_error.DbError(err.Error())
 		c.JSON(200, rsp)
 		return
 	}
 
-	rsp.Ip = rsp.Ip + conf.GetPort()
+	rsp.Ip = conf.GetIp() + conf.GetPort()
 
 	session := sessions.Default(c)
 	session.Set(controller.SessionUserId, u.UserId)
