@@ -29,6 +29,14 @@ var RepairScheduleDao *_RepairScheduleDao
 var RepairDao *_RepairDao
 var RemoteDao *_RemoteDao
 var RemoteScheduleDao *_RemoteScheduleDao
+var VideoClassDao *_VideoClassDao
+var VideoDao *_VideoDao
+var MaterialDao *_MaterialDao
+var MaterialClassDao *_MaterialClassDao
+var SchemeDao *_SchemeDao
+var SoftDao *_SoftDao
+var SoftClassDao *_SoftClassDao
+var QADao *_QADao
 
 func Init(dbPath string) error {
 	//db, err := gorm.Open("mysql", "debian-sys-maint:fYzuFNK68VdZTWJ0@/demite?charset=utf8&parseTime=True&loc=Local")
@@ -63,6 +71,14 @@ func Init(dbPath string) error {
 	RemoteDao = newRemoteDao(db)
 	RemoteScheduleDao = newRemoteScheduleDao(db)
 	UserGroupDao = newUserGroupDao(db)
+	VideoClassDao = newVideoClassDao(db)
+	VideoDao = newVideoDao(db)
+	MaterialDao = newMaterialDao(db)
+	MaterialClassDao = newMaterialClassDao(db)
+	SchemeDao = newSchemeDao(db)
+	SoftDao = newSoftDao(db)
+	SoftClassDao = newSoftClassDao(db)
+	QADao = newQADao(db)
 
 	//init
 	err = UserDao.initUserDao()
@@ -71,6 +87,16 @@ func Init(dbPath string) error {
 	}
 
 	err = UserGroupDao.initUserGroupDao()
+	if err != nil {
+		return err
+	}
+
+	err = VideoClassDao.Init()
+	if err != nil {
+		return err
+	}
+
+	err = SchemeDao.init()
 	if err != nil {
 		return err
 	}

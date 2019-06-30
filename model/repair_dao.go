@@ -1,9 +1,11 @@
 package model
 
 import (
-	"github.com/jinzhu/gorm"
-	"github.com/pkg/errors"
 	"time"
+
+	//	"errors"
+
+	"github.com/jinzhu/gorm"
 )
 
 type repairStatus string
@@ -209,9 +211,9 @@ func (this *_RepairDao) Deal(id int64, userId int64, staffId int64, repairTime i
 	obj.Status = REPAIRSTATUSCOMFIRM
 	obj.UpdateTime = time.Now().Unix()
 
-	if repairTime < time.Now().Unix() {
-		return errors.New("time error")
-	}
+	// if repairTime < time.Now().Unix() {
+	// 	return errors.New("time error")
+	// }
 
 	tx := this.Db.Begin()
 	err = tx.Save(obj).Error

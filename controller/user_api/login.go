@@ -1,6 +1,7 @@
 package user_api
 
 import (
+	"demite/conf"
 	"demite/controller"
 	"demite/model"
 	"demite/my_error"
@@ -16,6 +17,7 @@ type LoginRequest struct {
 
 type LoginResponse struct {
 	AuthList *authList             `json:"data"`
+	Ip       string                `json:"ip"`
 	Status   *my_error.ErrorCommon `json:"status"`
 }
 
@@ -61,7 +63,6 @@ func Login(c *gin.Context) {
 		rsp.Status = my_error.DbError(err.Error())
 		c.JSON(200, rsp)
 		return
-		return
 	}
 
 	aList := &authList{
@@ -71,9 +72,19 @@ func Login(c *gin.Context) {
 		AuthDelStaff:     g.AuthDelStaff,
 	}
 
+	rsp.Ip, err = util.GetIp()
+	if err != nil {
+		rsp.Status = my_error.DbError(err.Error())
+		c.JSON(200, rsp)
+		return
+	}
+
+	rsp.Ip = rsp.Ip + conf.GetPort()
+
 	session := sessions.Default(c)
 	session.Set(controller.SessionUserId, u.UserId)
 	session.Save()
+
 	rsp.AuthList = aList
 	rsp.Status = my_error.NoError()
 	c.JSON(200, rsp)
