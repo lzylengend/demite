@@ -19,9 +19,10 @@ type ListQAResponse struct {
 }
 
 type ListQAData struct {
-	Id    int64  `json:"id"`
-	Title string `json:"title"`
-	Desc  string `json:"desc"`
+	Id      int64  `json:"id"`
+	Title   string `json:"title"`
+	Desc    string `json:"desc"`
+	Content string `json:"content"`
 }
 
 type ListQAApi struct {
@@ -69,9 +70,10 @@ func ListQA(c *gin.Context) {
 
 	for _, v := range res {
 		rsp.Data = append(rsp.Data, &ListQAData{
-			Id:    v.Id,
-			Desc:  v.Desc,
-			Title: v.Title,
+			Id:      v.Id,
+			Desc:    v.Desc,
+			Title:   v.Title,
+			Content: v.Content,
 		})
 	}
 
