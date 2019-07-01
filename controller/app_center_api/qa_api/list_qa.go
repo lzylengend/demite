@@ -54,14 +54,14 @@ func ListQA(c *gin.Context) {
 		return
 	}
 
-	res, err := model.QADao.List(0, req.Limit, req.Offset)
+	res, err := model.QADao.ListByKey(req.Key, req.Limit, req.Offset)
 	if err != nil {
 		rsp.Status = my_error.DbError(err.Error())
 		c.JSON(200, rsp)
 		return
 	}
 
-	count, err := model.QADao.Count(0)
+	count, err := model.QADao.CountByKey(req.Key)
 	if err != nil {
 		rsp.Status = my_error.DbError(err.Error())
 		c.JSON(200, rsp)

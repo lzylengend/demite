@@ -45,6 +45,32 @@ func (this *_QADao) List(classId int64, limit int64, offset int64) ([]*QA, error
 	return res, err
 }
 
+func (this *_QADao) ListByKey(key string, limit int64, offset int64) ([]*QA, error) {
+	res := []*QA{}
+	var err error
+
+	if key == "" {
+		err = this.Db.Where("datastatus = ? ", 0).Limit(limit).Offset(offset).Order("updatetime desc").Find(&res).Error
+	} else {
+		err = this.Db.Where("datastatus = ? and title = ?", 0, "%"+key+"%").Limit(limit).Offset(offset).Order("updatetime desc").Find(&res).Error
+	}
+
+	return res, err
+}
+
+func (this *_QADao) CountByKey(key string) (int64, error) {
+	var n int64
+	var err error
+
+	if key == "" {
+		err = this.Db.Where("datastatus = ? ", 0).Count(&n).Error
+	} else {
+		err = this.Db.Where("datastatus = ? and title = ?", 0, "%"+key+"%").Count(&n).Error
+	}
+
+	return n, err
+}
+
 func (this *_QADao) Count(classId int64) (int64, error) {
 	var n int64
 	var err error
