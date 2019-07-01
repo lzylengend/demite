@@ -52,7 +52,7 @@ func (this *_QADao) ListByKey(key string, limit int64, offset int64) ([]*QA, err
 	if key == "" {
 		err = this.Db.Where("datastatus = ? ", 0).Limit(limit).Offset(offset).Order("updatetime desc").Find(&res).Error
 	} else {
-		err = this.Db.Where("datastatus = ? and title = ?", 0, "%"+key+"%").Limit(limit).Offset(offset).Order("updatetime desc").Find(&res).Error
+		err = this.Db.Where("datastatus = ? and title like ?", 0, "%"+key+"%").Limit(limit).Offset(offset).Order("updatetime desc").Find(&res).Error
 	}
 
 	return res, err
@@ -65,7 +65,7 @@ func (this *_QADao) CountByKey(key string) (int64, error) {
 	if key == "" {
 		err = this.Db.Where("datastatus = ? ", 0).Count(&n).Error
 	} else {
-		err = this.Db.Where("datastatus = ? and title = ?", 0, "%"+key+"%").Count(&n).Error
+		err = this.Db.Where("datastatus = ? and title like ?", 0, "%"+key+"%").Count(&n).Error
 	}
 
 	return n, err
