@@ -24,6 +24,7 @@ type ListVideoData struct {
 	ClassId int64  `json:"classid"`
 	Title   string `json:"title"`
 	Desc    string `json:"desc"`
+	PicId   string `json:"picid"`
 }
 
 type ListVideoApi struct {
@@ -76,6 +77,7 @@ func ListVideo(c *gin.Context) {
 			ClassId: v.ClassId,
 			Title:   v.Title,
 			Desc:    v.Desc,
+			PicId:   v.PicId,
 		})
 	}
 

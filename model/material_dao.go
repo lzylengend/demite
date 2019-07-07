@@ -7,6 +7,7 @@ import (
 type Material struct {
 	Id         int64  `gorm:"column:id;primary_key"`
 	FileId     string `gorm:"column:fileid"`
+	PicId      string `gorm:"column:picid"`
 	ClassId    int64  `gorm:"column:classid"`
 	Title      string `gorm:"column:title"`
 	Desc       string `gorm:"column:desc"`

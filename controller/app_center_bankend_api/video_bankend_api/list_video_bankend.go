@@ -28,6 +28,7 @@ type ListVideoData struct {
 	Title     string `json:"title"`
 	Desc      string `json:"desc"`
 	FileUrl   string `json:"fileurl"`
+	PicId     string `json:"picid"`
 }
 
 type ListVideoBankendApi struct {
@@ -89,6 +90,7 @@ func ListVideoBankend(c *gin.Context) {
 			Carousel:  v.Carousel,
 			Desc:      v.Desc,
 			Title:     v.Title,
+			PicId:     v.PicId,
 		})
 	}
 

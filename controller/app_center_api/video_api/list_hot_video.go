@@ -20,6 +20,7 @@ type ListHotVideoData struct {
 	FileId string `json:"fileid"`
 	Title  string `json:"title"`
 	Desc   string `json:"desc"`
+	PicId  string `json:"picid"`
 }
 
 type ListHotVideoApi struct {
@@ -71,6 +72,7 @@ func ListHotVideo(c *gin.Context) {
 			FileId: v.FileId,
 			Title:  v.Title,
 			Desc:   v.Desc,
+			PicId:  v.PicId,
 		})
 	}
 

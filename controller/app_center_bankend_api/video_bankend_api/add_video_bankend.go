@@ -14,6 +14,7 @@ type AddVideoBankendRequest struct {
 	Carousel bool   `json:"carousel"`
 	Title    string `json:"title"`
 	Desc     string `json:"desc"`
+	PicId    string `json:"picid"`
 }
 
 type AddVideoBankendResponse struct {
@@ -59,6 +60,7 @@ func AddVideoBankend(c *gin.Context) {
 		CreateTime: time.Now().Unix(),
 		Title:      req.Title,
 		Desc:       req.Desc,
+		PicId:      req.PicId,
 	})
 	if err != nil {
 		rsp.Status = my_error.DbError(err.Error())

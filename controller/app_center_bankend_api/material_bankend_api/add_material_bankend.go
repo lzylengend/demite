@@ -12,6 +12,7 @@ type AddMaterialBankendRequest struct {
 	ClassId int64  `json:"classid"`
 	Title   string `json:"title"`
 	Desc    string `json:"desc"`
+	PicId   string `json:"picid"`
 }
 
 type AddMaterialBankendResponse struct {
@@ -55,6 +56,7 @@ func AddMaterialBankend(c *gin.Context) {
 		CreateTime: time.Now().Unix(),
 		Title:      req.Title,
 		Desc:       req.Desc,
+		PicId:      req.PicId,
 	})
 	if err != nil {
 		rsp.Status = my_error.DbError(err.Error())

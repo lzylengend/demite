@@ -25,6 +25,7 @@ type ListMaterialData struct {
 	ClassName string `json:"classname"`
 	Title     string `json:"title"`
 	Desc      string `json:"desc"`
+	PicId     string `json:"picid"`
 }
 
 type ListMaterialBankendApi struct {
@@ -85,6 +86,7 @@ func ListMaterialBankend(c *gin.Context) {
 			ClassName: name,
 			Desc:      v.Desc,
 			Title:     v.Title,
+			PicId:     v.PicId,
 		})
 	}
 

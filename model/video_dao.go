@@ -7,6 +7,7 @@ import (
 type Video struct {
 	Id         int64  `gorm:"column:id;primary_key"`
 	FileId     string `gorm:"column:fileid"`
+	PicId      string `gorm:"column:picid"`
 	ClassId    int64  `gorm:"column:classid"`
 	Hot        bool   `gorm:"column:hot"`
 	Carousel   bool   `gorm:"column:carousel"`

@@ -17,6 +17,7 @@ type ListCarouselVideoResponse struct {
 type ListCarouselVideoData struct {
 	Id     int64  `json:"id"`
 	FileId string `json:"fileid"`
+	PicId  string `json:"picid"`
 }
 
 type ListCarouselVideoApi struct {
@@ -59,6 +60,7 @@ func ListCarouselVideo(c *gin.Context) {
 		rsp.Data = append(rsp.Data, &ListCarouselVideoData{
 			Id:     v.Id,
 			FileId: v.FileId,
+			PicId:  v.PicId,
 		})
 	}
 

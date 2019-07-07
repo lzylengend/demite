@@ -15,6 +15,7 @@ type UpdateVideoBankendRequest struct {
 	Title    string `json:"title"`
 	Desc     string `json:"desc"`
 	FileId   string `json:"fileid"`
+	PicId    string `json:"picid"`
 }
 
 type UpdateVideoBankendResponse struct {
@@ -64,6 +65,7 @@ func UpdateVideoBankend(c *gin.Context) {
 	vd.Title = req.Title
 	vd.Desc = req.Desc
 	vd.FileId = req.FileId
+	vd.PicId = req.PicId
 
 	err = model.VideoDao.Update(vd)
 	if err != nil {
